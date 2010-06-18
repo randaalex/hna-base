@@ -18,7 +18,7 @@
 <ENTITIES>
 <ENTITY ID="1000" Name="hna_users" Comments="" LineColor="8388608" FillColor="16777215" FontColor="0" XPos="30" YPos="20" Type="4" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" CharacterSet="utf8" Collate="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" PartitioningType="0" PartitioningIsLinear="1" PartitionsNum="2" PartitioningExpression="" SubPartitioningType="0" SubPartitioningIsLinear="0" SubPartitionsNum="2" SubPartitioningExpression="" >
 <COLUMNS>
-<COLUMN ID="1001" Name="user_id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="1" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
+<COLUMN ID="1001" Name="user_id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
 </COLUMN>
 <COLUMN ID="1002" Name="surname" DomainID="-1" Pos="1" Datatype="13" Type="CHAR" Width="50" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
 </COLUMN>
@@ -47,9 +47,6 @@
 <COLUMN ID="1014" Name="note" DomainID="-1" Pos="13" Datatype="13" Type="CHAR" Width="250" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
 </COLUMN>
 </COLUMNS>
-<REFERENCES_END>
-<REFERENCE_END ID="1019" />
-</REFERENCES_END>
 <INDEXES>
 <INDEX ID="1015" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
 <INDEXCOLUMNS>
@@ -85,9 +82,6 @@
 <COLUMN ID="1031" Name="6" DomainID="-1" Pos="11" Datatype="0" Type="TINYINT" Width="1" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
 </COLUMN>
 </COLUMNS>
-<REFERENCES_BEGIN>
-<REFERENCE_BEGIN ID="1019" />
-</REFERENCES_BEGIN>
 <INDEXES>
 <INDEX ID="1018" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
 <INDEXCOLUMNS>
@@ -119,7 +113,6 @@
 </ENTITY>
 </ENTITIES>
 <REFERENCES>
-<REFERENCE  ID="1019" Name="Ref_01" Comments="" SOURCE="1016" DESTINATION="1000" FKIDS="1017=1001\n" RefColor="8388608" RefLabelColor="16777215" RefLabelFontColor="0" OnDelete="3" OnUpdate="3" Description="" Annotation="" Generate="1" FKIndex_ID="-1" ParentKeyIndexID="1018" AutoColumnIDs="" />
 </REFERENCES>
 <NOTES>
 </NOTES>

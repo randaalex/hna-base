@@ -53,11 +53,7 @@ CREATE TABLE `hna_users` (
   `register` datetime,
   `admin_id` int(11),
   `note` char(250),
-  PRIMARY KEY(`user_id`),
-  CONSTRAINT `Ref_01` FOREIGN KEY (`user_id`)
-    REFERENCES `hna_pays`(`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+  PRIMARY KEY(`user_id`)
 )
 ENGINE=INNODB
 CHARACTER SET utf8 ;
