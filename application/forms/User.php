@@ -56,7 +56,9 @@ class Application_Form_User extends Zend_Form
 				->setRequired(true)
 				->addFilter('StripTags')
 				->addFilter('StringTrim')
-				->addValidator('IP')
+				->addValidator('IP', 'false')
+				->addPrefixPath('Validator','Validator','validate')
+				->addValidator('HnaIp')
 				->addValidator('Db_NoRecordExists', false, array(
 					'table' => 'hna_users',
 					'field' => 'ip'	
