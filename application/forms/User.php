@@ -50,11 +50,48 @@ class Application_Form_User extends Zend_Form
 				->addFilter('StripTags')
 				->addFilter('StringTrim')
 				->addValidator('NotEmpty');
+				
+		$ip = new Zend_Form_Element_Text('ip');
+		$ip->setLabel('ip')
+				->setRequired(true)
+				->addFilter('StripTags')
+				->addFilter('StringTrim')
+				->addValidator('IP')
+				->addValidator('Db_NoRecordExists', false, array(
+					'table' => 'hna_users',
+					'field' => 'ip'	
+				));				
 
+		$mac1 = new Zend_Form_Element_Text('mac1');
+		$mac1->setLabel('mac1')
+				->addFilter('StripTags')
+				->addFilter('StringTrim')
+				->addPrefixPath('Validator','Validator','validate')
+				->addValidator('mac');
+				
+		$mac2 = new Zend_Form_Element_Text('mac2');
+		$mac2->setLabel('mac2')
+				->addFilter('StripTags')
+				->addFilter('StringTrim')
+				->addPrefixPath('Validator','Validator','validate')
+				->addValidator('mac');	
+
+		$status = new Zend_Form_Element_Text('status');
+		$status->setLabel('Status')
+				->setRequired(true)
+				->addFilter('StripTags')
+				->addFilter('StringTrim')
+				->addValidator('NotEmpty');				
+
+		$note = new Zend_Form_Element_Text('note');
+		$note->setLabel('Note')
+				->addFilter('StripTags')
+				->addFilter('StringTrim');					
+				
 		$submit = new Zend_Form_Element_Submit('submit');
 		$submit->setAttrib('id','submitbutton');
 		
-		$this->addElements(array($surname,$firstname,$lastname,$block,$room,$submit));
+		$this->addElements(array($surname,$firstname,$lastname,$block,$room,$ip,$mac1,$mac2,$status,$note,$submit));
 	}
 }
 

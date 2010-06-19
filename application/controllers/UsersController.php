@@ -32,11 +32,21 @@ class UsersController extends Zend_Controller_Action
         		$surname = $form->getValue('surname');
         		$firstname = $form->getValue('firstname');
         		$lastname = $form->getValue('lastname');
+        		/////
+        		$contract = 1;
+        		/////  
         		$block = $form->getValue('block');
         		$room = $form->getValue('room');
+        		$ip = $form->getValue('ip');
+        		$mac1 = $form->getValue('mac1');
+        		$mac2 = $form->getValue('mac2');
+        		$status = $form->getValue('status');
+        		$register = date('Y-m-d H:i:s');
+        		
+        		$note = $form->getValue('note');
 
         		$users = new Application_Model_DbTable_Users();
-        		$users ->addUser($surname,$firstname,$lastname,$block,$room);
+        		$users ->addUser($surname,$firstname,$lastname,$contract,$block,$room,$ip,$mac1,$mac2,$status,$register,$note);
         		
         		$this->_helper->redirector('index','users');
         	} else {
