@@ -86,7 +86,7 @@ class UsersController extends Zend_Controller_Action
         		$note = $form->getValue('note');
 				
         		$users = new Application_Model_DbTable_Users();
-        		$users->updateUser($id,$surname,$firstname,$lastname,$block,$room,$ip,$mac1,$mac2,$note,$status,$note);
+        		$users->updateUser($id,$surname,$firstname,$lastname,$block,$room,$ip,$mac1,$mac2,$status,$note);
         		
         		$this->_helper->redirector('index');
         	} else {

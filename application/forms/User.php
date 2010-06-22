@@ -89,7 +89,9 @@ class Application_Form_User extends Zend_Form
 		$submit = new Zend_Form_Element_Submit('submit');
 		$submit->setAttrib('id','submitbutton');
 		
-		$this->addElements(array($surname,$firstname,$lastname,$block,$room,$ip,$mac1,$mac2,$status,$note,$submit));
+		
+		
+		$this->addElements(array($id,$surname,$firstname,$lastname,$block,$room,$ip,$mac1,$mac2,$status,$note,$submit));
 	}
 }
 

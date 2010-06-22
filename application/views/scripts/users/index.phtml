@@ -31,7 +31,7 @@ table,td,th {
 	<td><?php echo $this->escape($users->register); ?></td>
 	<td><?php echo $this->escape($users->admin_id); ?></td>
 	<td><?php echo $this->escape($users->note); ?></td>
-	<td><a href="<?php echo $this->url(array('controller'=>'users','action'=>'edit','id'=>$users->user_id)); ?>">Edit</a></td>	
+	<td><a href="<?php echo $this->url(array('controller'=>'users','action'=>'edit','id'=>$users->id)); ?>">Edit</a></td>	
 </tr>
 <?php endforeach;?>
 
