@@ -57,7 +57,50 @@ class UsersController extends Zend_Controller_Action
     
     public function editAction()
     {
-        echo "UsersController::editAction";
+        $this->view->title = "Edit User";
+        $this->view->headTitle =($this->view->title);
+        
+        $form = new Application_Form_User();
+        $form->submit->setLabel('save');
+        //$form->button->setLabel('delete');
+        $this->view->form = $form;
+        
+        if ($this->getRequest()->isPost()) {
+        	$formData = $this->getRequest()->getPost();
+        	if ($form->isValid($formData)) {
+        		$id = (int)$form->getValue('id');
+        		
+        		$surname = $form->getValue('surname');
+        		$firstname = $form->getValue('firstname');
+        		$lastname = $form->getValue('lastname');
+        		/////
+        		$contract = $form->getValue('contract');
+        		/////  
+        		$block = $form->getValue('block');
+        		$room = $form->getValue('room');
+        		$ip = $form->getValue('ip');
+        		$mac1 = $form->getValue('mac1');
+        		$mac2 = $form->getValue('mac2');
+        		$status = $form->getValue('status');
+        		$register = $form->getValue('date');
+        		$note = $form->getValue('note');
+				
+        		$users = new Application_Model_DbTable_Users();
+        		$users->updateUser($id,$surname,$firstname,$lastname,$block,$room,$ip,$mac1,$mac2,$note,$status,$note);
+        		
+        		$this->_helper->redirector('index');
+        	} else {
+        		$form->populate($formData);
+        	}	
+        } else {
+        	$id = $this->_getParam('id',0);
+        	if ($id > 0) {
+        		$users = new Application_Model_DbTable_Users();
+        		$form->populate($users->getUser($id));
+        	}
+        
+        }
+        
     }
 
     public function deleteAction()

@@ -58,11 +58,7 @@ class Application_Form_User extends Zend_Form
 				->addFilter('StringTrim')
 				->addValidator('IP', 'false')
 				->addPrefixPath('Validator','Validator','validate')
-				->addValidator('HnaIp')
-				->addValidator('Db_NoRecordExists', false, array(
-					'table' => 'hna_users',
-					'field' => 'ip'	
-				));				
+				->addValidator('HnaIp');				
 
 		$mac1 = new Zend_Form_Element_Text('mac1');
 		$mac1->setLabel('mac1')
