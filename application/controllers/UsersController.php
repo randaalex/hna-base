@@ -97,6 +97,8 @@ class UsersController extends Zend_Controller_Action
         	if ($id > 0) {
         		$users = new Application_Model_DbTable_Users();
         		$form->populate($users->getUser($id));
+        		
+        		$this->view->assign('id',$id);
         	}
         
         }
@@ -105,7 +107,23 @@ class UsersController extends Zend_Controller_Action
 
     public function deleteAction()
     {
-        echo "UsersController::deleteAction";
+        $this->view->title = "Delete user";
+        $this->view->headTitle($this->view->title);
+        
+        if ($this->getRequest()->isPost()){
+        	$del = $this->getRequest()->getPost('del');
+        	if ($del == "Yes"){
+        		$id = $this->getRequest()->getPost('id');
+        		$user = new Application_Model_DbTable_Users();
+        		$user->deleteUser($id);
+        	}
+        	$this->_helper->redirector('index');
+        	
+        } else {
+        	$id = $this->_getParam('id',0);
+        	$users = new Application_Model_DbTable_Users();
+        	$this->view->user = $users->getUser($id);
+        }       
     }
 
     public function viewAction()
