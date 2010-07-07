@@ -34,6 +34,7 @@ class UsersController extends Zend_Controller_Action
         		$lastname = $form->getValue('lastname');
         		/////
         		$contract = 1;
+                        
         		/////  
         		$block = $form->getValue('block');
         		$room = $form->getValue('room');
