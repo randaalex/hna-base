@@ -22,7 +22,7 @@ class UsersController extends Zend_Controller_Action
         $this->title->title = "Add new user";
         $this->view->headTitle($this->view->title);
         
-        $form = new Application_Form_User();
+        $form = new Application_Form_AddUser();
         $form->submit->setLabel('Add');
         $this->view->form = $form;
         
@@ -61,7 +61,7 @@ class UsersController extends Zend_Controller_Action
         $this->view->title = "Edit User";
         $this->view->headTitle =($this->view->title);
         
-        $form = new Application_Form_User();
+        $form = new Application_Form_EditUser();
         $form->submit->setLabel('save');
         //$form->button->setLabel('delete');
         $this->view->form = $form;
