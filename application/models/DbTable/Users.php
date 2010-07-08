@@ -58,8 +58,8 @@ class Application_Model_DbTable_Users extends Zend_Db_Table_Abstract
 	}
 	
 	public function deleteUser($id){
-		
-		$this->delete('id =',(int)$id);
+            
+		$this->delete('id =' .(int)$id);
 	}
 }
 
