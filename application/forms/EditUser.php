@@ -44,9 +44,12 @@ class Application_Form_EditUser extends Zend_Form
 				->addFilter('StringTrim')
 				->addValidator('NotEmpty');
 
-		$room = new Zend_Form_Element_Text('room');
-		$room->setLabel('Room')
-				->setRequired(true)
+		$room = new Zend_Form_Element_Select('room');
+                $room->setLabel('Room')
+                                ->addMultiOptions(array('a' => 'a',
+                                                        'b' => 'b'))
+                                ->setValue('a')
+                     		->setRequired(true)
 				->addFilter('StripTags')
 				->addFilter('StringTrim')
 				->addValidator('NotEmpty');
