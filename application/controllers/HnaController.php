@@ -1,6 +1,6 @@
 <?php
 
-class UsersController extends Zend_Controller_Action
+class HnaController extends Zend_Controller_Action
 {
 
     public function init()
@@ -13,7 +13,7 @@ class UsersController extends Zend_Controller_Action
         $this->view->title = "HNA Users";
         $this->view->headTitle($this->view->title);
         
-        $users = new Application_Model_DbTable_Users();
+        $users = new Application_Model_DbTable_Hna();
         $this->view->users = $users->fetchAll();
     }
 
@@ -86,7 +86,7 @@ class UsersController extends Zend_Controller_Action
         		$register = $form->getValue('date');
         		$note = $form->getValue('note');
 				
-        		$users = new Application_Model_DbTable_Users();
+        		$users = new Application_Model_DbTable_Hna();
         		$users->updateUser($id,$surname,$firstname,$lastname,$block,$room,$ip,$mac1,$mac2,$status,$note);
         		
         		$this->_helper->redirector('index');
@@ -96,7 +96,7 @@ class UsersController extends Zend_Controller_Action
         } else {
         	$id = $this->_getParam('id',0);
         	if ($id > 0) {
-        		$users = new Application_Model_DbTable_Users();
+        		$users = new Application_Model_DbTable_Hna();
         		$form->populate($users->getUser($id));
         		
         		$this->view->assign('id',$id);
@@ -115,14 +115,14 @@ class UsersController extends Zend_Controller_Action
         	$del = $this->getRequest()->getPost('del');
         	if ($del == "Yes"){
         		$id = $this->getRequest()->getPost('id');
-        		$user = new Application_Model_DbTable_Users();
+        		$user = new Application_Model_DbTable_Hna();
         		$user->deleteUser($id);
         	}
         	$this->_helper->redirector('index');
         	
         } else {
         	$id = $this->_getParam('id',0);
-        	$users = new Application_Model_DbTable_Users();
+        	$users = new Application_Model_DbTable_Hna();
         	$this->view->user = $users->getUser($id);
         }       
     }
