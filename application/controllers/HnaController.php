@@ -13,8 +13,8 @@ class HnaController extends Zend_Controller_Action
         $this->view->title = "HNA Users";
         $this->view->headTitle($this->view->title);
         
-        $users = new Application_Model_DbTable_Hna();
-        $this->view->users = $users->fetchAll();
+        $user = new Application_Model_DbTable_Hna();
+        $this->view->hna = $user->fetchAll();
     }
 
     public function addAction()
@@ -46,10 +46,10 @@ class HnaController extends Zend_Controller_Action
         		
         		$note = $form->getValue('note');
 
-        		$users = new Application_Model_DbTable_Users();
-        		$users ->addUser($surname,$firstname,$lastname,$contract,$block,$room,$ip,$mac1,$mac2,$status,$register,$note);
+        		$hna = new Application_Model_DbTable_Hna();
+        		$hna ->addUser($surname,$firstname,$lastname,$contract,$block,$room,$ip,$mac1,$mac2,$status,$register,$note);
         		
-        		$this->_helper->redirector('index','users');
+        		$this->_helper->redirector('index','hna');
         	} else {
         		$form->populate($formData);
         	}

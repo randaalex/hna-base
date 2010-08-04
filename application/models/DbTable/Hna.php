@@ -8,7 +8,7 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 	public function getUser($id){
 		$id = (int)$id;
 		
-		$row = $this->fetchRow('id=' . $id);
+		$row = $this->fetchRow('user_id=' . $id);
 		if (!$row) {
 			throw new Exception("Count not find row $id");
 		}
@@ -53,13 +53,13 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 			'note' => $note 
 		);
 		
-		$this->update($data, 'id ='.(int)$id);
+		$this->update($data, 'user_id ='.(int)$id);
 		
 	}
 	
 	public function deleteUser($id){
             
-		$this->delete('id =' .(int)$id);
+		$this->delete('user_id =' .(int)$id);
 	}
 }
 

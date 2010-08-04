@@ -4,7 +4,6 @@ table,td,th {
 	border-collapse: collapse;
 }
 </style>
-
 <table>
 <tr>
 	<th>Name</th>
@@ -19,7 +18,7 @@ table,td,th {
 	<th>note</th>	
 	<th>&nbsp;</th>	
 </tr>
-<?php foreach($this->users as $users) : ?>
+<?php foreach($this->hna as $users) : ?>
 <tr>
 	<td><?php echo $this->escape($users->surname).' '.$this->escape($users->firstname).' '.$this->escape($users->lastname);?></td>
 	<td><?php echo $this->escape($users->contract); ?></td>
@@ -31,7 +30,7 @@ table,td,th {
 	<td><?php echo $this->escape($users->register); ?></td>
 	<td><?php echo $this->escape($users->admin_id); ?></td>
 	<td><?php echo $this->escape($users->note); ?></td>
-	<td><a href="<?php echo $this->url(array('controller'=>'hna','action'=>'edit','id'=>$users->id)); ?>">Edit</a></td>
+	<td><a href="<?php echo $this->url(array('controller'=>'hna','action'=>'edit','id'=>$users->user_id)); ?>">Edit</a></td>
 </tr>
 <?php endforeach;?>
 
