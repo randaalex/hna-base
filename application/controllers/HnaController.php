@@ -127,6 +127,19 @@ class HnaController extends Zend_Controller_Action
         }       
     }
 
+    public function getFreeIpAction()
+    {
+        if ($this->getRequest()->isPost()) {
+            $block = $this->getRequest()->getPost('block');
+            $block = (int) $block;
+            if (isset($block)){
+
+                $freeip = new Application_Model_DbTable_Hna();
+                //$freeip->
+            }
+        }
+    }
+
     public function viewAction()
     {
         // action body

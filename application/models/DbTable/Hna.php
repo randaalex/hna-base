@@ -61,5 +61,50 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
             
 		$this->delete('user_id =' .(int)$id);
 	}
+
+	public function getFreeIP($block){
+
+                if (($block >=101) && ($block <=110)) {
+                    $block = $block + 10;
+                }
+
+                $block = substr($block, strlen($block)-2,2);
+
+                do {
+
+                    if (($block >= 1) && ($block <= 3)) {
+                        $tempip = '172.30.111.' . rand(11, 239);
+                    }
+                    if (($block >= 4) && ($block <= 5)) {
+                        $tempip = '172.30.112.' . rand(11, 239);
+                    }
+                    if (($block >= 6) && ($block <= 7)) {
+                        $tempip = '172.30.121.' . rand(11, 239);
+                    }
+                    if (($block >= 8) && ($block <= 10)) {
+                        $tempip = '172.30.122.' . rand(11, 239);
+                    }
+                    if (($block >= 11) && ($block <= 13)) {
+                        $tempip = '172.30.131.' . rand(11, 239);
+                    }
+                    if (($block >= 14) && ($block <= 15)) {
+                        $tempip = '172.30.132.' . rand(11, 239);
+                    }
+                    if (($block >= 16) && ($block <= 17)) {
+                        $tempip = '172.30.141.' . rand(11, 239);
+                    }
+                    if (($block >= 18) && ($block <= 20)) {
+                        $tempip = '172.30.142.' . rand(11, 239);
+                    }
+
+                    //$this->
+                    $ip = $tempip;
+
+                } while(isset($ip));
+
+
+
+        }
+
 }
 
