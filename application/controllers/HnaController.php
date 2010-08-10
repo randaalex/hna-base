@@ -145,6 +145,10 @@ class HnaController extends Zend_Controller_Action
         // action body
     }
 
+    public function testAction()
+    {
+        $form = new Application_Form_Test();
+        $this->view->form = $form;
+    }
 
 }
-
