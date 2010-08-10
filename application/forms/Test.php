@@ -6,39 +6,88 @@ class Application_Form_Test extends Zend_Dojo_Form
     public function init()
     {
         
-        $this->setMethod('post')->setAction("/");
+        $this->setMethod('post');
+        $this->setName('myform');
+
         $this
-        ->addElement('DateTextBox', 'date1', array(
-            'label' => 'Choose a date:',
-            'datePattern' => 'yyyy-MM-dd',
-            'validators' => array('Date'),
-            'required' => true
-        ))
-        ->addElement('TimeTextBox', 'time1', array(
-            'label' => 'Choose a time:',
-            'timePattern' => 'HH:mm:ss',
-        ))
-        ->addElement('NumberSpinner', 'number1', array(
-            'label' => 'Choose a number:',
-            'value' => '',
-            'smallDelta' => 1,
-            'min' => 0,
-            'max' => 30,
-            'defaultTimeout' => 100,
-            'timeoutChangeRate' => 100,
-        ))
-        ->addElement('HorizontalSlider', 'slide1', array(
-            'label' => 'Let\'s slide:',
-            'minimum' => '',
-            'maximum' => 25,
-            'discreteValues' => 10,
-            'style' => 'width: 450px;',
-            'topDecorationDijit' => 'HorizontalRuleLabels',
-            'topDecorationLabels' => array('0%', '50%', '100%'),
-            'topDecorationParams' => array('style' => 'padding-bottom: 20px;'),
-        ))
-        ->addElement('SubmitButton', 'submit', array(
-            'label' => 'Submit!'
+            ->addElement('ValidationTextBox', 'contract', array(
+                'label'     => 'Contract number:',
+                'style'     => 'width: 450px;',
+                
+            ))
+
+            ->addElement('ValidationTextBox', 'surname', array(
+                'label'     => 'Enter surname:',
+                'style'     => 'width: 450px;',
+                'required'  => true,
+                'trim'      => true,
+                'promptMessage' => 'Введите фамилию.'
+            ))
+
+            ->addElement('ValidationTextBox', 'firstname', array(
+                'label'     => 'Enter firstname:',
+                'style'     => 'width: 450px;',
+                'required'  => true,
+                'promptMessage' => 'Введите имя.'
+            ))
+
+            ->addElement('ValidationTextBox', 'lastname', array(
+                'label'     => 'Enter lastname:',
+                'style'     => 'width: 450px;',
+                'promptMessage' => 'Введите отчество.'
+            ))
+
+            ->addElement('NumberTextBox', 'block', array(
+                'label'     => 'Enter block number:',
+                'style'     => 'width: 450px;',
+                'required'  => true,
+                'promptMessage' => 'Введите номер блока.'
+            ))
+
+            ->addElement('ComboBox', 'room', array(
+                'label'     => 'Enter room:',
+                'required'  => true,
+                'multiOptions' => array(
+                        'a' =>  'А',
+                        'b' =>  'Б' ),
+                'promptMessage' => 'Выберите комнату.'
+            ))
+
+            ->addElement('ValidationTextBox', 'mac1', array(
+                'label'     => 'Enter mac1:',
+                'style'     => 'width: 450px;',
+                'regExp'    => '[\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}',
+                'lowercase' => true,
+                'promptMessage' => 'Введите МАС1.'
+            ))
+
+            ->addElement('ValidationTextBox', 'mac2', array(
+                'label'     => 'Enter mac2:',
+                'style'     => 'width: 450px;',
+                'regExp'    => '[\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}',
+                'lowercase' => true,
+                'promptMessage' => 'Введите МАС2.'
+            ))
+
+            ->addElement('ValidationTextBox', 'ip', array(
+                'label'     => 'Enter IP:',
+                'style'     => 'width: 450px;',
+                'validators'=> array('IP'),
+                'regExp'    => '172\.30\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)',
+                'required'  => true,
+                'invalidMessage' => 'IP-адрес не принадлежит сети HNA.Net',
+                'promptMessage' => 'Введите IP-адрес.'
+            ))
+
+            ->addElement('ValidationTextBox', 'note', array(
+                'label'     => 'Enter note:',
+                'style'     => 'width: 450px;',
+                'promptMessage' => 'Введите примечание.'
+            ))
+
+
+            ->addElement('SubmitButton', 'submit', array(
+                'label' => 'Submit!'
             ));
 
 
