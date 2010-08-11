@@ -29,8 +29,17 @@ class HnaController extends Zend_Controller_Action
                                            dojo.connect(dojo.byId('getfreeip'),'onclick',function(){
 
                                                 blocknum = dojo.attr(dojo.byId('block'),'value');
-                                                dojo.attr(dojo.byId('ip'),'value',blocknum);
+                                                //dojo.attr(dojo.byId('ip'),'value',blocknum);
                                                 
+                                                dojo.xhrGet({
+                                                    url:        'http://hna_base/hna/getfreeip',
+                                                    handleAs:   'text',
+                                                    content:     { block: blocknum },
+                                                    load:       function(response, ioArgs) {
+                                                                    dojo.attr(dojo.byId('ip'),'value',response);
+                                                                }
+                                                });
+
                                            })
                                         }");
 
@@ -134,30 +143,22 @@ class HnaController extends Zend_Controller_Action
         }       
     }
 
-    public function getFreeIpAction()
+    public function getfreeipAction()
     {
 
 	$this->_helper->viewRenderer->setNoRender ();
 	$this->_helper->getHelper('layout')->disableLayout ();
 
-
-        if ($this->getRequest()->isPost()) {
-
-            $block = $this->getRequest()->getPost('block');
-            $block = (int) $block;
-            if (isset($block)){
-
-                $this->getResponse ()
-                    ->setHeader ( 'Content-Type', 'application/json; charset=utf-8' );
-
+        if ($this->getRequest()->isGet()) {
+            
+                $block = $this->_getParam('block',0);
+                $block = (int) $block;
 
                 $freeip = new Application_Model_DbTable_Hna();
-                //$freeip->
-
-                $data = new Zend_Dojo_Data('id', $entries);
-        	$this->getResponse()->setBody( $data->toJson() );
-
-            }
+                $ip = $freeip->getFreeIP($block);
+                
+                echo $ip;
+            
         }
     }
 

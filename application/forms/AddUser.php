@@ -37,12 +37,12 @@ class Application_Form_AddUser extends Zend_Dojo_Form
                 'promptMessage' => 'Введите отчество.'
             ))
 
-            ->addElement('NumberTextBox', 'block', array(
+            ->addElement('ValidationTextBox', 'block', array(
                 'label'     => 'Enter block number:',
                 'style'     => 'width: 240px;',
+                'regExp'    => '\d{3,4}',
                 'required'  => true,
-                'promptMessage' => 'Введите номер блока.',
-                'value'     => '222'
+                'promptMessage' => 'Введите номер блока.'
             ))
 
             ->addElement('ComboBox', 'room', array(
@@ -70,6 +70,10 @@ class Application_Form_AddUser extends Zend_Dojo_Form
                 'promptMessage' => 'Введите МАС2.'
             ))
             */
+            ->addElement('Button','getfreeip', array(
+                'label'     => 'Получить свободный IP'
+            ))
+
             ->addElement('ValidationTextBox', 'ip', array(
                 'label'     => 'Enter IP:',
                 'style'     => 'width: 240px;',
@@ -78,10 +82,6 @@ class Application_Form_AddUser extends Zend_Dojo_Form
                 'required'  => true,
                 'invalidMessage' => 'IP-адрес не принадлежит сети HNA.Net',
                 'promptMessage' => 'Введите IP-адрес.'
-            ))
-
-            ->addElement('Button','getfreeip', array(
-                'label'     => 'Получить свободный IP'
             ))
 
             ->addElement('ValidationTextBox', 'note', array(
