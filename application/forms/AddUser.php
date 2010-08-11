@@ -17,7 +17,7 @@ class Application_Form_AddUser extends Zend_Dojo_Form
             ))
 
             ->addElement('ValidationTextBox', 'surname', array(
-                'label'     => 'Enter surname:',
+                'label'     => 'Фамилия:',
                 'style'     => 'width: 240px;',
                 'required'  => true,
                 'trim'      => true,
@@ -25,28 +25,29 @@ class Application_Form_AddUser extends Zend_Dojo_Form
             ))
 
             ->addElement('ValidationTextBox', 'firstname', array(
-                'label'     => 'Enter firstname:',
+                'label'     => 'Имя:',
                 'style'     => 'width: 240px;',
                 'required'  => true,
                 'promptMessage' => 'Введите имя.'
             ))
 
             ->addElement('ValidationTextBox', 'lastname', array(
-                'label'     => 'Enter lastname:',
+                'label'     => 'Отчество:',
                 'style'     => 'width: 240px;',
                 'promptMessage' => 'Введите отчество.'
             ))
 
             ->addElement('ValidationTextBox', 'block', array(
-                'label'     => 'Enter block number:',
+                'label'     => 'Номер блока:',
                 'style'     => 'width: 240px;',
-                'regExp'    => '\d{3,4}',
+                'regExp'    => '',
                 'required'  => true,
-                'promptMessage' => 'Введите номер блока.'
+                'promptMessage' => 'Введите номер блока.',
+                'invalidMessage'=> 'Неверный номер блока.'
             ))
 
             ->addElement('ComboBox', 'room', array(
-                'label'     => 'Enter room:',
+                'label'     => 'Комната:',
                 'required'  => true,
                 'multiOptions' => array(
                         'a' =>  'А',
@@ -71,13 +72,13 @@ class Application_Form_AddUser extends Zend_Dojo_Form
             ))
             */
             ->addElement('Button','getfreeip', array(
-                'label'     => 'Получить свободный IP'
+                'label'     => 'Получить свободный IP',
+                'disabled'   => true
             ))
 
             ->addElement('ValidationTextBox', 'ip', array(
-                'label'     => 'Enter IP:',
+                'label'     => 'IP:',
                 'style'     => 'width: 240px;',
-                'validators'=> array('IP'),
                 'regExp'    => '172\.30\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)',
                 'required'  => true,
                 'invalidMessage' => 'IP-адрес не принадлежит сети HNA.Net',
@@ -85,13 +86,13 @@ class Application_Form_AddUser extends Zend_Dojo_Form
             ))
 
             ->addElement('ValidationTextBox', 'note', array(
-                'label'     => 'Enter note:',
+                'label'     => 'Примечание:',
                 'style'     => 'width: 240px;',
                 'promptMessage' => 'Введите примечание.'
             ))
 
             ->addElement('ComboBox', 'status', array(
-                'label'     => 'Enter status:',
+                'label'     => 'Статус:',
                 'required'  => true,
                 'multiOptions' => array(
                         '0' => 'Активный пользователь',

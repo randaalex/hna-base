@@ -65,9 +65,22 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 	public function getFreeIP($block){
 
                 $block = (int)$block;
-                if (($block >=101) && ($block <=110)) {
+                if (($block >= 101) && ($block <= 110)) {
                     $block = $block + 10;
                 }
+                elseif (($block >= 1301) && ($block <= 1305)) {
+                    $block = $block + 5;
+                }
+                elseif (($block >= 1306) && ($block <= 1310)) {
+                    $block = $block + 10;
+                }
+                elseif (($block >= 1401) && ($block <= 1405)) {
+                    $block = $block + 5;
+                }
+                elseif (($block >= 1406) && ($block <= 1410)) {
+                    $block = $block + 10;
+                }
+
 
                 $block = substr($block, strlen($block)-2,2);
 
@@ -98,7 +111,6 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
                     if (($block >= 18) && ($block <= 20)) {
                         $tempip = '172.30.142.' . rand(11, 239);
                     }
-                    //$tempip = '172.30.132.1';
                     
                     if (!$this->fetchRow('ip=\'' . $tempip .'\' AND status!=0 AND status!=1')) {
                         $ip = $tempip;
