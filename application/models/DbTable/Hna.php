@@ -102,6 +102,8 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 
                 } while(isset($ip));
 
+                return $ip;
+
 
 
         }

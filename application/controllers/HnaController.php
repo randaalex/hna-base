@@ -23,9 +23,17 @@ class HnaController extends Zend_Controller_Action
         $this->view->headTitle($this->view->title);
         
         $form = new Application_Form_AddUser();
-        $form->submit->setLabel('Add');
         $this->view->form = $form;
-        
+
+        $this->view->Dojo()->addOnLoad("function() {
+                                           dojo.connect(dojo.byId('getfreeip'),'onclick',function(){
+
+                                                blocknum = dojo.attr(dojo.byId('block'),'value');
+                                                dojo.attr(dojo.byId('ip'),'value',blocknum);
+                                                
+                                           })
+                                        }");
+
         if ($this->getRequest()->isPost()) {
         	$formData = $this->getRequest()->getPost();
         	if ($form->isValid($formData)) {
@@ -34,21 +42,20 @@ class HnaController extends Zend_Controller_Action
         		$lastname = $form->getValue('lastname');
         		/////
         		$contract = 1;
-                        
-        		/////  
+        		/////
         		$block = $form->getValue('block');
         		$room = $form->getValue('room');
         		$ip = $form->getValue('ip');
         		$mac1 = $form->getValue('mac1');
         		$mac2 = $form->getValue('mac2');
-        		$status = $form->getValue('status');
+                        $status = $form->getValue('status');
         		$register = date('Y-m-d H:i:s');
-        		
+
         		$note = $form->getValue('note');
 
         		$hna = new Application_Model_DbTable_Hna();
-        		$hna ->addUser($surname,$firstname,$lastname,$contract,$block,$room,$ip,$mac1,$mac2,$status,$register,$note);
-        		
+        		$hna->addUser($surname,$firstname,$lastname,$contract,$block,$room,$ip,$mac1,$mac2,$status,$register,$note);
+
         		$this->_helper->redirector('index','hna');
         	} else {
         		$form->populate($formData);
@@ -129,13 +136,27 @@ class HnaController extends Zend_Controller_Action
 
     public function getFreeIpAction()
     {
+
+	$this->_helper->viewRenderer->setNoRender ();
+	$this->_helper->getHelper('layout')->disableLayout ();
+
+
         if ($this->getRequest()->isPost()) {
+
             $block = $this->getRequest()->getPost('block');
             $block = (int) $block;
             if (isset($block)){
 
+                $this->getResponse ()
+                    ->setHeader ( 'Content-Type', 'application/json; charset=utf-8' );
+
+
                 $freeip = new Application_Model_DbTable_Hna();
                 //$freeip->
+
+                $data = new Zend_Dojo_Data('id', $entries);
+        	$this->getResponse()->setBody( $data->toJson() );
+
             }
         }
     }
