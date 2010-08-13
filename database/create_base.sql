@@ -40,10 +40,11 @@ DROP TABLE IF EXISTS `hna_users`;
 
 CREATE TABLE `hna_users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `contract` int(11),
   `surname` char(50),
   `firstname` char(50),
   `lastname` char(50),
-  `contract` int(11),
+  `group` char(6),
   `block` int(4),
   `room` varbinary(50) DEFAULT 'a,b',
   `ip` char(14),
