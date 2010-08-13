@@ -28,19 +28,29 @@ class Application_Form_AddUser extends Zend_Dojo_Form
                 'label'     => 'Имя:',
                 'style'     => 'width: 240px;',
                 'required'  => true,
+                'trim'      => true,
                 'promptMessage' => 'Введите имя.'
             ))
 
             ->addElement('ValidationTextBox', 'lastname', array(
                 'label'     => 'Отчество:',
                 'style'     => 'width: 240px;',
+                'trim'      => true,
                 'promptMessage' => 'Введите отчество.'
+            ))
+
+            ->addElement('ValidationTextBox', 'group', array(
+                'label'     => 'Группа:',
+                'style'     => 'width: 240px;',
+                'regExp'    => '\w{6}',
+                'require'   => true,
+                'promptMessage' => 'Введите номер группы.'
             ))
 
             ->addElement('ValidationTextBox', 'block', array(
                 'label'     => 'Номер блока:',
                 'style'     => 'width: 240px;',
-                'regExp'    => '',
+                'regExp'    => '\d{3,4}',
                 'required'  => true,
                 'promptMessage' => 'Введите номер блока.',
                 'invalidMessage'=> 'Неверный номер блока.'
@@ -50,8 +60,8 @@ class Application_Form_AddUser extends Zend_Dojo_Form
                 'label'     => 'Комната:',
                 'required'  => true,
                 'multiOptions' => array(
-                        'a' =>  'А',
-                        'b' =>  'Б' ),
+                        'a' =>  'а',
+                        'b' =>  'б' ),
                 'promptMessage' => 'Выберите комнату.'
             ))
             /*

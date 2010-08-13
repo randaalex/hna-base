@@ -26,20 +26,33 @@ class HnaController extends Zend_Controller_Action
         $this->view->form = $form;
 
         $this->view->Dojo()->addOnLoad("function() {
+
+                                           //if(dijit.byId('block').isValid()){ alert('valid'); }
+
+                                           dojo.connect(dojo.byId('block'),'onchange',function(){
+
+                                                if(dijit.byId('block').isValid()){
+                                                    dijit.byId('getfreeip').attr('disabled', false);
+                                                } else {
+                                                    dijit.byId('getfreeip').attr('disabled', true);
+                                                }
+
+                                           });
+
                                            dojo.connect(dojo.byId('getfreeip'),'onclick',function(){
-
-                                                blocknum = dojo.attr(dojo.byId('block'),'value');
-                                                //dojo.attr(dojo.byId('ip'),'value',blocknum);
+                                                if(dijit.byId('block').isValid()){
+                                                    blocknum = dojo.attr(dojo.byId('block'),'value');
+                                                    //dojo.attr(dojo.byId('ip'),'value',blocknum);
                                                 
-                                                dojo.xhrGet({
-                                                    url:        'http://hna_base/hna/getfreeip',
-                                                    handleAs:   'text',
-                                                    content:     { block: blocknum },
-                                                    load:       function(response, ioArgs) {
+                                                    dojo.xhrGet({
+                                                        url:        'http://hna_base/hna/getfreeip',
+                                                        handleAs:   'text',
+                                                        content:     { block: blocknum },
+                                                        load:       function(response, ioArgs) {
                                                                     dojo.attr(dojo.byId('ip'),'value',response);
-                                                                }
-                                                });
-
+                                                                    }
+                                                    });
+                                                }
                                            })
                                         }");
 
@@ -49,6 +62,7 @@ class HnaController extends Zend_Controller_Action
         		$surname = $form->getValue('surname');
         		$firstname = $form->getValue('firstname');
         		$lastname = $form->getValue('lastname');
+                        $group = $form->getValue('group');
         		/////
         		$contract = 1;
         		/////
@@ -63,7 +77,7 @@ class HnaController extends Zend_Controller_Action
         		$note = $form->getValue('note');
 
         		$hna = new Application_Model_DbTable_Hna();
-        		$hna->addUser($surname,$firstname,$lastname,$contract,$block,$room,$ip,$mac1,$mac2,$status,$register,$note);
+        		$hna->addUser($surname,$firstname,$lastname,$group,$contract,$block,$room,$ip,$mac1,$mac2,$status,$register,$note);
 
         		$this->_helper->redirector('index','hna');
         	} else {

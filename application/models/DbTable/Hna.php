@@ -17,28 +17,29 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 		
 	}
 	
-	public function addUser($surname,$firstname,$lastname,$contract,$block,$room,$ip,$mac1,$mac2,$status,$register,$admin_id,$note){
+	public function addUser($surname,$firstname,$lastname,$group,$contract,$block,$room,$ip,$mac1,$mac2,$status,$register,$admin_id,$note){
 		
 		$data = array(
-			'surname' => $surname,
+			'surname'   => $surname,
 			'firstname' => $firstname,
-			'lastname' => $lastname,
-			'block' => $block,
-			'contract' => $contract,
-			'room' => $room, 
-			'ip' => $ip, 
-			'mac1' => $mac1, 
-			'mac2' => $mac2, 
-			'status' => $status,
-			'register' => $register,
-			'admin_id' => $admin_id,
-			'note' => $note 
+			'lastname'  => $lastname,
+                        'group'     => $group,
+			'block'     => $block,
+			'contract'  => $contract,
+			'room'      => $room,
+			'ip'        => $ip,
+			'mac1'      => $mac1,
+			'mac2'      => $mac2,
+			'status'    => $status,
+			'register'  => $register,
+			'admin_id'  => $admin_id,
+			'note'      => $note
 		);
 		
 		$this->insert($data);
 	}
 	
-	public function updateUser($id,$surname,$firstname,$lastname,$block,$room,$ip,$mac1,$mac2,$status,$note){
+	public function updateUser($id,$surname,$firstname,$lastname,$group,$block,$room,$ip,$mac1,$mac2,$status,$note){
 		
 		$data = array(
 			'surname' => $surname,
