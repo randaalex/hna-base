@@ -19,6 +19,7 @@ DROP TABLE IF EXISTS `hna_pays`;
 
 CREATE TABLE `hna_pays` (
   `user_id` int(11) NOT NULL,
+  `year` int(11),
   `connect` tinyint(1),
   `9` tinyint(1),
   `10` tinyint(1),
@@ -30,6 +31,8 @@ CREATE TABLE `hna_pays` (
   `4` tinyint(1),
   `5` tinyint(1),
   `6` tinyint(1),
+  `7` tinyint(4),
+  `8` tinyint(4),
   PRIMARY KEY(`user_id`)
 )
 ENGINE=INNODB
