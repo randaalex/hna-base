@@ -116,7 +116,7 @@ class Application_Form_AddUser extends Zend_Dojo_Form
                 'label' => 'Добавить пользователя'
             ));
 
-
+            
     }
 
 }

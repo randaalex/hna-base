@@ -1,9 +1,17 @@
-<p>Are you sure taht you want to delete
-	<?php echo $this->escape($this->user['surname']); ?> <?php echo $this->escape($this->user['firstname']); ?> ?
+<p>Вы действительно хотите удалить пользователя?<br>
+	<?php echo $this->escape($this->user['surname']); ?>
+        <?php echo $this->escape($this->user['firstname']); ?>
+        <?php echo $this->escape($this->user['lastname']); ?> <br>
+        <?php echo $this->escape($this->user['group']); ?> <br>
+        <?php echo $this->escape($this->user['ip']); ?> <br>
+        <?php echo $this->escape($this->user['block']); ?>
+        <?php echo $this->escape($this->user['room']); ?> <br>
+        <?php echo $this->escape($this->user['note']); ?>
+
 </p>
 <form action="<?php echo $this->url(array('action'=>'delete')); ?>" method="post">
 <div>
-	<input type="hidden" name="id" value="<?php echo $this->user['id']; ?>" />
+	<input type="hidden" name="id" value="<?php echo $this->user['user_id']; ?>" />
 	<input type="submit" name="del" value="Yes" />
 	<input type="submit" name="del" value="No" />
 </div>
