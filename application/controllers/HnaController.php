@@ -47,7 +47,7 @@ class HnaController extends Zend_Controller_Action
                                                     //dojo.attr(dojo.byId('ip'),'value',blocknum);
                                                 
                                                     dojo.xhrGet({
-                                                        url:        '$getfreipurl',
+                                                        url:        '$getfreeipurl',
                                                         handleAs:   'text',
                                                         content:     { block: blocknum },
                                                         load:       function(response, ioArgs) {
@@ -96,36 +96,102 @@ class HnaController extends Zend_Controller_Action
         $form = new Application_Form_EditUser();
         $this->view->form = $form;
 
-        $this->view->Dojo()->addOnLoad("function() {
+       // проверка поля block на вилидность,
+       // и установка параметра disabled кнопки getfreeip
+        $this->view->Dojo()->addOnLoad("
+            function() {
+               dojo.connect(dojo.byId('block'),'onchange',function(){
 
-                                           dojo.connect(dojo.byId('block'),'onchange',function(){
+                    if(dijit.byId('block').isValid()){
+                        dijit.byId('getfreeip').attr('disabled', false);
+                    } else {
+                        dijit.byId('getfreeip').attr('disabled', true);
+                    }
+               });
+            }");
 
-                                                if(dijit.byId('block').isValid()){
-                                                    dijit.byId('getfreeip').attr('disabled', false);
-                                                } else {
-                                                    dijit.byId('getfreeip').attr('disabled', true);
-                                                }
+       // проверка поля ip на вилидность,
+       // и установка параметра disabled кнопок getmac1 и getmac2
+        $this->view->Dojo()->addOnLoad("
+            function() {
+               dojo.connect(dojo.byId('ip'),'onchange',function(){
 
-                                           });
+                    if(dijit.byId('ip').isValid()){
+                        dijit.byId('getmac1').attr('disabled', false);
+                        dijit.byId('getmac2').attr('disabled', false);
+                    } else {
+                        dijit.byId('getmac1').attr('disabled', true);
+                        dijit.byId('getmac2').attr('disabled', true);
+                    }
+               });
+             }" );
 
-                                           dojo.connect(dojo.byId('getfreeip'),'onclick',function(){
-                                                if(dijit.byId('block').isValid()){
-                                                    blocknum = dojo.attr(dojo.byId('block'),'value');
-                                                    //dojo.attr(dojo.byId('ip'),'value',blocknum);
+        // подключение события onclick по кнопке getfreeip,
+        // проверка поля block на валидность,
+        // отправка GET запроса с контентом block
+        // и вывод полученного значения в поле ip
+        $getfreeipurl = $this->view->baseUrl()."/hna/getfreeip";
+        $this->view->Dojo()->addOnLoad("
+            function() {
+               dojo.connect(dojo.byId('getfreeip'),'onclick',function(){
+                    if(dijit.byId('block').isValid()){
 
-                                                    dojo.xhrGet({
-                                                        url:        'http://hna_base/hna/getfreeip',
-                                                        handleAs:   'text',
-                                                        content:     { block: blocknum },
-                                                        load:       function(response, ioArgs) {
-                                                                    dojo.attr(dojo.byId('ip'),'value',response);
-                                                                    }
-                                                    });
-                                                }
-                                           });
+                        blocknum = dojo.attr(dojo.byId('block'),'value');
 
-                                        }");
-        
+                        dojo.xhrGet({
+                            url:        '$getfreeipurl',
+                            handleAs:   'text',
+                            content:     { block: blocknum },
+                            load:       function(response, ioArgs) {
+                                        dojo.attr(dojo.byId('ip'),'value',response);
+                                        }
+                        });
+                    }
+               });
+             }" );
+
+        // подключение события onclick по кнопке getmac,
+        // проверка поля ip на валидность,
+        // отправка GET запроса с контентом ip
+        // и вывод полученного значения в поле mac
+        $getmac = $this->view->baseUrl()."/hna/getmac";
+        $this->view->Dojo()->addOnLoad("
+            function() {
+               dojo.connect(dojo.byId('getmac1'),'onclick',function(){
+                    if(dijit.byId('ip').isValid()){
+
+                        ip = dojo.attr(dojo.byId('ip'),'value');
+
+                        dojo.xhrGet({
+                            url:        '$getmac',
+                            handleAs:   'text',
+                            content:     { ip: ip },
+                            load:       function(response, ioArgs) {
+                                        dojo.attr(dojo.byId('mac1'),'value',response);
+                                        }
+                        });
+                    }
+               });
+
+               dojo.connect(dojo.byId('getmac2'),'onclick',function(){
+                    if(dijit.byId('ip').isValid()){
+
+                        ip = dojo.attr(dojo.byId('ip'),'value');
+
+                        dojo.xhrGet({
+                            url:        '$getmac',
+                            handleAs:   'text',
+                            content:     { ip: ip },
+                            load:       function(response, ioArgs) {
+                                        dojo.attr(dojo.byId('mac2'),'value',response);
+                                        }
+                        });
+                    }
+               });
+
+            }");
+
+
         if ($this->getRequest()->isPost()) {
         	$formData = $this->getRequest()->getPost();
         	if ($form->isValid($formData)) {
@@ -216,6 +282,24 @@ class HnaController extends Zend_Controller_Action
         }
     }
 
+    public function getmacAction()
+    {
+	$this->_helper->viewRenderer->setNoRender ();
+	$this->_helper->getHelper('layout')->disableLayout ();
+
+        if ($this->getRequest()->isGet()) {
+
+                $ip = $this->_getParam('ip',0);
+                $ip = (int) $ip;
+
+                // stub-function
+                $mac = "00:11:22:33:44:55";
+
+                echo $mac;
+
+        }
+    }
+
     public function viewAction()
     {
         // action body
@@ -223,7 +307,16 @@ class HnaController extends Zend_Controller_Action
 
     public function testAction()
     {
-        // testAction
+
+
+        $user = new Application_Model_DbTable_Hna();
+        $users = $user->fetchAll();
+
+        $dojoData= new Zend_Dojo_Data('user_id',$users,'id');
+        echo $dojoData->toJson();
+
+        //exit;
+
     }
 
 }
