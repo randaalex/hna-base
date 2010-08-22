@@ -6,13 +6,24 @@ class Application_Form_AddPay extends Zend_Dojo_Form
     {
 
         $this->setMethod('post');
-        $this->setName('adduser');
+        $this->setName('addpay');
 
         $this
+            ->addElement('Hidden','user_id', array(
+                'validators'=> array('Int'),
+                'value'     => '-1'
+            ))
+
             ->addElement('ValidationTextBox', 'ip', array(
                 'label'     => 'IP:',
                 'style'     => 'width: 240px;',
+                'regExp'    => '172\.30\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)',
+                'required'  => true
 
+            ))
+
+            ->addElement('Textarea','info', array(
+                'style'     => 'width: 240px;',
             ))
 
             ->addElement('CheckBox', 'connect', array(

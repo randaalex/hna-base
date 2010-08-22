@@ -125,5 +125,18 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
                 }
         }
 
+
+        public function getUserInfo($ip) {
+
+		$row = $this->fetchRow('ip = "' . $ip . '"');
+
+		if ($row) {
+                    return $row->toArray();
+		}
+
+
+        }
+
+
 }
 
