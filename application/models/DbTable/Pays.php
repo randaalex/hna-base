@@ -22,8 +22,6 @@ class Application_Model_DbTable_Pays extends Zend_Db_Table_Abstract
             $id = $result['user_id'];
 
             $data = array(
-                    'user_id'=> (int)$id,
-                    'year'  => date('Y'),
                     'connect'=> (int)$connect,
                      '9'    => (int)$m9,
                     '10'    => (int)$m10,
@@ -40,7 +38,7 @@ class Application_Model_DbTable_Pays extends Zend_Db_Table_Abstract
 
                 );
 
-            $this->insert($data);
+            $this->update($data, 'user_id=' . (int)$id);
         }
 
         public function getUserPays($user_id){
@@ -48,11 +46,13 @@ class Application_Model_DbTable_Pays extends Zend_Db_Table_Abstract
             $user_id = (int)$user_id;
 
             $row = $this->fetchRow('user_id=' . $user_id);
-            if (!$row) {
-                    throw new Exception("Count not find row $id");
+            if ($row) {
+                return $row->toArray();
+            } else {
+                return array();
             }
 
-            return $row->toArray();
+            
 
         }
 }

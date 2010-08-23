@@ -132,7 +132,11 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 
 		if ($row) {
                     return $row->toArray();
-		}
+		} else {
+                    $array = $row->toArray;
+                    //return $array['user_id'] = '-1';
+                    return array();
+                }
 
 
         }

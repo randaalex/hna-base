@@ -22,7 +22,8 @@ class Application_Form_AddPay extends Zend_Dojo_Form
 
             ))
 
-            ->addElement('Textarea','info', array(
+            ->addElement('ValidationTextBox','info', array(
+                'label'     => 'Информация:',
                 'style'     => 'width: 240px;',
             ))
 
@@ -30,51 +31,51 @@ class Application_Form_AddPay extends Zend_Dojo_Form
                 'label'     => 'Подключение:',
             ))
 
-            ->addElement('CheckBox', '9', array(
+            ->addElement('CheckBox', 'm9', array(
                 'label'     => 'Сентябрь:',
             ))
 
-            ->addElement('CheckBox', '10', array(
+            ->addElement('CheckBox', 'm10', array(
                 'label'     => 'Октябрь:',
             ))
 
-            ->addElement('CheckBox', '11', array(
+            ->addElement('CheckBox', 'm11', array(
                 'label'     => 'Ноябрь:',
             ))
 
-            ->addElement('CheckBox', '12', array(
+            ->addElement('CheckBox', 'm12', array(
                 'label'     => 'Декабрь:',
             ))
 
-            ->addElement('CheckBox', '1', array(
+            ->addElement('CheckBox', 'm1', array(
                 'label'     => 'Январь:',
             ))
 
-            ->addElement('CheckBox', '2', array(
+            ->addElement('CheckBox', 'm2', array(
                 'label'     => 'Февраль: ',
             ))
 
-            ->addElement('CheckBox', '3', array(
+            ->addElement('CheckBox', 'm3', array(
                 'label'     => 'Март: ',
             ))
 
-            ->addElement('CheckBox', '4', array(
+            ->addElement('CheckBox', 'm4', array(
                 'label'     => 'Апрель:',
             ))
 
-            ->addElement('CheckBox', '5', array(
+            ->addElement('CheckBox', 'm5', array(
                 'label'     => 'Май:',
             ))
 
-            ->addElement('CheckBox', '6', array(
+            ->addElement('CheckBox', 'm6', array(
                 'label'     => 'Июнь: ',
             ))
 
-            ->addElement('CheckBox', '7', array(
+            ->addElement('CheckBox', 'm7', array(
                 'label'     => 'Июль: ',
             ))
 
-            ->addElement('CheckBox', '8', array(
+            ->addElement('CheckBox', 'm8', array(
                 'label'     => 'Август:',
             ))
 
@@ -83,7 +84,10 @@ class Application_Form_AddPay extends Zend_Dojo_Form
                 'label' => 'Добавить оплату'
             ));
 
-         //$this->mounth1->addDecorator('HtmlTag', array('tag' => 'll'));
+         // TODO: Доделать декораторы!
+         //$this->m1->addDecorator('HtmlTag', array('tag' => 'll'));
+         //$this->m2->addDecorator('HtmlTag', array('tag' => 'll'));
+         //$this->m1->setDecorators(array('ViewHelper'));
 
          
     }
