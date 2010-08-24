@@ -132,13 +132,20 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 
 		if ($row) {
                     return $row->toArray();
-		} else {
-                    $array = $row->toArray;
-                    //return $array['user_id'] = '-1';
-                    return array();
+		} 
+
+        }
+
+        public function getUserId($ip) {
+
+                $row = $this->fetchRow('ip = "' . $ip . '"');
+
+                if($row){
+                    $data = $row->toArray();
+                    return $data['user_id'];
+                } else {
+                    return false;
                 }
-
-
         }
 
 

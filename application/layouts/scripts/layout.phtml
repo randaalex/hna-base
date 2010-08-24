@@ -1,0 +1,24 @@
+<?php echo $this->doctype(); ?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <?php echo $this->headTitle(); ?>
+        
+        <?php if($this->dojo()->isEnabled()):
+                $this->dojo()->setLocalPath('/js/dojo/dojo.js')
+                    ->addStyleSheetModule('dijit.themes.tundra');
+                echo $this->dojo();
+              endif; ?>
+    </head>
+    <body class="tundra">
+        <div id="header">
+            <div id="logged-in-as" style="text-align: right;">
+                <?php echo $this->loggedAs(); ?>
+            </div>
+        </div>
+        <div>
+            <?php echo $this->layout()->content; ?>
+            
+        </div>
+    </body>
+</html>

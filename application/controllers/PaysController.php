@@ -22,7 +22,7 @@ class PaysController extends Zend_Controller_Action
                 $this->view->form = $form;
         
                 $getuserinfo = $this->view->baseUrl()."/pays/getuserinfo/";
-                $this->view->Dojo()->requireModule('dojox.encoding.base64');
+                $this->view->Dojo()->requireModule('dojox.encoding.base64'); // TODO: Запхать все это в отдельную javascript библиотеку
                 $this->view->Dojo()->addOnLoad("function() {
         
                                                            dojo.connect(dojo.byId('ip'),'onkeyup',function(){
@@ -44,59 +44,87 @@ class PaysController extends Zend_Controller_Action
                                                                                 dojo.attr(dojo.byId('user_id'),'value', response.user_id);
                                                                                 dijit.byId('connect').attr('checked', Boolean(response.connect));
                                                                                 dijit.byId('connect').attr('readOnly', Boolean(response.connect));
+                                                                                dijit.byId('connect').attr('disabled', Boolean(response.connect));
                                                                                 dijit.byId('m9').attr('checked', Boolean(response.m9));
                                                                                 dijit.byId('m9').attr('readOnly', Boolean(response.m9));
+                                                                                dijit.byId('m9').attr('disabled', Boolean(response.m9));
                                                                                 dijit.byId('m10').attr('checked', Boolean(response.m10));
                                                                                 dijit.byId('m10').attr('readOnly', Boolean(response.m10));
+                                                                                dijit.byId('m10').attr('disabled', Boolean(response.m10));
                                                                                 dijit.byId('m11').attr('checked', Boolean(response.m11));
                                                                                 dijit.byId('m11').attr('readOnly', Boolean(response.m11));
+                                                                                dijit.byId('m11').attr('disabled', Boolean(response.m11));
                                                                                 dijit.byId('m12').attr('checked', Boolean(response.m12));
                                                                                 dijit.byId('m12').attr('readOnly', Boolean(response.m12));
+                                                                                dijit.byId('m12').attr('disabled', Boolean(response.m12));
                                                                                 dijit.byId('m1').attr('checked', Boolean(response.m1));
                                                                                 dijit.byId('m1').attr('readOnly', Boolean(response.m1));
+                                                                                dijit.byId('m1').attr('disabled', Boolean(response.m1));
                                                                                 dijit.byId('m2').attr('checked', Boolean(response.m2));
                                                                                 dijit.byId('m2').attr('readOnly', Boolean(response.m2));
+                                                                                dijit.byId('m2').attr('disabled', Boolean(response.m2));
                                                                                 dijit.byId('m3').attr('checked', Boolean(response.m3));
                                                                                 dijit.byId('m3').attr('readOnly', Boolean(response.m3));
+                                                                                dijit.byId('m3').attr('disabled', Boolean(response.m3));
                                                                                 dijit.byId('m4').attr('checked', Boolean(response.m4));
                                                                                 dijit.byId('m4').attr('readOnly', Boolean(response.m4));
+                                                                                dijit.byId('m4').attr('disabled', Boolean(response.m4));
                                                                                 dijit.byId('m5').attr('checked', Boolean(response.m5));
                                                                                 dijit.byId('m5').attr('readOnly', Boolean(response.m5));
+                                                                                dijit.byId('m5').attr('disabled', Boolean(response.m5));
                                                                                 dijit.byId('m6').attr('checked', Boolean(response.m6));
                                                                                 dijit.byId('m6').attr('readOnly', Boolean(response.m6));
+                                                                                dijit.byId('m6').attr('disabled', Boolean(response.m6));
                                                                                 dijit.byId('m7').attr('checked', Boolean(response.m7));
                                                                                 dijit.byId('m7').attr('readOnly', Boolean(response.m7));
+                                                                                dijit.byId('m7').attr('disabled', Boolean(response.m7));
                                                                                 dijit.byId('m8').attr('checked', Boolean(response.m8));
                                                                                 dijit.byId('m8').attr('readOnly', Boolean(response.m8));
+                                                                                dijit.byId('m8').attr('disabled', Boolean(response.m8));
+                                                                                dijit.byId('submit').attr('disabled', false);
                                                                              } else {
-                                                                            dijit.byId('connect').attr('checked', false);
-                                                                            dijit.byId('connect').attr('readOnly', true);
 
+                                                                                dijit.byId('connect').attr('checked', false);
+                                                                                dijit.byId('connect').attr('readOnly', true);
+                                                                                dijit.byId('connect').attr('disabled', true);
                                                                                 dojo.attr(dojo.byId('info'),'value', '');
                                                                                 dijit.byId('m9').attr('checked', false);
                                                                                 dijit.byId('m9').attr('readOnly', true);
+                                                                                dijit.byId('m9').attr('disabled', true);
                                                                                 dijit.byId('m10').attr('checked', false);
                                                                                 dijit.byId('m10').attr('readOnly', true);
+                                                                                dijit.byId('m10').attr('disabled', true);
                                                                                 dijit.byId('m11').attr('checked', false);
                                                                                 dijit.byId('m11').attr('readOnly', true);
+                                                                                dijit.byId('m11').attr('disabled', true);
                                                                                 dijit.byId('m12').attr('checked', false);
                                                                                 dijit.byId('m12').attr('readOnly', true);
+                                                                                dijit.byId('m12').attr('disabled', true);
                                                                                 dijit.byId('m1').attr('checked', false);
                                                                                 dijit.byId('m1').attr('readOnly', true);
+                                                                                dijit.byId('m1').attr('disabled', true);
                                                                                 dijit.byId('m2').attr('checked', false);
                                                                                 dijit.byId('m2').attr('readOnly', true);
+                                                                                dijit.byId('m2').attr('disabled', true);
                                                                                 dijit.byId('m3').attr('checked', false);
                                                                                 dijit.byId('m3').attr('readOnly', true);
+                                                                                dijit.byId('m3').attr('disabled', true);
                                                                                 dijit.byId('m4').attr('checked', false);
                                                                                 dijit.byId('m4').attr('readOnly', true);
+                                                                                dijit.byId('m4').attr('disabled', true);
                                                                                 dijit.byId('m5').attr('checked', false);
                                                                                 dijit.byId('m5').attr('readOnly', true);
+                                                                                dijit.byId('m5').attr('disabled', true);
                                                                                 dijit.byId('m6').attr('checked', false);
                                                                                 dijit.byId('m6').attr('readOnly', true);
+                                                                                dijit.byId('m6').attr('disabled', true);
                                                                                 dijit.byId('m7').attr('checked', false);
                                                                                 dijit.byId('m7').attr('readOnly', true);
+                                                                                dijit.byId('m7').attr('disabled', true);
                                                                                 dijit.byId('m8').attr('checked', false);
                                                                                 dijit.byId('m8').attr('readOnly', true);
+                                                                                dijit.byId('m8').attr('disabled', true);
+                                                                                dijit.byId('submit').attr('disabled', true);
                                                                              }
                                                                         },
                                                                         error: function(){
@@ -132,7 +160,9 @@ class PaysController extends Zend_Controller_Action
                                     $m8 = $form->getValue('m8');
                                     
         
-        
+                                $data = new Application_Model_DbTable_Pays();
+                                $data->getUserPays($user_id);
+
                 		$hna = new Application_Model_DbTable_Pays();
                 		$hna->addPay($ip,$connect,$m9,$m10,$m11,$m12,$m1,$m2,$m3,$m4,$m5,$m6,$m7,$m8);
         

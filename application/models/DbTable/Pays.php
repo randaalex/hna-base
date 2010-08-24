@@ -9,7 +9,7 @@ class Application_Model_DbTable_Pays extends Zend_Db_Table_Abstract
             $ip = $ip;
 
             // TODO: костыли, нужно переделать!
-            $db = Zend_Db::factory('Pdo_Mysql', array(
+            /*$db = Zend_Db::factory('Pdo_Mysql', array(
                 'host'             => '127.0.0.1',
                 'username'         => 'root',
                 'password'         => '',
@@ -20,6 +20,10 @@ class Application_Model_DbTable_Pays extends Zend_Db_Table_Abstract
             $result = $db->fetchRow($sql);
 
             $id = $result['user_id'];
+            */
+
+            $modelid = new Application_Model_DbTable_Hna();
+            $id = $modelid->getUserId($ip);
 
             $data = array(
                     'connect'=> (int)$connect,
@@ -38,7 +42,19 @@ class Application_Model_DbTable_Pays extends Zend_Db_Table_Abstract
 
                 );
 
-            $this->update($data, 'user_id=' . (int)$id);
+            if ($id) {
+
+                $modelpay = new Application_Model_DbTable_Pays();
+                $pays = $modelpay->getUserPays($id);
+
+                foreach ($pays as $key => $value) {
+                    if ( $value == 1 ){
+                        $data[$key] = 1;
+                    }
+                }
+
+                $this->update($data, 'user_id=' . (int)$id);
+            }
         }
 
         public function getUserPays($user_id){
