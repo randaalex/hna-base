@@ -39,6 +39,26 @@ class Application_Form_AddUser extends Zend_Dojo_Form
                 'promptMessage' => 'Введите отчество.'
             ))
 
+            ->addElement('ValidationTextBox', 'login', array(
+                'label'     => 'Логин:',
+                'style'     => 'width: 240px;',
+                'required'  => true,
+                'trim'      => true,
+                'promptMessage' => 'Введите логин.'
+            ))
+
+            ->addElement('ValidationTextBox', 'pass', array(
+                'label'     => 'Пароль:',
+                'style'     => 'width: 240px;',
+                'required'  => true,
+                'trim'      => true,
+                'promptMessage' => 'Введите пароль.'
+            ))
+
+            ->addElement('Button','getpass', array(
+                'label'     => 'Случайный пароль',
+            ))
+
             ->addElement('ValidationTextBox', 'group', array(
                 'label'     => 'Группа:',
                 'style'     => 'width: 240px;',
@@ -64,37 +84,7 @@ class Application_Form_AddUser extends Zend_Dojo_Form
                         'b' =>  'б' ),
                 'promptMessage' => 'Выберите комнату.'
             ))
-            /*
-            ->addElement('ValidationTextBox', 'mac1', array(
-                'label'     => 'Enter mac1:',
-                'style'     => 'width: 240px;',
-                'regExp'    => '[\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}',
-                'lowercase' => true,
-                'promptMessage' => 'Введите МАС1.'
-            ))
-
-            ->addElement('ValidationTextBox', 'mac2', array(
-                'label'     => 'Enter mac2:',
-                'style'     => 'width: 240px;',
-                'regExp'    => '[\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}[\-|\:][\d|A-F,a-f]{2}',
-                'lowercase' => true,
-                'promptMessage' => 'Введите МАС2.'
-            ))
-            */
-            ->addElement('Button','getfreeip', array(
-                'label'     => 'Получить свободный IP',
-                'disabled'   => true
-            ))
-
-            ->addElement('ValidationTextBox', 'ip', array(
-                'label'     => 'IP:',
-                'style'     => 'width: 240px;',
-                'regExp'    => '172\.30\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)',
-                'required'  => true,
-                'invalidMessage' => 'IP-адрес не принадлежит сети HNA.Net',
-                'promptMessage' => 'Введите IP-адрес.'
-            ))
-
+            
             ->addElement('ValidationTextBox', 'note', array(
                 'label'     => 'Примечание:',
                 'style'     => 'width: 240px;',
