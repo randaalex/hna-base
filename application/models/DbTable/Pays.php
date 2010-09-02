@@ -4,11 +4,22 @@ class Application_Model_DbTable_Pays extends Zend_Db_Table_Abstract
 {
     protected $_name = 'hna_pays';
 
-        public function addPay($ip,$connect,$m9,$m10,$m11,$m12,$m1,$m2,$m3,$m4,$m5,$m6,$m7,$m8){
+    public function addUser($id) {
 
-            $ip = $ip;
+            $data = array (
+                'user_id'    => (int)$id,
+                'year'  => date('Y'),
+            );
 
-            // TODO: костыли, нужно переделать!
+            $this->insert($data);
+    }
+
+
+    public function addPay($login,$connect,$m9,$m10,$m11,$m12,$m1,$m2,$m3,$m4,$m5,$m6,$m7,$m8){
+
+            $login = $login;
+
+            // TO_DO: костыли, нужно переделать!
             /*$db = Zend_Db::factory('Pdo_Mysql', array(
                 'host'             => '127.0.0.1',
                 'username'         => 'root',
@@ -23,7 +34,7 @@ class Application_Model_DbTable_Pays extends Zend_Db_Table_Abstract
             */
 
             $modelid = new Application_Model_DbTable_Hna();
-            $id = $modelid->getUserId($ip);
+            $id = $modelid->getUserId($login);
 
             $data = array(
                     'connect'=> (int)$connect,

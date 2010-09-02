@@ -25,9 +25,9 @@ class PaysController extends Zend_Controller_Action
                 $this->view->Dojo()->requireModule('dojox.encoding.base64'); // TODO: Запхать все это в отдельную javascript библиотеку
                 $this->view->Dojo()->addOnLoad("function() {
         
-                                                           dojo.connect(dojo.byId('ip'),'onkeyup',function(){
+                                                           dojo.connect(dojo.byId('login'),'onkeyup',function(){
 
-                                                                if((dijit.byId('ip').isValid()) && (dojo.attr(dojo.byId('ip'),'value').length >= 12)){
+                                                                if((dijit.byId('login').isValid()) && (dojo.attr(dojo.byId('login'),'value').length >= 3)){
 
 
 
@@ -143,7 +143,7 @@ class PaysController extends Zend_Controller_Action
                 	$formData = $this->getRequest()->getPost();
                 	if ($form->isValid($formData)) {
         
-                                    $ip = $form->getValue('ip');
+                                    $login = $form->getValue('login');
                                     
                                     $connect = $form->getValue('connect');
                                     $m9 = $form->getValue('m9');
@@ -164,7 +164,7 @@ class PaysController extends Zend_Controller_Action
                                 $data->getUserPays($user_id);
 
                 		$hna = new Application_Model_DbTable_Pays();
-                		$hna->addPay($ip,$connect,$m9,$m10,$m11,$m12,$m1,$m2,$m3,$m4,$m5,$m6,$m7,$m8);
+                		$hna->addPay($login,$connect,$m9,$m10,$m11,$m12,$m1,$m2,$m3,$m4,$m5,$m6,$m7,$m8);
         
                 		//$this->_helper->redirector('index','pays');
                 	} else {
@@ -180,10 +180,10 @@ class PaysController extends Zend_Controller_Action
 
         if ($this->getRequest()->isPost()) {
 
-                $ip = $this->_getParam('ip');
+                $login = $this->_getParam('login');
                 
                 $userinfo = new Application_Model_DbTable_Hna();
-                $info = $userinfo->getUserInfo($ip);
+                $info = $userinfo->getUserInfo($login);
 
                 $userpays = new Application_Model_DbTable_Pays();
                 $pays = $userpays->getUserPays($info['user_id']);

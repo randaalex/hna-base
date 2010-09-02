@@ -10,12 +10,6 @@ class Application_Form_AddUser extends Zend_Dojo_Form
         $this->setName('adduser');
 
         $this
-            ->addElement('ValidationTextBox', 'contract', array(
-                'label'     => 'Contract number:',
-                'style'     => 'width: 240px;',
-
-            ))
-
             ->addElement('ValidationTextBox', 'surname', array(
                 'label'     => 'Фамилия:',
                 'style'     => 'width: 240px;',
@@ -37,26 +31,6 @@ class Application_Form_AddUser extends Zend_Dojo_Form
                 'style'     => 'width: 240px;',
                 'trim'      => true,
                 'promptMessage' => 'Введите отчество.'
-            ))
-
-            ->addElement('ValidationTextBox', 'login', array(
-                'label'     => 'Логин:',
-                'style'     => 'width: 240px;',
-                'required'  => true,
-                'trim'      => true,
-                'promptMessage' => 'Введите логин.'
-            ))
-
-            ->addElement('ValidationTextBox', 'pass', array(
-                'label'     => 'Пароль:',
-                'style'     => 'width: 240px;',
-                'required'  => true,
-                'trim'      => true,
-                'promptMessage' => 'Введите пароль.'
-            ))
-
-            ->addElement('Button','getpass', array(
-                'label'     => 'Случайный пароль',
             ))
 
             ->addElement('ValidationTextBox', 'group', array(

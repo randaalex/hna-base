@@ -14,10 +14,9 @@ class Application_Form_AddPay extends Zend_Dojo_Form
                 'value'     => '-1'
             ))
 
-            ->addElement('ValidationTextBox', 'ip', array(
-                'label'     => 'IP:',
+            ->addElement('ValidationTextBox', 'login', array(
+                'label'     => 'Login:',
                 'style'     => 'width: 240px;',
-                'regExp'    => '172\.30\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)',
                 'required'  => true
 
             ))

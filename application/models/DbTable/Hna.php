@@ -26,8 +26,8 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
                         'login'     => $login,
                         'pass'      => $pass,
                         'group'     => $group,
+                        'contract'  => $contract,
 			'block'     => $block,
-			'contract'  => $contract,
 			'room'      => $room,
 			'status'    => $status,
 			'register'  => $register,
@@ -36,6 +36,9 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 		);
 		
 		$this->insert($data);
+                
+                $row = $this->fetchRow('surname = "'.$surname.'"');
+                return $row['user_id'];
 	}
 	
 	public function updateUser($id,$surname,$firstname,$lastname,$login,$pass,$group,$block,$room,$status,$note){
@@ -62,9 +65,9 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 		$this->delete('user_id =' .(int)$id);
 	}
 
-        public function getUserInfo($ip) {
+        public function getUserInfo($user_id) {
 
-		$row = $this->fetchRow('ip = "' . $ip . '"');
+		$row = $this->fetchRow('user_id = "' . $user_id . '"');
 
 		if ($row) {
                     return $row->toArray();
@@ -72,9 +75,9 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 
         }
 
-        public function getUserId($ip) {
+        public function getUserId($login) {
 
-                $row = $this->fetchRow('ip = "' . $ip . '"');
+                $row = $this->fetchRow('login = "' . $login . '"');
 
                 if($row){
                     $data = $row->toArray();
@@ -84,6 +87,21 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
                 }
         }
 
+        public function getLastContract(){
+
+                // TODO: костыли, нужно переделать!
+                $db = Zend_Db::factory('Pdo_Mysql', array(
+                    'host'             => '127.0.0.1',
+                    'username'         => 'root',
+                    'password'         => '',
+                    'dbname'           => 'hna_base'
+                ));
+
+                $sql = "SELECT MAX(contract) AS contract FROM hna_users";
+                $result = $db->fetchRow($sql);
+
+                return $result['contract'];
+        }
 
 }
 

@@ -1,0 +1,12 @@
+Вы только что добавили пользователя: <br>
+
+ФИО:        <?php echo $this->escape($this->user['surname']); ?>
+            <?php echo $this->escape($this->user['firstname']); ?>
+            <?php echo $this->escape($this->user['lastname']); ?> <br>
+Договор:    <?php echo $this->escape($this->user['contract']); ?> <br>
+Login:      <?php echo $this->escape($this->user['contract']) .$this->escape($this->user['login']); ?> <br>
+Password:   <?php echo $this->escape($this->user['pass']); ?> <br>
+Группа:     <?php echo $this->escape($this->user['group']); ?> <br>
+Блок:       <?php echo $this->escape($this->user['block']); ?>
+            <?php echo $this->escape($this->user['room']); ?> <br>
+Примечание: <?php echo $this->escape($this->user['note']); ?>

@@ -14,7 +14,8 @@ class HnaController extends Zend_Controller_Action
         $this->view->headTitle($this->view->title);
         
         $user = new Application_Model_DbTable_Hna();
-        $this->view->hna = $user->fetchAll();
+        $userinfo = $user->fetchAll();
+        
     }
 
     public function addAction()
@@ -37,30 +38,38 @@ class HnaController extends Zend_Controller_Action
                                            })
                                         }");
 
-
         if ($this->getRequest()->isPost()) {
-        	$formData = $this->getRequest()->getPost();
-        	if ($form->isValid($formData)) {
+
+                $formData = $this->getRequest()->getPost();
+               
+                if ($form->isValid($formData)) {
+                    
         		$surname = $form->getValue('surname');
         		$firstname = $form->getValue('firstname');
         		$lastname = $form->getValue('lastname');
-                        $login = $form->getValue('login');
-                        $pass = $form->getValue('pass');
+                        $login = $this->logingen(5);
+                        $pass = $this->passgen(8);
                         $group = $form->getValue('group');
         		/////
-        		$contract = 1;
+                        $modcontract = new Application_Model_DbTable_Hna();
+                        $contract = $modcontract->getLastContract() + 1;
         		/////
         		$block = $form->getValue('block');
         		$room = $form->getValue('room');
                         $status = $form->getValue('status');
-        		$register = date('Y-m-d H:i:s');
-
+        		$register = date('Y-m-d H:i');
+                        $admin_id = 1;
         		$note = $form->getValue('note');
 
         		$hna = new Application_Model_DbTable_Hna();
-        		$hna->addUser($surname,$firstname,$lastname,$login,$pass,$group,$contract,$block,$room,$status,$register,$note);
+                        $user_id = $hna->addUser($surname,$firstname,$lastname,$login,$pass,$group,$contract,$block,$room,$status,$register,$admin_id,$note);
 
-        		$this->_helper->redirector('index','hna');
+                        $pays = new Application_Model_DbTable_Pays();
+                        $pays->addUser($user_id);
+
+
+        		//$this->_helper->redirector('index','hna');
+                        $this->getHelper('Redirector')->gotoSimpleAndExit('vadd', 'hna', '' , array('user_id' => $user_id));
         	} else {
         		$form->populate($formData);
         	}
@@ -87,7 +96,9 @@ class HnaController extends Zend_Controller_Action
                         $pass = $form->getValue('pass');
                         $group = $form->getValue('group');
         		/////
-        		$contract = $form->getValue('contract');
+ 
+
+        		//$contract =
         		/////  
         		$block = $form->getValue('block');
         		$room = $form->getValue('room');
@@ -122,6 +133,29 @@ class HnaController extends Zend_Controller_Action
         
         }
         
+    }
+
+    public function vaddAction()
+    {
+        $this->view->title = "Пользователь добавлен";
+        $this->view->headTitle($this->view->title);
+
+        if ($this->getRequest()->isGet()) {
+
+            $user_id = $this->_getParam('user_id');
+
+            $user = new Application_Model_DbTable_Hna();
+            $this->view->user = $user->getUser($user_id);
+            //print_r($user->getUserInfo($user_id));
+        }
+
+
+    }
+
+    public function viewAction()
+    {
+        $this->view->title = "View user";
+        $this->view->headTitle($this->view->title);
     }
 
     public function deleteAction()
@@ -182,23 +216,59 @@ class HnaController extends Zend_Controller_Action
         }
     }
 
-    public function viewAction()
-    {
-        // action body
-    }
-
     public function testAction()
     {
 
 
-        $user = new Application_Model_DbTable_Hna();
-        $users = $user->fetchAll();
+        //$contractmod = new Application_Model_DbTable_Hna();
+        //$contract = $contractmod->getLastContract();
 
-        $dojoData= new Zend_Dojo_Data('user_id',$users,'id');
-        echo $dojoData->toJson();
+        //print_r($contract);
 
         //exit;
-
+        for($i=1;$i<=30;$i++){
+        echo $this->logingen(5)."<br>";
+        echo $this->passgen(10)."<br><br>";
+        }
     }
 
+    /**
+     * function of generating random string
+     *
+     * @param int $lenght
+     * @return string $pass
+     */
+    private function passgen($lenght)
+    {
+        
+        $chars = '1234567890abcdefghijklmnopqrstuvwxyz';
+
+        $pass = '';
+
+        for($i=1;$i<=$lenght;$i++){
+            $pass .= substr($chars, rand(0,35), 1);
+        };
+
+        return $pass;
+    }
+
+    /**
+     * function of generating random string
+     *
+     * @param int $lenght
+     * @return string $pass
+     */
+    private function logingen($lenght)
+    {
+
+        $chars = 'abcdefghijklmnopqrstuvwxyz';
+
+        $login = '';
+
+        for($i=1;$i<=$lenght;$i++){
+            $login .= substr($chars, rand(0,25), 1);
+        };
+
+        return $login;
+    }
 }

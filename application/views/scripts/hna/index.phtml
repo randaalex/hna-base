@@ -4,11 +4,12 @@ table,td,th {
 	border-collapse: collapse;
 }
 </style>
+<center>
 <table>
 <tr>
 	<th>Name</th>
-        <th>Login</th>
 	<th>Contract</th>
+        <th>Login</th>
         <th>Group</th>
         <th>Block</th>
 	<th>status</th>
@@ -19,8 +20,8 @@ table,td,th {
 <?php foreach($this->hna as $users) : ?>
 <tr>
 	<td><?php echo $this->escape($users->surname).' '.$this->escape($users->firstname).' '.$this->escape($users->lastname);?></td>
-        <td><?php echo $this->escape($users->login); ?></td>
 	<td><?php echo $this->escape($users->contract); ?></td>
+        <td><?php echo $this->escape($users->login); ?></td>
         <td><?php echo $this->escape($users->group); ?></td>
 	<td><?php echo $this->escape($users->block).$this->escape($users->room); ?></td>
 	<td><?php echo $this->escape($users->status); ?></td>
@@ -32,3 +33,4 @@ table,td,th {
 
 
 </table>
+</center>
