@@ -18,22 +18,23 @@ CHARACTER SET utf8 ;
 DROP TABLE IF EXISTS `hna_pays`;
 
 CREATE TABLE `hna_pays` (
+  `pay_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `year` int(11),
-  `connect` tinyint(1),
-  `9` tinyint(1),
-  `10` tinyint(1),
-  `11` tinyint(1),
-  `12` tinyint(1),
-  `1` tinyint(1),
-  `2` tinyint(1),
-  `3` tinyint(1),
-  `4` tinyint(1),
-  `5` tinyint(1),
-  `6` tinyint(1),
-  `7` tinyint(4),
-  `8` tinyint(4),
-  PRIMARY KEY(`user_id`)
+  `connect` tinyint(1) NOT NULL DEFAULT '0',
+  `9` tinyint(1) NOT NULL DEFAULT '0',
+  `10` tinyint(1) NOT NULL DEFAULT '0',
+  `11` tinyint(1) NOT NULL DEFAULT '0',
+  `12` tinyint(1) NOT NULL DEFAULT '0',
+  `1` tinyint(1) NOT NULL DEFAULT '0',
+  `2` tinyint(1) NOT NULL DEFAULT '0',
+  `3` tinyint(1) NOT NULL DEFAULT '0',
+  `4` tinyint(1) NOT NULL DEFAULT '0',
+  `5` tinyint(1) NOT NULL DEFAULT '0',
+  `6` tinyint(1) NOT NULL DEFAULT '0',
+  `7` tinyint(4) NOT NULL DEFAULT '0',
+  `8` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY(`pay_id`)
 )
 ENGINE=INNODB
 CHARACTER SET utf8 ;
@@ -47,16 +48,17 @@ CREATE TABLE `hna_users` (
   `surname` char(50),
   `firstname` char(50),
   `lastname` char(50),
+  `login` char(30),
+  `pass` char(32),
   `group` char(6),
   `block` int(4),
   `room` varbinary(50) DEFAULT 'a,b',
-  `ip` char(14),
-  `mac1` char(17),
-  `mac2` char(17),
   `status` tinyint(1),
   `register` datetime,
   `admin_id` int(11),
   `note` char(250),
+  `lastip` char(15),
+  `lastmac` char(20),
   PRIMARY KEY(`user_id`)
 )
 ENGINE=INNODB
