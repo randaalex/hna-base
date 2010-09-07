@@ -14,6 +14,7 @@ class HnaController extends Zend_Controller_Action
         $this->view->headTitle($this->view->title);
         
         $user = new Application_Model_DbTable_Hna();
+        $this->view->hna = $user->fetchAll();
         $userinfo = $user->fetchAll();
         
     }
