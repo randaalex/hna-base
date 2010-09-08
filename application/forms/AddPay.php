@@ -15,9 +15,10 @@ class Application_Form_AddPay extends Zend_Dojo_Form
             ))
 
             ->addElement('ValidationTextBox', 'login', array(
-                'label'     => 'Login:',
+                'label'     => 'Contract:',
                 'style'     => 'width: 240px;',
-                'required'  => true
+                'required'  => true,
+                'promptMessage' => 'Введите номер договора.'
 
             ))
 

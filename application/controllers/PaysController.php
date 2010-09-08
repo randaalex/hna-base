@@ -27,7 +27,7 @@ class PaysController extends Zend_Controller_Action
         
                                                            dojo.connect(dojo.byId('login'),'onkeyup',function(){
 
-                                                                if((dijit.byId('login').isValid()) && (dojo.attr(dojo.byId('login'),'value').length >= 3)){
+                                                                if((dijit.byId('login').isValid()) && (dojo.attr(dojo.byId('login'),'value').length = 5)){
 
 
 
