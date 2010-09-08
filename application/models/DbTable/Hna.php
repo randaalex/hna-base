@@ -65,9 +65,9 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 		$this->delete('user_id =' .(int)$id);
 	}
 
-        public function getUserInfo($user_id) {
+        public function getUserInfo($contract) {
 
-		$row = $this->fetchRow('user_id = "' . $user_id . '"');
+		$row = $this->fetchRow('contract = "' . $contract . '"');
 
 		if ($row) {
                     return $row->toArray();
