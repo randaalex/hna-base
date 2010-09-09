@@ -48,7 +48,7 @@ class HnaController extends Zend_Controller_Action
         		$surname = $form->getValue('surname');
         		$firstname = $form->getValue('firstname');
         		$lastname = $form->getValue('lastname');
-                        $login = $this->logingen(5);
+                        $login = $this->logingen();
                         $pass = $this->passgen(8);
                         $group = $form->getValue('group');
         		/////
@@ -96,11 +96,6 @@ class HnaController extends Zend_Controller_Action
                         $login = $form->getValue('login');
                         $pass = $form->getValue('pass');
                         $group = $form->getValue('group');
-        		/////
- 
-
-        		//$contract =
-        		/////  
         		$block = $form->getValue('block');
         		$room = $form->getValue('room');
         		$status = $form->getValue('status');
@@ -256,20 +251,30 @@ class HnaController extends Zend_Controller_Action
     /**
      * function of generating random string
      *
-     * @param int $lenght
-     * @return string $pass
+     * @return string $login
      */
-    private function logingen($lenght)
+    private function logingen()
     {
 
-        $chars = 'abcdefghijklmnopqrstuvwxyz';
+    $fp = file("../library/logins.txt");
 
-        $login = '';
+    $num_stroka = rand(1, count($fp)); 
+    $file = file("../library/logins.txt"); // Считываем весь файл в массив
 
-        for($i=1;$i<=$lenght;$i++){
-            $login .= substr($chars, rand(0,25), 1);
-        };
+    for($i = 0; $i < sizeof($file); $i++)
+    if($i == $num_stroka) {
+        //echo "<br>$num_stroka - ".$file[$i];
+        $login = $file[$i];
+        unset($file[$i]);
+    }
 
-        return $login;
+    $fp = fopen("../library/logins.txt", "w");
+    fputs($fp, implode("", $file));
+    fclose($fp);
+
+    $fp = file("../library/logins.txt");
+
+    return $login;
+    
     }
 }
