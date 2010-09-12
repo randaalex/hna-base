@@ -180,14 +180,14 @@ class PaysController extends Zend_Controller_Action
 
         if ($this->getRequest()->isPost()) {
 
-                $contract = $this->_getParam('contract');
+                $contract = $this->_getParam('login');
                 
                 $userinfo = new Application_Model_DbTable_Hna();
                 $info = $userinfo->getUserInfo($contract);
 
                 $userpays = new Application_Model_DbTable_Pays();
                 $pays = $userpays->getUserPays($info['user_id']);
-
+                
                 if($info['user_id']) {
                     echo "{ 'user_id' : '" . $info['user_id'] . "'," .
                           " 'surname' : '" . $info['surname'] . "'," .
