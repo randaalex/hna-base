@@ -89,12 +89,21 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 
         public function getLastContract(){
 
-                // TODO: костыли, нужно переделать!
-                $db = Zend_Db::factory('Pdo_Mysql', array(
-                    'host'             => '127.0.0.1',
-                    'username'         => 'root',
-                    'password'         => '',
-                    'dbname'           => 'hna_base'
+
+                $bootstrap = Zend_Controller_Front::getInstance()->getParam('bootstrap');
+                $options = $bootstrap->getOptions();
+
+                $dbadapter = $options['resources']['db']['adapter'];
+                $dbhost = $options['resources']['db']['params']['host'];
+                $dbuser = $options['resources']['db']['params']['username'];
+                $dbpass = $options['resources']['db']['params']['password'];
+                $dbname = $options['resources']['db']['params']['dbname'];
+
+                $db = Zend_Db::factory($dbadapter, array(
+                    'host'             => $dbhost,
+                    'username'         => $dbuser,
+                    'password'         => $dbpass,
+                    'dbname'           => $dbname
                 ));
 
                 $sql = "SELECT MAX(contract) AS contract FROM hna_users";
