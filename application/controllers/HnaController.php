@@ -48,13 +48,13 @@ class HnaController extends Zend_Controller_Action
         		$surname = $form->getValue('surname');
         		$firstname = $form->getValue('firstname');
         		$lastname = $form->getValue('lastname');
-                        $login = $this->logingen();
                         $pass = $this->passgen(8);
                         $group = $form->getValue('group');
         		/////
                         $modcontract = new Application_Model_DbTable_Hna();
                         $contract = $modcontract->getLastContract() + 1;
         		/////
+                        $login = $contract . $this->logingen();
         		$block = $form->getValue('block');
         		$room = $form->getValue('room');
                         $status = $form->getValue('status');
