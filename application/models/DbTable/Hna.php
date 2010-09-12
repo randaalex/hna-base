@@ -77,7 +77,7 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 
         public function getUserId($login) {
 
-                $row = $this->fetchRow('login = "' . $login . '"');
+                $row = $this->fetchRow('contract = "' . $login . '"');
 
                 if($row){
                     $data = $row->toArray();
