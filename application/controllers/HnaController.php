@@ -108,7 +108,6 @@ class HnaController extends Zend_Controller_Action
         		$status = $form->getValue('status');
         		$register = $form->getValue('date');
         		$note = $form->getValue('note');
-				
         		$users = new Application_Model_DbTable_Hna();
         		$users->updateUser($id,$surname,$firstname,$lastname,$login,$pass,$group,$block,$room,$status,$note);
         		
