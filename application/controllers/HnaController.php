@@ -289,7 +289,7 @@ class HnaController extends Zend_Controller_Action
     for($i = 0; $i < sizeof($file); $i++)
     if($i == $num_stroka) {
         //echo "<br>$num_stroka - ".$file[$i];
-        $login = $file[$i];
+        $login = substr($file[$i],0,strlen($file[$i])-2);
         unset($file[$i]);
     }
 
