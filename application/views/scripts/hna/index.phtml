@@ -14,6 +14,7 @@ table,td,th {
         <th>Block</th>
 	<th>status</th>
 	<th>date_reg</th>
+        <th>admin</th>
 	<th>note</th>	
 	<th>&nbsp;</th>	
 </tr>
@@ -26,8 +27,9 @@ table,td,th {
 	<td><?php echo $this->escape($users->block).$this->escape($users->room); ?></td>
 	<td><?php echo $this->escape($users->status); ?></td>
 	<td><?php echo $this->escape($users->register); ?></td>
+        <td><?php echo $this->escape($users->admin_id); ?></td>
 	<td><?php echo $this->escape($users->note); ?></td>
-	<td><a href="<?php echo $this->url(array('controller'=>'hna','action'=>'edit','id'=>$users->user_id)); ?>">Edit</a></td>
+	<td><a href="<?php echo $this->url(array('controller'=>'hna','action'=>'edit','user_id'=>$users->user_id)); ?>">Edit</a> <a href="<?php echo $this->url(array('controller'=>'hna','action'=>'view','user_id'=>$users->user_id)); ?>">View</a></td>
 </tr>
 <?php endforeach;?>
 

@@ -1,1 +1,19 @@
-<br /><br /><center>View script for controller <b>Users</b> and script/action name <b>view</b></center>
+Информация о пользователе: <br>
+
+ФИО:        <?php echo $this->escape($this->user['surname']); ?>
+            <?php echo $this->escape($this->user['firstname']); ?>
+            <?php echo $this->escape($this->user['lastname']); ?> <br>
+Договор:    <?php echo $this->escape($this->user['contract']); ?> <br>
+Login:      <?php echo $this->escape($this->user['contract']) .$this->escape($this->user['login']); ?> <br>
+Password:   <?php echo $this->escape($this->user['pass']); ?> <br>
+Группа:     <?php echo $this->escape($this->user['group']); ?> <br>
+Блок:       <?php echo $this->escape($this->user['block']); ?>
+            <?php echo $this->escape($this->user['room']); ?> <br>
+Примечание: <?php echo $this->escape($this->user['note']); ?>
+<br><br>
+<?php echo $this->escape($this->pay['connect']); ?> <br>
+<?php echo $this->escape($this->pay['9']); ?> <br>
+<?php echo $this->escape($this->pay['10']); ?> <br>
+<?php echo $this->escape($this->pay['11']); ?> <br>
+<?php echo $this->escape($this->pay['12']); ?> <br>
+<?php echo $this->escape($this->pay['1']); ?> <br>

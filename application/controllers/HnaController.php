@@ -58,8 +58,15 @@ class HnaController extends Zend_Controller_Action
         		$block = $form->getValue('block');
         		$room = $form->getValue('room');
                         $status = $form->getValue('status');
-        		$register = date('Y-m-d H:i');
-                        $admin_id = 1;
+        		$register = date('Y-m-d');
+
+                        $auth = Zend_Auth::getInstance();
+                        if ($auth->hasIdentity()) {
+                            $admin_id = $auth->getIdentity()->admin_id;
+                        } else {
+                            $this->getHelper('Redirector')->gotoSimpleAndExit('error', 'hna', '' , array('add' => 'notlogin'));
+                        }
+
         		$note = $form->getValue('note');
 
         		$hna = new Application_Model_DbTable_Hna();
@@ -152,6 +159,24 @@ class HnaController extends Zend_Controller_Action
     {
         $this->view->title = "View user";
         $this->view->headTitle($this->view->title);
+
+        if ($this->getRequest()->isGet()) {
+
+            $user_id = $this->_getParam('user_id');
+
+            $user = new Application_Model_DbTable_Hna();
+            $userinfo = $user->getUser($user_id);
+            $this->view->user = $userinfo;
+
+            $pay = new Application_Model_DbTable_Pays();
+            $userpay = $pay->getUserPays($user_id);
+            $this->view->pay = $userpay;
+
+            
+
+        }
+
+
     }
 
     public function deleteAction()
@@ -162,14 +187,14 @@ class HnaController extends Zend_Controller_Action
         if ($this->getRequest()->isPost()){
         	$del = $this->getRequest()->getPost('del');
         	if ($del == "Yes"){
-        		$id = $this->getRequest()->getPost('id');
+        		$id = $this->getRequest()->getPost('user_id');
         		$user = new Application_Model_DbTable_Hna();
         		$user->deleteUser($id);
         	}
         	$this->_helper->redirector('index');
         	
         } else {
-        	$id = $this->_getParam('id',0);
+        	$id = $this->_getParam('user_id',0);
         	$users = new Application_Model_DbTable_Hna();
         	$this->view->user = $users->getUser($id);
         }       
