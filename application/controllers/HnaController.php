@@ -114,7 +114,7 @@ class HnaController extends Zend_Controller_Action
         		$form->populate($formData);
         	}	
         } else {
-        	$id = $this->_getParam('id',0);
+        	$id = $this->_getParam('user_id',0);
         	if ($id > 0) {
 
                         $delurl = $this->view->baseUrl()."/hna/delete/id/$id";
