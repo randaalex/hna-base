@@ -52,6 +52,12 @@ class HnaController extends Zend_Controller_Action
                         $group = $form->getValue('group');
                         $modcontract = new Application_Model_DbTable_Hna();
                         $contract = $modcontract->getLastContract() + 1;
+
+                        // TODO: сделать переменную года, согласно которой и делать проверку
+                        if($contract < 10000){
+                            $contract = 10000;
+                        }
+
                         $login = $contract . $this->logingen();
         		$block = $form->getValue('block');
         		$room = $form->getValue('room');
