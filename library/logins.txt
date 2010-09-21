@@ -803,6 +803,7 @@ gyrus
 hydra
 incus
 kappa
+kapuk
 komma
 laeve
 leate
