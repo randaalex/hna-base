@@ -50,13 +50,14 @@ class HnaController extends Zend_Controller_Action
         		$lastname = $form->getValue('lastname');
                         $pass = $this->passgen(8);
                         $group = $form->getValue('group');
+                        
                         $modcontract = new Application_Model_DbTable_Hna();
                         $contract = $modcontract->getLastContract() + 1;
 
                         // TODO: сделать переменную года, согласно которой и делать проверку
-                        if($contract < 10000){
+                        /*if($contract < 10000){
                             $contract = 10000;
-                        }
+                        }*/
 
                         $login = $contract . $this->logingen();
         		$block = $form->getValue('block');
@@ -300,7 +301,7 @@ class HnaController extends Zend_Controller_Action
     for($i = 0; $i < sizeof($file); $i++)
     if($i == $num_stroka) {
         //echo "<br>$num_stroka - ".$file[$i];
-        $login = substr($file[$i],0,strlen($file[$i])-2);
+        $login = substr($file[$i],0,5);
         unset($file[$i]);
     }
 
