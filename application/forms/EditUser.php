@@ -17,6 +17,7 @@ class Application_Form_EditUser extends Zend_Dojo_Form
             ->addElement('ValidationTextBox', 'contract', array(
                 'label'     => 'Contract number:',
                 'style'     => 'width: 240px;',
+                'readOnly'  => true
 
             ))
 
@@ -105,10 +106,6 @@ class Application_Form_EditUser extends Zend_Dojo_Form
 
             ->addElement('SubmitButton', 'submit', array(
                 'label' => 'Сохранить изменения'
-            ))
-
-            ->addElement('Button','del', array(
-                'label'     => 'Удалить пользователя'
             ));
 
     }

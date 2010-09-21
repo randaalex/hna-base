@@ -98,13 +98,12 @@ class HnaController extends Zend_Controller_Action
         		$surname = $form->getValue('surname');
         		$firstname = $form->getValue('firstname');
         		$lastname = $form->getValue('lastname');
-                        $login = $form->getValue('login');
+                        $login = $form->getValue('contract') . $form->getValue('login');
                         $pass = $form->getValue('pass');
                         $group = $form->getValue('group');
         		$block = $form->getValue('block');
         		$room = $form->getValue('room');
-        		$status = $form->getValue('status');
-        		$register = $form->getValue('date');
+                        $status = $form->getValue('status');
         		$note = $form->getValue('note');
         		$users = new Application_Model_DbTable_Hna();
         		$users->updateUser($id,$surname,$firstname,$lastname,$login,$pass,$group,$block,$room,$status,$note);
@@ -117,16 +116,10 @@ class HnaController extends Zend_Controller_Action
         	$id = $this->_getParam('user_id',0);
         	if ($id > 0) {
 
-                        $delurl = $this->view->baseUrl()."/hna/delete/id/$id";
-
-                        $this->view->Dojo()->addOnLoad("function() {
-                                           dojo.connect(dojo.byId('del'),'onclick',function(){
-                                               window.location = '$delurl';
-                                           });
-                        }");
-
         		$users = new Application_Model_DbTable_Hna();
-        		$form->populate($users->getUser($id));
+                        $userinfo = $users->getUser($id);
+                        $userinfo['login'] = substr($userinfo['login'], 5, strlen($userinfo['login'])); //Перед отображение логина, вырезаем номер договора
+        		$form->populate($userinfo);
 
                         $this->view->assign('user_id',$id);
         	}
