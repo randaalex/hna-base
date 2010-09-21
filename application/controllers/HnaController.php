@@ -71,10 +71,11 @@ class HnaController extends Zend_Controller_Action
                         $user_id = $hna->addUser($surname,$firstname,$lastname,$login,$pass,$group,$contract,$block,$room,$status,$register,$admin_id,$note);
 
                         $pays = new Application_Model_DbTable_Pays();
-                        $pays->addUser($user_id);
-
-
-        		//$this->_helper->redirector('index','hna');
+                        if($form->getValue('arhiv') == '0'){
+                            $pays->addUser($user_id);
+                        } else {
+                            $pays->addUser($user_id, true);
+                        }
                         $this->getHelper('Redirector')->gotoSimpleAndExit('vadd', 'hna', '' , array('user_id' => $user_id));
         	} else {
         		$form->populate($formData);

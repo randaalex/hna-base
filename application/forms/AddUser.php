@@ -76,8 +76,15 @@ class Application_Form_AddUser extends Zend_Dojo_Form
                 'promptMessage' => 'Выберите статус пользователя.'
             ))
 
+            ->addElement('CheckBox','arhiv',array(
+                'label'     => 'Пользователь из архива:',
+                'checkedValue'   => '1',
+                'checked'   => false,
+                'promptMessage' => 'Отметте, если пользователь из архива.'
+            ))
+
             ->addElement('SubmitButton', 'submit', array(
-                'label' => 'Добавить пользователя'
+                'label'     => 'Добавить пользователя'
             ));
 
             

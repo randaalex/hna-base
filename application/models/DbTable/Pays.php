@@ -4,12 +4,16 @@ class Application_Model_DbTable_Pays extends Zend_Db_Table_Abstract
 {
     protected $_name = 'hna_pays';
 
-    public function addUser($id) {
+    public function addUser($id, $is_arhiv = false) {
 
             $data = array (
-                'user_id'    => (int)$id,
-                'year'  => date('Y'),
+                'user_id'   => (int)$id,
+                'year'      => date('Y'),
             );
+
+            if($is_arhiv){
+                $data['connect'] = 1;
+            }
 
             $this->insert($data);
     }
