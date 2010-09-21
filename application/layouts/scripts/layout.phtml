@@ -11,13 +11,23 @@
               endif; ?>
     </head>
     <body class="tundra">
+
         <div id="header">
-            <div id="logged-in-as" style="text-align: right;">
-                <?php echo $this->loggedAs(); ?>
-            </div>
-            <a href="/hna/index">hna-index</a>
-            <a href="/hna/add">hna-add</a>
-            <a href="/pays/add">pays-add</a>
+        <table style="width: 99%; border: 0px; ">
+            <tr>
+                <td style="text-align: left; border: 0px;">
+                    <a href="/hna/index">hna-index</a>
+                    <a href="/hna/add">hna-add</a>
+                    <a href="/pays/add">pays-add</a>
+                </td>
+                <td style="text-align: rigth; border: 0px;">
+                    <div id="logged-in-as" style="text-align: right;">
+                        <?php echo $this->loggedAs(); ?>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br />
         </div>
         <div>
             <?php echo $this->layout()->content; ?>
