@@ -1,15 +1,61 @@
 SET FOREIGN_KEY_CHECKS=0;
 
--- Drop table hna_admins
-DROP TABLE IF EXISTS `hna_admins`;
+-- Drop table hna_log_users
+DROP TABLE IF EXISTS `hna_log_users`;
 
-CREATE TABLE `hna_admins` (
-  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
-  `login` char(50),
+CREATE TABLE `hna_log_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11),
+  `admin_id` int(11),
+  `time` datetime,
+  `action` int(11),
+  `message` char(250),
+  PRIMARY KEY(`id`)
+)
+ENGINE=MYISAM
+ROW_FORMAT=default;
+
+-- Drop table hna_list_log_users_actions
+DROP TABLE IF EXISTS `hna_list_log_users_actions`;
+
+CREATE TABLE `hna_list_log_users_actions` (
+  `action` int(11),
+  `description` char(250)
+)
+ENGINE=MYISAM
+ROW_FORMAT=default;
+
+-- Drop table hna_list_users_statuses
+DROP TABLE IF EXISTS `hna_list_users_statuses`;
+
+CREATE TABLE `hna_list_users_statuses` (
+  `status` int(11),
+  `description` char(250)
+)
+ENGINE=MYISAM
+ROW_FORMAT=default;
+
+-- Drop table hna_users
+DROP TABLE IF EXISTS `hna_users`;
+
+CREATE TABLE `hna_users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `contract` int(11),
+  `surname` char(50),
+  `firstname` char(50),
+  `lastname` char(50),
+  `login` char(30),
   `pass` char(32),
-  `prefix` int(11),
-  `status` tinyint(4),
-  PRIMARY KEY(`admin_id`)
+  `group` char(6),
+  `block` int(4),
+  `room` varbinary(50) DEFAULT 'a,b',
+  `status` tinyint(1),
+  `register` datetime,
+  `admin_id` int(11),
+  `note` char(250),
+  `lastip` char(15),
+  `lastmac` char(20),
+  PRIMARY KEY(`user_id`)
 )
 ENGINE=INNODB
 CHARACTER SET utf8 ;
@@ -39,27 +85,15 @@ CREATE TABLE `hna_pays` (
 ENGINE=INNODB
 CHARACTER SET utf8 ;
 
--- Drop table hna_users
-DROP TABLE IF EXISTS `hna_users`;
+-- Drop table hna_admins
+DROP TABLE IF EXISTS `hna_admins`;
 
-CREATE TABLE `hna_users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `contract` int(11),
-  `surname` char(50),
-  `firstname` char(50),
-  `lastname` char(50),
-  `login` char(30),
+CREATE TABLE `hna_admins` (
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` char(50),
   `pass` char(32),
-  `group` char(6),
-  `block` int(4),
-  `room` varbinary(50) DEFAULT 'a,b',
-  `status` tinyint(1),
-  `register` datetime,
-  `admin_id` int(11),
-  `note` char(250),
-  `lastip` char(15),
-  `lastmac` char(20),
-  PRIMARY KEY(`user_id`)
+  `status` tinyint(4),
+  PRIMARY KEY(`admin_id`)
 )
 ENGINE=INNODB
 CHARACTER SET utf8 ;
