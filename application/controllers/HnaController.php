@@ -55,7 +55,16 @@ class HnaController extends Zend_Controller_Action
                         $login = $contract . $this->logingen();
         		$block = $form->getValue('block');
         		$room = $form->getValue('room');
-                        $status = $form->getValue('status');
+
+                        switch ($form->getValue('status')) {
+                            case 'Активный пользователь':   $status = 0; break;
+                            case 'Забаненый пользователь':  $status = 1; break;
+                            case 'Архивный пользователь':   $status = 2; break;
+                            case 'Администратор':           $status = 3; break;
+                            default:
+                                break;
+                        }
+                        
         		$register = date('Y-m-d');
 
                         $auth = Zend_Auth::getInstance();

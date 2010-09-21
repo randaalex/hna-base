@@ -68,6 +68,7 @@ class Application_Form_AddUser extends Zend_Dojo_Form
             ->addElement('ComboBox', 'status', array(
                 'label'     => 'Статус:',
                 'required'  => true,
+                'autocomplite' => false,
                 'multiOptions' => array(
                         '0' => 'Активный пользователь',
                         '1' => 'Забаненый пользователь',
