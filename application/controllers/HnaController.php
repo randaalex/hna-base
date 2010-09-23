@@ -115,7 +115,7 @@ class HnaController extends Zend_Controller_Action
          if ($this->getRequest()->isPost()) {
         	$formData = $this->getRequest()->getPost();
         	if ($form->isValid($formData)) {
-        		$id = (int)$form->getValue('user_id');
+        		$user_id = (int)$form->getValue('user_id');
         		
         		$surname = $form->getValue('surname');
         		$firstname = $form->getValue('firstname');
@@ -128,18 +128,22 @@ class HnaController extends Zend_Controller_Action
                         $status = $form->getValue('status');
         		$note = $form->getValue('note');
         		$users = new Application_Model_DbTable_Hna();
-        		$users->updateUser($id,$surname,$firstname,$lastname,$login,$pass,$group,$block,$room,$status,$note);
-        		
+        		$users->updateUser($user_id,$surname,$firstname,$lastname,$login,$pass,$group,$block,$room,$status,$note);
+
+                        //$admin_id = Zend_Auth::getInstance();
+                        $userlog =  new Application_Model_DbTable_Logs();
+                        $userlog->addMessage($user_id, Zend_Auth::getInstance()->getIdentity()->admin_id , 2, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Статус:$status; Примечание:$note");
+
         		$this->_helper->redirector('index');
         	} else {
         		$form->populate($formData);
         	}	
         } else {
-        	$id = $this->_getParam('user_id',0);
-        	if ($id > 0) {
+        	$user_id = $this->_getParam('user_id',0);
+        	if ($user_id > 0) {
 
         		$users = new Application_Model_DbTable_Hna();
-                        $userinfo = $users->getUser($id);
+                        $userinfo = $users->getUser($user_id);
                         $userinfo['login'] = substr($userinfo['login'], 5, strlen($userinfo['login'])); //Перед отображение логина, вырезаем номер договора
         		$form->populate($userinfo);
 
@@ -184,8 +188,18 @@ class HnaController extends Zend_Controller_Action
             $userpay = $pay->getUserPays($user_id);
             $this->view->pay = $userpay;
 
-            
+            $log = new Application_Model_DbTable_Logs();
+            $userlog = $log->getUserLog($user_id);
+            $this->view->log = $userlog;
 
+            $admin = new Application_Model_DbTable_Admin();
+            $admins = $admin->getAdmins();
+
+            foreach ($admins as $key => $value) {
+                $admin_list[$value['admin_id']] = $value['login'];
+            }
+            $this->view->admin = $admin_list;
+            
         }
 
 

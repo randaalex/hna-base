@@ -20,5 +20,12 @@ class Application_Model_DbTable_Logs extends Zend_Db_Table_Abstract
     }
 
 
+    public function getUserLog($user_id)
+    {
+
+        $row = $this->fetchAll('user_id = "' . (int)$user_id . '"');
+        return $row->toArray();
+
+    }
 
 }

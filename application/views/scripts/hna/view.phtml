@@ -10,7 +10,8 @@ Password:   <?php echo $this->escape($this->user['pass']); ?> <br>
 Блок:       <?php echo $this->escape($this->user['block']); ?>
             <?php echo $this->escape($this->user['room']); ?> <br>
 Примечание: <?php echo $this->escape($this->user['note']); ?>
-<br><br>
+<br>
+<br>
 Подключение: <?php echo $this->escape($this->pay['connect']); ?> <br>
 Сент: <?php echo $this->escape($this->pay['9']); ?> <br>
 Окт: <?php echo $this->escape($this->pay['10']); ?> <br>
@@ -24,3 +25,36 @@ Password:   <?php echo $this->escape($this->user['pass']); ?> <br>
 Июн: <?php echo $this->escape($this->pay['6']); ?> <br>
 Июл: <?php echo $this->escape($this->pay['7']); ?> <br>
 Авг: <?php echo $this->escape($this->pay['8']); ?> <br>
+<br />
+<br />
+История пользователя: <br>
+
+<style type="text/css">
+    table,td,th {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+</style>
+
+<table style="font-size: 14px;">
+    <tr>
+        <th>Дата:</th>
+        <th>Администратор:</th>
+        <th>Событие:</th>
+        <th>Сообщение:</th>
+    </tr>
+<?php foreach($this->log as $logs) : ?>
+    <tr>
+        <td><?php echo $this->escape($logs['time']); ?></td>
+        <td><?php echo $this->escape($this->admin[$this->escape($logs['admin_id'])]); ?></td>
+        <td><?php
+                switch ($logs['action']) {
+                    case 0: echo "Создание пользователя"; break;
+                    case 1: echo "Востановление пользователя из архива"; break;
+                    case 2: echo "Редактирование пользователя"; break;
+                }
+            ?></td>
+        <td><?php echo $this->escape($logs['message']); ?></td>
+    </tr>
+<?php endforeach;?>
+</table>
