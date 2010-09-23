@@ -1,7 +1,8 @@
 --
--- Дамп данных таблицы `hna_list_log_users_actions`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `hna_list_log_users_actions`
 --
 
 INSERT INTO `hna_list_log_users_actions` (`action`, `description`) VALUES
 (0, 'Creating a new user'),
-(1, 'Restoring a user from the archive');
+(1, 'Restoring a user from the archive'),
+(2, 'Editing user');
