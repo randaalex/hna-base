@@ -16,6 +16,13 @@ class HnaController extends Zend_Controller_Action
         $user = new Application_Model_DbTable_Hna();
         $this->view->hna = $user->fetchAll();
         $userinfo = $user->fetchAll();
+
+        $admin = new Application_Model_DbTable_Admin();
+        $admins = $admin->getAdmins();
+        foreach ($admins as $key => $value) {
+            $admin_list[$value['admin_id']] = $value['login'];
+        }
+        $this->view->admin = $admin_list;
         
     }
 
@@ -197,16 +204,16 @@ class HnaController extends Zend_Controller_Action
             $this->view->pay = $userpay;
 
             $log = new Application_Model_DbTable_Logs();
-            $userlog = $log->getUserLog($user_id);
-            $this->view->log = $userlog;
-
-            $admin = new Application_Model_DbTable_Admin();
+            $userlog = $log->getUserLog($user_id);            $admin = new Application_Model_DbTable_Admin();
             $admins = $admin->getAdmins();
 
             foreach ($admins as $key => $value) {
                 $admin_list[$value['admin_id']] = $value['login'];
             }
             $this->view->admin = $admin_list;
+            $this->view->log = $userlog;
+
+
             
         }
 
