@@ -7,6 +7,7 @@ table,td,th {
 <center>
 <table>
 <tr>
+        <th>ID</th>
 	<th>Name</th>
 	<th>Contract</th>
         <th>Login</th>
@@ -20,6 +21,7 @@ table,td,th {
 </tr>
 <?php foreach($this->hna as $users) : ?>
 <tr>
+        <td><?php echo $this->escape($users->user_id); ?></td>
 	<td><?php echo $this->escape($users->surname).' '.$this->escape($users->firstname).' '.$this->escape($users->lastname);?></td>
 	<td><?php echo $this->escape($users->contract); ?></td>
         <td><?php echo $this->escape($users->login); ?></td>
