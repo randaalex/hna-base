@@ -62,13 +62,36 @@ class Application_Model_DbTable_Pays extends Zend_Db_Table_Abstract
                 $modelpay = new Application_Model_DbTable_Pays();
                 $pays = $modelpay->getUserPays($id);
 
+                $message = 'Добавлена оплата за:';
                 foreach ($pays as $key => $value) {
                     if ( $value == 1 ){
                         $data[$key] = 1;
+                    } else {
+                        if($data[$key] == 1){
+                            switch ($key){
+                                case 'connect': $message  .= ' подключение,'; break;
+                                case '9':       $message  .= ' сентябрь,'; break;
+                                case '10':      $message  .= ' октябрь,'; break;
+                                case '11':      $message  .= ' ноябрь,'; break;
+                                case '12':      $message  .= ' декабрь,'; break;
+                                case '1':       $message  .= ' январь,'; break;
+                                case '2':       $message  .= ' февраль,'; break;
+                                case '3':       $message  .= ' март,'; break;
+                                case '4':       $message  .= ' апрель,'; break;
+                                case '5':       $message  .= ' май,'; break;
+                                case '6':       $message  .= ' июнь,'; break;
+                                case '7':       $message  .= ' июль,'; break;
+                                case '8':       $message  .= ' август,'; break;
+                            }
+                        }
                     }
                 }
-
+                $message = substr($message, 0, strlen($message)-1);
+                
                 $this->update($data, 'user_id=' . (int)$id);
+
+                $userlog =  new Application_Model_DbTable_Logs();
+                $userlog->addMessage((int)$id, Zend_Auth::getInstance()->getIdentity()->admin_id , 3, $message);
             }
         }
 

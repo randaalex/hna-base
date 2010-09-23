@@ -98,10 +98,10 @@ class HnaController extends Zend_Controller_Action
 
                         if($form->getValue('arhiv') == '0'){
                             $pays->addUser($user_id);
-                            $userlog->addMessage($user_id, $admin_id, 0, '');
+                            $userlog->addMessage($user_id, $admin_id, 0, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Статус:$status; Примечание:$note");
                         } else {
                             $pays->addUser($user_id, true);
-                            $userlog->addMessage($user_id, $admin_id, 1, '');
+                            $userlog->addMessage($user_id, $admin_id, 1, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Статус:$status; Примечание:$note");
                         }
 
                         $this->getHelper('Redirector')->gotoSimpleAndExit('vadd', 'hna', '' , array('user_id' => $user_id));
