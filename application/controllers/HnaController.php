@@ -125,14 +125,22 @@ class HnaController extends Zend_Controller_Action
                         $group = $form->getValue('group');
         		$block = $form->getValue('block');
         		$room = $form->getValue('room');
-                        $status = $form->getValue('status');
+
+                        switch ($form->getValue('status')) {
+                            case 'Активный пользователь':   $status = 0; break;
+                            case 'Забаненый пользователь':  $status = 1; break;
+                            case 'Архивный пользователь':   $status = 2; break;
+                            case 'Администратор':           $status = 3; break;
+                            default:
+                                break;
+                        }
         		$note = $form->getValue('note');
         		$users = new Application_Model_DbTable_Hna();
         		$users->updateUser($user_id,$surname,$firstname,$lastname,$login,$pass,$group,$block,$room,$status,$note);
 
                         //$admin_id = Zend_Auth::getInstance();
                         $userlog =  new Application_Model_DbTable_Logs();
-                        $userlog->addMessage($user_id, Zend_Auth::getInstance()->getIdentity()->admin_id , 2, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Статус:$status; Примечание:$note");
+                        $userlog->addMessage($user_id, Zend_Auth::getInstance()->getIdentity()->admin_id , 2, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Примечание:$note");
 
         		$this->_helper->redirector('index');
         	} else {
