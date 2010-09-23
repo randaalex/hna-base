@@ -147,7 +147,7 @@ class HnaController extends Zend_Controller_Action
 
                         //$admin_id = Zend_Auth::getInstance();
                         $userlog =  new Application_Model_DbTable_Logs();
-                        $userlog->addMessage($user_id, Zend_Auth::getInstance()->getIdentity()->admin_id , 2, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Примечание:$note");
+                        $userlog->addMessage($user_id, Zend_Auth::getInstance()->getIdentity()->admin_id , 2, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Статус:$status; Примечание:$note");
 
         		$this->_helper->redirector('index');
         	} else {
