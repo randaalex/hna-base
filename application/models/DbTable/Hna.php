@@ -37,7 +37,7 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 		
 		$this->insert($data);
                 
-                $row = $this->fetchRow('surname = "'.$surname.'"');
+                $row = $this->fetchRow('login = "'.$login.'"');
                 return $row['user_id'];
 	}
 	
