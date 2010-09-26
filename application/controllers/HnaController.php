@@ -28,6 +28,12 @@ class HnaController extends Zend_Controller_Action
 
     public function addAction()
     {
+
+        $auth = Zend_Auth::getInstance();
+        if (!$auth->hasIdentity()) {
+          $this->getHelper('Redirector')->gotoSimpleAndExit('login', 'admin', '');
+        }
+
         $this->title->title = "Add new user";
         $this->view->headTitle($this->view->title);
         
@@ -81,12 +87,7 @@ class HnaController extends Zend_Controller_Action
                         
         		$register = date('Y-m-d');
 
-                        $auth = Zend_Auth::getInstance();
-                        if ($auth->hasIdentity()) {
-                            $admin_id = $auth->getIdentity()->admin_id;
-                        } else {
-                            $this->getHelper('Redirector')->gotoSimpleAndExit('error', 'hna', '' , array('add' => 'notlogin'));
-                        }
+                        $admin_id = $auth->getIdentity()->admin_id;
 
         		$note = $form->getValue('note');
 
@@ -113,6 +114,12 @@ class HnaController extends Zend_Controller_Action
     
     public function editAction()
     {
+
+        $auth = Zend_Auth::getInstance();
+        if (!$auth->hasIdentity()) {
+          $this->getHelper('Redirector')->gotoSimpleAndExit('login', 'admin', '');
+        }
+
         $this->view->title = "Edit User";
         $this->view->headTitle($this->view->title);
         

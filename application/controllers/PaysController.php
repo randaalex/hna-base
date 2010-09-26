@@ -15,6 +15,11 @@ class PaysController extends Zend_Controller_Action
 
     public function addAction()
     {
+        $auth = Zend_Auth::getInstance();
+        if (!$auth->hasIdentity()) {
+          $this->getHelper('Redirector')->gotoSimpleAndExit('login', 'admin', '');
+        }
+
         $this->title->title = "Add pay";
                 $this->view->headTitle($this->view->title);
         
