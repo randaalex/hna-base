@@ -3,6 +3,11 @@
 class ErrorController extends Zend_Controller_Action
 {
 
+    public function indexAction()
+    {
+        $this->view->message = "У вас нет прав для использования данного ресурса!";
+    }
+
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');

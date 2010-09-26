@@ -15,10 +15,14 @@ class PaysController extends Zend_Controller_Action
 
     public function addAction()
     {
-        $auth = Zend_Auth::getInstance();
-        if (!$auth->hasIdentity()) {
-          $this->getHelper('Redirector')->gotoSimpleAndExit('login', 'admin', '');
-        }
+
+        if(Zend_Auth::getInstance()->getIdentity())
+          $role = Zend_Auth::getInstance()->getIdentity()->status;
+
+        $acl = new App_Acl();
+
+        if(!$acl->isAllowed($role, App_Resources::PAYSADD))
+            $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
         $this->title->title = "Add pay";
                 $this->view->headTitle($this->view->title);
@@ -180,6 +184,15 @@ class PaysController extends Zend_Controller_Action
 
     public function getuserinfoAction()
     {
+
+        if(Zend_Auth::getInstance()->getIdentity())
+          $role = Zend_Auth::getInstance()->getIdentity()->status;
+
+        $acl = new App_Acl();
+
+        if(!$acl->isAllowed($role, App_Resources::PAYSUSERINFO))
+            $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
+
 	$this->_helper->viewRenderer->setNoRender ();
 	$this->_helper->getHelper('layout')->disableLayout ();
 

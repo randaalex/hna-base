@@ -10,6 +10,15 @@ class HnaController extends Zend_Controller_Action
 
     public function indexAction()
     {
+
+        if(Zend_Auth::getInstance()->getIdentity())
+          $role = Zend_Auth::getInstance()->getIdentity()->status;
+
+        $acl = new App_Acl();
+
+        if(!$acl->isAllowed($role, App_Resources::INDEX))
+            $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
+
         $this->view->title = "HNA Users";
         $this->view->headTitle($this->view->title);
         
@@ -29,10 +38,13 @@ class HnaController extends Zend_Controller_Action
     public function addAction()
     {
 
-        $auth = Zend_Auth::getInstance();
-        if (!$auth->hasIdentity()) {
-          $this->getHelper('Redirector')->gotoSimpleAndExit('login', 'admin', '');
-        }
+        if(Zend_Auth::getInstance()->getIdentity())
+          $role = Zend_Auth::getInstance()->getIdentity()->status;
+
+        $acl = new App_Acl();
+
+        if(!$acl->isAllowed($role, App_Resources::ADD))
+            $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
         $this->title->title = "Add new user";
         $this->view->headTitle($this->view->title);
@@ -115,10 +127,13 @@ class HnaController extends Zend_Controller_Action
     public function editAction()
     {
 
-        $auth = Zend_Auth::getInstance();
-        if (!$auth->hasIdentity()) {
-          $this->getHelper('Redirector')->gotoSimpleAndExit('login', 'admin', '');
-        }
+        if(Zend_Auth::getInstance()->getIdentity())
+          $role = Zend_Auth::getInstance()->getIdentity()->status;
+
+        $acl = new App_Acl();
+
+        if(!$acl->isAllowed($role, App_Resources::EDIT))
+            $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
         $this->view->title = "Edit User";
         $this->view->headTitle($this->view->title);
@@ -178,6 +193,15 @@ class HnaController extends Zend_Controller_Action
 
     public function vaddAction()
     {
+
+        if(Zend_Auth::getInstance()->getIdentity())
+          $role = Zend_Auth::getInstance()->getIdentity()->status;
+
+        $acl = new App_Acl();
+
+        if(!$acl->isAllowed($role, App_Resources::VADD))
+            $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
+
         $this->view->title = "Пользователь добавлен";
         $this->view->headTitle($this->view->title);
 
@@ -195,6 +219,15 @@ class HnaController extends Zend_Controller_Action
 
     public function viewAction()
     {
+
+        if(Zend_Auth::getInstance()->getIdentity())
+          $role = Zend_Auth::getInstance()->getIdentity()->status;
+
+        $acl = new App_Acl();
+
+        if(!$acl->isAllowed($role, App_Resources::VIEW))
+            $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
+
         $this->view->title = "View user";
         $this->view->headTitle($this->view->title);
 
@@ -229,6 +262,15 @@ class HnaController extends Zend_Controller_Action
 
     public function deleteAction()
     {
+
+        if(Zend_Auth::getInstance()->getIdentity())
+          $role = Zend_Auth::getInstance()->getIdentity()->status;
+
+        $acl = new App_Acl();
+
+        if(!$acl->isAllowed($role, App_Resources::DELETE))
+            $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
+
         $this->view->title = "Delete user";
         $this->view->headTitle($this->view->title);
         
@@ -251,6 +293,14 @@ class HnaController extends Zend_Controller_Action
     public function getfreeipAction()
     {
 
+        if(Zend_Auth::getInstance()->getIdentity())
+          $role = Zend_Auth::getInstance()->getIdentity()->status;
+
+        $acl = new App_Acl();
+
+        if(!$acl->isAllowed($role, App_Resources::HNA))
+            $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
+
 	$this->_helper->viewRenderer->setNoRender ();
 	$this->_helper->getHelper('layout')->disableLayout ();
 
@@ -264,40 +314,6 @@ class HnaController extends Zend_Controller_Action
                 
                 echo $ip;
             
-        }
-    }
-
-    public function getmacAction()
-    {
-	$this->_helper->viewRenderer->setNoRender ();
-	$this->_helper->getHelper('layout')->disableLayout ();
-
-        if ($this->getRequest()->isGet()) {
-
-                $ip = $this->_getParam('ip',0);
-                $ip = (int) $ip;
-
-                // stub-function
-                $mac = "00:11:22:33:44:55";
-
-                echo $mac;
-
-        }
-    }
-
-    public function testAction()
-    {
-
-
-        //$contractmod = new Application_Model_DbTable_Hna();
-        //$contract = $contractmod->getLastContract();
-
-        //print_r($contract);
-
-        //exit;
-        for($i=1;$i<=30;$i++){
-        echo $this->logingen(5)."<br>";
-        echo $this->passgen(10)."<br><br>";
         }
     }
 
