@@ -46,7 +46,7 @@ CREATE TABLE `hna_users` (
   `lastname` char(50),
   `login` char(30),
   `pass` char(32),
-  `group` char(6),
+  `group` char(12),
   `block` int(4),
   `room` varbinary(50) DEFAULT 'a,b',
   `status` tinyint(1),

@@ -32,7 +32,7 @@
 </COLUMN>
 <COLUMN ID="1044" Name="pass" DomainID="-1" Pos="6" Datatype="13" Type="CHAR" Width="32" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
 </COLUMN>
-<COLUMN ID="1039" Name="group" DomainID="-1" Pos="7" Datatype="13" Type="CHAR" Width="6" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
+<COLUMN ID="1039" Name="group" DomainID="-1" Pos="7" Datatype="13" Type="CHAR" Width="12" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
 </COLUMN>
 <COLUMN ID="1006" Name="block" DomainID="-1" Pos="8" Datatype="3" Type="INT" Width="4" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
 </COLUMN>

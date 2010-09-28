@@ -63,7 +63,6 @@ class Application_Form_EditUser extends Zend_Dojo_Form
             ->addElement('ValidationTextBox', 'group', array(
                 'label'     => 'Группа:',
                 'style'     => 'width: 240px;',
-                'regExp'    => '\w{6}',
                 'require'   => true,
                 'promptMessage' => 'Введите номер группы.'
             ))
