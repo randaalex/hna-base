@@ -99,7 +99,7 @@ class HnaController extends Zend_Controller_Action
                         
         		$register = date('Y-m-d');
 
-                        $admin_id = $auth->getIdentity()->admin_id;
+                        $admin_id = Zend_Auth::getInstance()->getIdentity()->admin_id;
 
         		$note = $form->getValue('note');
 
