@@ -104,6 +104,11 @@ class Application_Form_EditUser extends Zend_Dojo_Form
                 'promptMessage' => 'Выберите статус пользователя.'
             ))
 
+            ->addElement('Button','del', array(
+                'label'     => 'Удалить пользователя'
+
+            ))
+
             ->addElement('SubmitButton', 'submit', array(
                 'label' => 'Сохранить изменения'
             ));

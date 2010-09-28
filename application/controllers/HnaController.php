@@ -179,6 +179,14 @@ class HnaController extends Zend_Controller_Action
         	$user_id = $this->_getParam('user_id',0);
         	if ($user_id > 0) {
 
+                        $delurl = $this->view->baseUrl()."/hna/delete/user_id/$user_id";
+
+                        $this->view->Dojo()->addOnLoad("function() {
+                                           dojo.connect(dojo.byId('del'),'onclick',function(){
+                                               window.location = '$delurl';
+                                           });
+                        }");
+
         		$users = new Application_Model_DbTable_Hna();
                         $userinfo = $users->getUser($user_id);
                         $userinfo['login'] = substr($userinfo['login'], 5, strlen($userinfo['login'])); //Перед отображение логина, вырезаем номер договора
