@@ -5,7 +5,14 @@ class ErrorController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $this->view->message = "У вас нет прав для использования данного ресурса!";
+
+        $auth = Zend_Auth::getInstance();
+
+        if ($auth->hasIdentity()) {
+            $this->view->message = "У вас нет прав для использования данного ресурса!";
+        } else {
+            $this->getHelper('Redirector')->gotoSimpleAndExit('login', 'admin', '');
+        }
     }
 
     public function errorAction()
