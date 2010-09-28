@@ -10,7 +10,7 @@ class AdminController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        $this->_helper->redirector('login', 'admin');
     }
 
     public function loginAction()

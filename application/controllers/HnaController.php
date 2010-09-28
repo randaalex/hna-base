@@ -298,33 +298,6 @@ class HnaController extends Zend_Controller_Action
         }       
     }
 
-    public function getfreeipAction()
-    {
-
-        if(Zend_Auth::getInstance()->getIdentity())
-          $role = Zend_Auth::getInstance()->getIdentity()->status;
-
-        $acl = new App_Acl();
-
-        if(!$acl->isAllowed($role, App_Resources::HNA))
-            $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
-
-	$this->_helper->viewRenderer->setNoRender ();
-	$this->_helper->getHelper('layout')->disableLayout ();
-
-        if ($this->getRequest()->isGet()) {
-            
-                $block = $this->_getParam('block',0);
-                $block = (int) $block;
-
-                $freeip = new Application_Model_DbTable_Hna();
-                $ip = $freeip->getFreeIP($block);
-                
-                echo $ip;
-            
-        }
-    }
-
     /**
      * function of generating random string
      *
