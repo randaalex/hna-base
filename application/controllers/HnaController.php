@@ -307,7 +307,7 @@ class HnaController extends Zend_Controller_Action
     private function passgen($lenght)
     {
         
-        $chars = '1234567890abcdefghijklmnopqrstuvwxyz';
+        $chars = '1234567890abcdefghijkmnopqstvwxyz';
 
         $pass = '';
 
