@@ -312,7 +312,7 @@ class HnaController extends Zend_Controller_Action
         $pass = '';
 
         for($i=1;$i<=$lenght;$i++){
-            $pass .= substr($chars, rand(0,35), 1);
+            $pass .= substr($chars, rand(0,33), 1);
         };
 
         return $pass;
