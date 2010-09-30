@@ -18,6 +18,7 @@ class App_Acl extends Zend_Acl
         $this->addRole(new Zend_Acl_Role(App_Roles::ADMIN));
 
         $this->allow(App_Roles::MC, App_Resources::PAYSADD);
+        $this->allow(App_Roles::MC, App_Resources::INDEX);
         $this->allow(App_Roles::ADMIN, App_Resources::HNA);
         $this->allow(App_Roles::ADMIN, App_Resources::PAYSADD);
     }
