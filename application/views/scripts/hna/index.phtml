@@ -20,7 +20,22 @@ table,td,th {
 	<th>&nbsp;</th>	
 </tr>
 <?php foreach($this->hna as $users) : ?>
-<tr>
+<tr style="background-color: <?php
+                                switch ($users->status) {
+                                case 1:
+                                    echo '#ff8c69';
+                                    break;
+                                case 2:
+                                    echo '#abcdef';
+                                    break;
+                                case 3:
+                                    echo '#77dd77';
+                                    break;
+                                default:
+                                    echo '#ffffff';
+                                    break;
+                                }
+                             ?>;">
         <td><?php echo $this->escape($users->user_id); ?></td>
 	<td><?php echo $this->escape($users->surname).' '.$this->escape($users->firstname).' '.$this->escape($users->lastname);?></td>
 	<td><?php echo $this->escape($users->contract); ?></td>

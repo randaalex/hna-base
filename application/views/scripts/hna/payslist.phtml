@@ -30,7 +30,7 @@ table,td,th {
 
 </tr>
 <?php foreach($this->hna as $users) : ?>
-<tr>
+<tr style="background-color: <?php if($users['status'] == 1){echo '#ff8c69';} else {echo '#ffffff';}; ?>;">
         <td><?php echo $this->escape($users['user_id']); ?></td>
 	<td><?php echo $this->escape($users['surname']).' '.$this->escape($users['firstname']).' '.$this->escape($users['lastname']);?></td>
 	<td><?php echo $this->escape($users['contract']); ?></td>
@@ -38,19 +38,19 @@ table,td,th {
 	<td><?php echo $this->escape($users['block']).$this->escape($users['room']); ?></td>
 	<td><?php echo $this->escape($users['status']); ?></td>
 	<td><?php echo $this->escape($users['register']); ?></td>
-        <td style="background-image: url('/images/<?php if($users['connect']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
-        <td style="background-image: url('/images/<?php if($users['9']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
-        <td style="background-image: url('/images/<?php if($users['10']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
-        <td style="background-image: url('/images/<?php if($users['11']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
-        <td style="background-image: url('/images/<?php if($users['12']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
-        <td style="background-image: url('/images/<?php if($users['1']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
-        <td style="background-image: url('/images/<?php if($users['2']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
-        <td style="background-image: url('/images/<?php if($users['3']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
-        <td style="background-image: url('/images/<?php if($users['4']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
-        <td style="background-image: url('/images/<?php if($users['5']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
-        <td style="background-image: url('/images/<?php if($users['6']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
-        <td style="background-image: url('/images/<?php if($users['7']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
-        <td style="background-image: url('/images/<?php if($users['8']){ echo 'checked';} else {echo 'unchecked';} ?>.gif'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['connect']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['9']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['10']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['11']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['12']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['1']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['2']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['3']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['4']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['5']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['6']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['7']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
+        <td style="background-image: url('/images/<?php if($users['8']){ echo 'checked';} else {echo 'unchecked';} ?>.png'); background-repeat: no-repeat; background-position: center; width: 45px;"></td>
 </tr>
 <?php endforeach;?>
 
