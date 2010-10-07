@@ -112,5 +112,30 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
                 return $result['contract'];
         }
 
+        public function getPaysList(){
+
+
+                $bootstrap = Zend_Controller_Front::getInstance()->getParam('bootstrap');
+                $options = $bootstrap->getOptions();
+
+                $dbadapter = $options['resources']['db']['adapter'];
+                $dbhost = $options['resources']['db']['params']['host'];
+                $dbuser = $options['resources']['db']['params']['username'];
+                $dbpass = $options['resources']['db']['params']['password'];
+                $dbname = $options['resources']['db']['params']['dbname'];
+
+                $db = Zend_Db::factory($dbadapter, array(
+                    'host'             => $dbhost,
+                    'username'         => $dbuser,
+                    'password'         => $dbpass,
+                    'dbname'           => $dbname
+                ));
+
+                $sql = "SELECT * FROM `hna_users` LEFT JOIN `hna_pays` ON `hna_users`.`user_id` = `hna_pays`.`user_id` WHERE `hna_users`.`status` = 0 OR `hna_users`.`status` = 1";
+                $result = $db->fetchAll($sql);
+
+                return $result;
+        }
+
 }
 

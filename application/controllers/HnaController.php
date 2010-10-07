@@ -298,6 +298,25 @@ class HnaController extends Zend_Controller_Action
         }       
     }
 
+    public function payslistAction()
+    {
+
+        if(Zend_Auth::getInstance()->getIdentity())
+          $role = Zend_Auth::getInstance()->getIdentity()->status;
+
+        $acl = new App_Acl();
+
+        if(!$acl->isAllowed($role, App_Resources::HNA))
+            $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
+
+        $this->view->title = "HNA Users Pays";
+        $this->view->headTitle($this->view->title);
+
+        $user = new Application_Model_DbTable_Hna();
+        $this->view->hna = $user->getPaysList();
+
+    }
+
     /**
      * function of generating random string
      *
