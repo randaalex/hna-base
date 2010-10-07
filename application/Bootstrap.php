@@ -18,7 +18,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'namespace' => '',
                 'basePath'  => APPLICATION_PATH));
             $autoloader = Zend_Loader_Autoloader::getInstance();
-            $autoloader->registerNamespace(array('App_'));
+            $autoloader->registerNamespace(array('App_','Log_'));
 
             return $moduleLoader;
         }

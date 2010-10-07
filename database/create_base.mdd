@@ -160,6 +160,37 @@
 </COLUMN>
 </COLUMNS>
 </ENTITY>
+<ENTITY ID="1063" Name="hna_log_admins" Comments="" LineColor="8388608" FillColor="16777215" FontColor="0" XPos="610" YPos="20" Type="0" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" CharacterSet="" Collate="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" PartitioningType="0" PartitioningIsLinear="1" PartitionsNum="2" PartitioningExpression="" SubPartitioningType="0" SubPartitioningIsLinear="0" SubPartitionsNum="2" SubPartitioningExpression="" >
+<COLUMNS>
+<COLUMN ID="1076" Name="id" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="1" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="1" PrimaryKey="1" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
+</COLUMN>
+<COLUMN ID="1077" Name="admin_id" DomainID="-1" Pos="1" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="NULL" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
+</COLUMN>
+<COLUMN ID="1078" Name="login" DomainID="-1" Pos="2" Datatype="13" Type="CHAR" Width="15" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
+</COLUMN>
+<COLUMN ID="1079" Name="time" DomainID="-1" Pos="3" Datatype="9" Type="DATETIME" Width="0" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
+</COLUMN>
+<COLUMN ID="1080" Name="ip" DomainID="-1" Pos="4" Datatype="13" Type="CHAR" Width="16" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
+</COLUMN>
+<COLUMN ID="1081" Name="action" DomainID="-1" Pos="5" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="NULL" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
+</COLUMN>
+</COLUMNS>
+<INDEXES>
+<INDEX ID="1085" Name="PRIMARY" Primary="1" Unique="0" FullText="0" Reference_ID="-1">
+<INDEXCOLUMNS>
+<INDEXCOLUMN ID="1076=" />
+</INDEXCOLUMNS>
+</INDEX>
+</INDEXES>
+</ENTITY>
+<ENTITY ID="1082" Name="hna_list_log_admins_actions" Comments="" LineColor="8388608" FillColor="16777215" FontColor="0" XPos="610" YPos="150" Type="0" RowFormat="0" Temporary="0" RowChecksum="0" PackKeys="0" DelayKeyTblUpdates="0" MinRowNumber="0" MaxRowNumber="0" CharacterSet="" Collate="" Description="" Annotation="" BeginScript="" EndScript="" Generate="1" PartitioningType="0" PartitioningIsLinear="1" PartitionsNum="2" PartitioningExpression="" SubPartitioningType="0" SubPartitioningIsLinear="0" SubPartitionsNum="2" SubPartitioningExpression="" >
+<COLUMNS>
+<COLUMN ID="1083" Name="action" DomainID="-1" Pos="0" Datatype="3" Type="INT" Width="11" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
+</COLUMN>
+<COLUMN ID="1084" Name="description" DomainID="-1" Pos="1" Datatype="13" Type="CHAR" Width="250" Prec="0" NotNull="0" Unsigned="0" ZeroFill="0" Binary="0" AutoInc="0" PrimaryKey="0" IsFKey="0" Values="" DefaultValue="" Comments="" TimestampOnUpdate="0" CharacterSet="" Collate="" >
+</COLUMN>
+</COLUMNS>
+</ENTITY>
 </ENTITIES>
 <REFERENCES>
 </REFERENCES>
