@@ -306,7 +306,7 @@ class HnaController extends Zend_Controller_Action
 
         $acl = new App_Acl();
 
-        if(!$acl->isAllowed($role, App_Resources::HNA))
+        if(!$acl->isAllowed($role, App_Resources::INDEX))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
         $this->view->title = "HNA Users Pays";
