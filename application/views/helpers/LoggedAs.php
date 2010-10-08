@@ -8,7 +8,7 @@ class Zend_View_Helper_LoggedAs extends Zend_View_Helper_Abstract
         if ($auth->hasIdentity()) {
             $username = $auth->getIdentity()->login;
             $logoutUrl = $this->view->url(array('controller'=>'admin', 'action'=>'logout'), null, true);
-            return 'Welcome ' . $username .  '. <a href="'.$logoutUrl.'">Logout</a>';
+            return 'С возвращением, ' . $username .  '. <a href="'.$logoutUrl.'">Logout</a>';
         }
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
