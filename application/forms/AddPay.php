@@ -8,101 +8,220 @@ class Application_Form_AddPay extends Zend_Dojo_Form
         $this->setMethod('post');
         $this->setName('addpay');
 
-        $this
-            ->addElement('Hidden','user_id', array(
+           $this->addElement('Hidden','user_id', array(
                 'validators'=> array('Int'),
                 'value'     => '-1'
-            ))
+            ));
 
-            ->addElement('ValidationTextBox', 'login', array(
+            $this->addElement('ValidationTextBox', 'login', array(
                 'label'     => 'Contract:',
                 'style'     => 'width: 240px;',
                 'required'  => true,
                 'promptMessage' => 'Введите номер договора.'
+            ));
 
-            ))
-
-            ->addElement('ValidationTextBox','info', array(
+            $this->addElement('ValidationTextBox','info', array(
                 'label'     => 'Информация:',
                 'style'     => 'width: 240px;',
-            ))
+            ));
 
-            ->addElement('CheckBox', 'connect', array(
+            $this->addElement('CheckBox', 'connect', array(
                 'label'     => 'Подключение:',
                 'disabled'  => true,
-            ))
+            ));
 
-            ->addElement('CheckBox', 'm9', array(
+            $this->addElement('CheckBox', 'm9', array(
                 'label'     => 'Сентябрь:',
                 'disabled'  => true,
-            ))
+            ));
 
-            ->addElement('CheckBox', 'm10', array(
+            $this->addElement('CheckBox', 'm10', array(
                 'label'     => 'Октябрь:',
                 'disabled'  => true,
-            ))
+            ));
 
-            ->addElement('CheckBox', 'm11', array(
+            $this->addElement('CheckBox', 'm11', array(
                 'label'     => 'Ноябрь:',
                 'disabled'  => true,
-            ))
+            ));
 
-            ->addElement('CheckBox', 'm12', array(
+            $this->addElement('CheckBox', 'm12', array(
                 'label'     => 'Декабрь:',
                 'disabled'  => true,
-            ))
+            ));
 
-            ->addElement('CheckBox', 'm1', array(
+            $this->addElement('CheckBox', 'm1', array(
                 'label'     => 'Январь:',
                 'disabled'  => true,
-            ))
+            ));
 
-            ->addElement('CheckBox', 'm2', array(
+            $this->addElement('CheckBox', 'm2', array(
                 'label'     => 'Февраль: ',
                 'disabled'  => true,
-            ))
+            ));
 
-            ->addElement('CheckBox', 'm3', array(
+            $this->addElement('CheckBox', 'm3', array(
                 'label'     => 'Март: ',
                 'disabled'  => true,
-            ))
+            ));
 
-            ->addElement('CheckBox', 'm4', array(
+            $this->addElement('CheckBox', 'm4', array(
                 'label'     => 'Апрель:',
                 'disabled'  => true,
-            ))
+            ));
 
-            ->addElement('CheckBox', 'm5', array(
+            $this->addElement('CheckBox', 'm5', array(
                 'label'     => 'Май:',
                 'disabled'  => true,
-            ))
+            ));
 
-            ->addElement('CheckBox', 'm6', array(
+            $this->addElement('CheckBox', 'm6', array(
                 'label'     => 'Июнь: ',
                 'disabled'  => true,
-            ))
+            ));
 
-            ->addElement('CheckBox', 'm7', array(
+            $this->addElement('CheckBox', 'm7', array(
                 'label'     => 'Июль: ',
                 'disabled'  => true,
-            ))
+            ));
 
-            ->addElement('CheckBox', 'm8', array(
+            $this->addElement('CheckBox', 'm8', array(
                 'label'     => 'Август:',
                 'disabled'  => true,
-            ))
+            ));
 
-
-            ->addElement('SubmitButton', 'submit', array(
+            $this->addElement('SubmitButton', 'submit', array(
                 'label'     => 'Добавить оплату',
                 'disabled'  => true,
             ));
 
-         // TODO: Доделать декораторы!
-         //$this->m1->addDecorator('HtmlTag', array('tag' => 'll'));
-         //$this->m2->addDecorator('HtmlTag', array('tag' => 'll'));
-         //$this->m1->setDecorators(array('ViewHelper'));
+             // Я понятия не имею что сделать что бы это жуткое поделие заработало
+             // Я в ахуе.
 
-         
+
+            $this->setDecorators(array(
+                'FormElements',
+                array('HtmlTag', array('tag' => 'table', 'id' => 'addpay')),
+                'Form',
+            ));
+
+            $this->connect->setDecorators(array(
+                'ViewHelper',
+                array('HtmlTag', array('tag' => 'h1')),
+            ));
+
+
+/*
+            $this->setDecorators(array(
+                'FormElements',
+                array('HtmlTag', array('tag' => 'table', 'id' => 'addpay')),
+                'Form',
+            ));
+ 
+           $this->connect->setDecorators(array(
+                'ViewHelper',
+                'Errors',
+                array(array('data' => 'HtmlTag'), array('tag' => 'td', 'id' => 'connect')),
+                array('Label', array('tag' => 'td')),
+            ));
+
+            $this->m9->setDecorators(array(
+                'ViewHelper',
+                'Errors',
+                array(array('data' => 'HtmlTag'), array('tag' => 'td', 'id' => 'm9')),
+                array('Label', array('tag' => 'td')),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
+            ));
+
+            $this->m10->setDecorators(array(
+                'ViewHelper',
+
+                array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+                array('Label', array('tag' => 'td')),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
+            ));
+
+            $this->m11->setDecorators(array(
+                'ViewHelper',
+                'Errors',
+                array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+                array('Label', array('tag' => 'td')),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
+            ));
+
+            $this->m12->setDecorators(array(
+                'ViewHelper',
+                'Errors',
+                array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+                array('Label', array('tag' => 'td')),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
+            ));
+
+            $this->m1->setDecorators(array(
+                'ViewHelper',
+                'Errors',
+                array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+                array('Label', array('tag' => 'td')),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
+            ));
+
+            $this->m2->setDecorators(array(
+                'ViewHelper',
+                'Errors',
+                array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+                array('Label', array('tag' => 'td')),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
+            ));
+
+            $this->m3->setDecorators(array(
+                'ViewHelper',
+                'Errors',
+                array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+                array('Label', array('tag' => 'td')),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
+            ));
+
+            $this->m4->setDecorators(array(
+                'ViewHelper',
+                'Errors',
+                array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+                array('Label', array('tag' => 'td')),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
+            ));
+
+            $this->m5->setDecorators(array(
+                'ViewHelper',
+                'Errors',
+                array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+                array('Label', array('tag' => 'td')),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
+            ));
+
+            $this->m6->setDecorators(array(
+                'ViewHelper',
+                'Errors',
+                array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+                array('Label', array('tag' => 'td')),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
+            ));
+
+            $this->m7->setDecorators(array(
+                'ViewHelper',
+                'Errors',
+                array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+                array('Label', array('tag' => 'td')),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
+            ));
+
+            $this->m8->setDecorators(array(
+                'ViewHelper',
+                array(array('data' => 'HtmlTag'), array('tag' => 'td')),
+                array('Label', array('tag' => 'td')),
+                array(array('row' => 'HtmlTag'), array('tag' => 'tr')),
+            ));
+
+            $this->submit->addDecorator('htmlTag', array('tag' => 'tr'));
+            $this->submit->addDecorator('htmlTag', array('tag' => 'td'));
+*/
     }
 }
