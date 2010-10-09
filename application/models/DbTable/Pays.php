@@ -23,20 +23,6 @@ class Application_Model_DbTable_Pays extends Zend_Db_Table_Abstract
 
             $login = $login;
 
-            // TO_DO: костыли, нужно переделать!
-            /*$db = Zend_Db::factory('Pdo_Mysql', array(
-                'host'             => '127.0.0.1',
-                'username'         => 'root',
-                'password'         => '',
-                'dbname'           => 'hna_base'
-            ));
-
-            $sql = "SELECT user_id FROM hna_users WHERE ip = '$ip'";
-            $result = $db->fetchRow($sql);
-
-            $id = $result['user_id'];
-            */
-
             $modelid = new Application_Model_DbTable_Hna();
             $id = $modelid->getUserId($login);
 
