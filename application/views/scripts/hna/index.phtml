@@ -1,22 +1,23 @@
 <style type="text/css">
 table,td,th {
 	border: 1px solid black;
-	border-collapse: collapse;
+	border-collapse: collapse;     
 }
 </style>
 <center>
-<table>
+<table style="font-size: 16px;">
 <tr>
-        <th>ID</th>
-	<th>Name</th>
-	<th>Contract</th>
-        <th>Login</th>
-        <th>Group</th>
-        <th>Block</th>
-	<th>status</th>
-	<th>date_reg</th>
-        <th>admin</th>
-	<th>note</th>	
+        <th style="width: 40px;">ID</th>
+	<th style="width: 250px;">Фамилия Имя Отчество</th>
+	<th style="width: 40px;">Дог.</th>
+        <th style="width: 60px;">Логин</th>
+        <th style="width: 45px;">Группа</th>
+        <th style="width: 40px;">Комн.</th>
+	<th style="width: 50px;">Дата рег.</th>
+        <th style="width: 70px;">Админ.</th>
+        <th style="width: 70px;">Посл. IP</th>
+        <th style="width: 100px;">Посл. MAC</th>
+	<th style="width: 300px;">Примечание</th>
 	<th>&nbsp;</th>	
 </tr>
 <?php foreach($this->hna as $users) : ?>
@@ -42,9 +43,10 @@ table,td,th {
         <td><?php echo $this->escape($users->login); ?></td>
         <td><?php echo $this->escape($users->group); ?></td>
 	<td><?php echo $this->escape($users->block).$this->escape($users->room); ?></td>
-	<td><?php echo $this->escape($users->status); ?></td>
 	<td><?php echo $this->escape($users->register); ?></td>
         <td><?php echo $this->escape($this->admin[$this->escape($users->admin_id)]); ?></td>
+        <td><?php echo $this->escape($users->lastip); ?></td>
+        <td><?php echo $this->escape($users->lastmac); ?></td>
 	<td><?php echo $this->escape($users->note); ?></td>
 	<td><a href="<?php echo $this->url(array('controller'=>'hna','action'=>'edit','user_id'=>$users->user_id)); ?>">Edit</a> <a href="<?php echo $this->url(array('controller'=>'hna','action'=>'view','user_id'=>$users->user_id)); ?>">View</a></td>
 </tr>
