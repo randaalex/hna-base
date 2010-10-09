@@ -97,20 +97,6 @@ class Application_Form_AddPay extends Zend_Dojo_Form
 
              // Я понятия не имею что сделать что бы это жуткое поделие заработало
              // Я в ахуе.
-
-
-            $this->setDecorators(array(
-                'FormElements',
-                array('HtmlTag', array('tag' => 'table', 'id' => 'addpay')),
-                'Form',
-            ));
-
-            $this->connect->setDecorators(array(
-                'ViewHelper',
-                array('HtmlTag', array('tag' => 'h1')),
-            ));
-
-
 /*
             $this->setDecorators(array(
                 'FormElements',
