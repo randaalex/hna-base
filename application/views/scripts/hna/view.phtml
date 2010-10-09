@@ -1,39 +1,130 @@
+<style type="text/css">
+table,td,th {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+#pay {
+        background-image: url('/images/checked.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 45px;
+        height: 20px;
+}
+#nopay {
+        background-image: url('/images/unchecked.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 45px;
+        height: 20px;
+}
+</style>
 Информация о пользователе: <br>
-
-ФИО:        <?php echo $this->escape($this->user['surname']); ?>
+<table>
+    <tr>
+        <td>
+            ФИО:
+        </td>
+        <td>
+            <?php echo $this->escape($this->user['surname']); ?>
             <?php echo $this->escape($this->user['firstname']); ?>
-            <?php echo $this->escape($this->user['lastname']); ?> <br>
-Договор:    <?php echo $this->escape($this->user['contract']); ?> <br>
-Login:      <?php echo $this->escape($this->user['login']); ?> <br>
-Password:   <?php 
+            <?php echo $this->escape($this->user['lastname']); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Договор:
+        </td>
+        <td>
+            <?php echo $this->escape($this->user['contract']); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Логин:
+        </td>
+        <td>
+            <?php echo $this->escape($this->user['login']); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Пароль:
+        </td>
+        <td>
+           <?php
                 if ($this->user['status'] == 3){
                     echo "&lt;hidden&gt;";
                 } else {
-                    echo $this->escape($this->user['pass']); 
+                    echo $this->escape($this->user['pass']);
                 }
-            ?> <br>
-Группа:     <?php echo $this->escape($this->user['group']); ?> <br>
-Блок:       <?php echo $this->escape($this->user['block']); ?>
-            <?php echo $this->escape($this->user['room']); ?> <br>
-Примечание: <?php echo $this->escape($this->user['note']); ?>
+            ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Группа:
+        </td>
+        <td>
+            <?php echo $this->escape($this->user['group']); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Блок:
+        </td>
+        <td>
+            <?php echo $this->escape($this->user['block']) . $this->escape($this->user['room']); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Примечание:
+        </td>
+        <td>
+            <?php echo $this->escape($this->user['note']); ?>
+        </td>
+    </tr>
+</table>
+
 <br>
-<br>
-Подключение: <?php echo $this->escape($this->pay['connect']); ?> <br>
-Сент: <?php echo $this->escape($this->pay['9']); ?> <br>
-Окт: <?php echo $this->escape($this->pay['10']); ?> <br>
-Ноябр: <?php echo $this->escape($this->pay['11']); ?> <br>
-Дек: <?php echo $this->escape($this->pay['12']); ?> <br>
-Янв: <?php echo $this->escape($this->pay['1']); ?> <br>
-Февр: <?php echo $this->escape($this->pay['2']); ?> <br>
-Март: <?php echo $this->escape($this->pay['3']); ?> <br>
-Апр: <?php echo $this->escape($this->pay['4']); ?> <br>
-Май: <?php echo $this->escape($this->pay['5']); ?> <br>
-Июн: <?php echo $this->escape($this->pay['6']); ?> <br>
-Июл: <?php echo $this->escape($this->pay['7']); ?> <br>
-Авг: <?php echo $this->escape($this->pay['8']); ?> <br>
+
+Оплаты:
+<table>
+<tr style="">
+        <th>Подкл.</th>
+        <th>Сент.</th>
+        <th>Окт.</th>
+        <th>Нояб.</th>
+        <th>Дек.</th>
+        <th>Янв.</th>
+        <th>Февр.</th>
+        <th>Март</th>
+        <th>Апр.</th>
+        <th>Май</th>
+        <th>Июнь</th>
+        <th>Июль</th>
+        <th>Авг.</th>
+
+</tr>
+<tr style="">
+        <td id="<?php if($this->pay['connect']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($this->pay['9']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($this->pay['10']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($this->pay['11']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($this->pay['12']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($this->pay['1']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($this->pay['2']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($this->pay['3']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($this->pay['4']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($this->pay['5']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($this->pay['6']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($this->pay['7']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($this->pay['8']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+</tr>
+</table>
+
 <br />
-<br />
-История пользователя: <br>
+История пользователя:
 
 <style type="text/css">
     table,td,th {
