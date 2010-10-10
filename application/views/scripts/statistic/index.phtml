@@ -1,0 +1,29 @@
+
+<b>Статистика по пользователям:</b>
+<table>
+    <tr>
+        <td>Активных:</td>
+        <td><?php echo $this->countActive; ?></td>
+    </tr>
+    <tr>
+        <td>Забаненых:</td>
+        <td><?php echo $this->countBanned; ?></td>
+    </tr>
+    <tr>
+        <td>Архивных:</td>
+        <td><?php echo $this->countArchived; ?></td>
+    </tr>
+</table>
+<br>
+
+<b>Статистика по подключениям:</b>
+<table>
+    <tr>
+        <td>Новых подключений:</td>
+        <td><?php echo $this->countConnections; ?></td>
+    </tr>
+    <tr>
+        <td>Восстановлений из архива:</td>
+        <td><?php echo $this->countRenewals; ?></td>
+    </tr>
+</table>
