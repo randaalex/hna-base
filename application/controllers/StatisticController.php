@@ -23,6 +23,15 @@ class StatisticController extends Zend_Controller_Action
         $this->view->countArchived = $countArchived;
         $this->view->countConnections = $countConnections;
         $this->view->countRenewals = $countRenewals;
+
+        $admin = new Application_Model_DbTable_Admin();
+        $admins = $admin->getAdmins();
+
+        foreach ($admins as $key => $value) {
+            $data["{$value['login']}"] = $statistic->getAdminsActions($value['admin_id']);
+        }
+        $this->view->admin_list = $data;
+
     }
 
 

@@ -31,3 +31,15 @@
         <td><?php echo $this->countRenewals; ?></td>
     </tr>
 </table>
+<br>
+
+<b>Статистика по админам:</b>
+<table>
+<?php foreach ($this->admin_list as $key => $value) { ?>
+    <tr>
+        <td><?php echo $key; ?>:</td>
+        <td><?php echo $value; ?></td>
+    </tr>
+<?php } ?>
+</table>
+

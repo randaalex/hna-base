@@ -48,6 +48,16 @@ class Application_Model_DbTable_Statistic extends Zend_Db_Table_Abstract
             return $result['count'];
     }
 
+    public function getAdminsActions($admin_id){
+
+            $admin_id = (int)$admin_id;
+            $sql = "SELECT COUNT(*) AS count FROM `hna_users`
+                    WHERE (`hna_users`.`status` = 0 OR `hna_users`.`status` = 1) AND `hna_users`.`admin_id` = $admin_id";
+            $result = self::db()->fetchRow($sql);
+
+            return $result['count'];
+    }
+
     private static function db() {
 
             $bootstrap = Zend_Controller_Front::getInstance()->getParam('bootstrap');
