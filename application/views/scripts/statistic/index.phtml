@@ -2,6 +2,10 @@
 <b>Статистика по пользователям:</b>
 <table>
     <tr>
+        <td>Всего:</td>
+        <td><?php echo $this->countActive + $this->countBanned; ?></td>
+    </tr>
+    <tr>
         <td>Активных:</td>
         <td><?php echo $this->countActive; ?></td>
     </tr>
