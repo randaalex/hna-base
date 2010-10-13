@@ -131,7 +131,7 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
                     'dbname'           => $dbname
                 ));
 
-                $sql = "SELECT * FROM `hna_users` LEFT JOIN `hna_pays` ON `hna_users`.`user_id` = `hna_pays`.`user_id` WHERE `hna_users`.`status` = 0 OR `hna_users`.`status` = 1";
+                $sql = "SELECT * FROM `hna_users` LEFT JOIN `hna_pays` ON `hna_users`.`user_id` = `hna_pays`.`user_id` WHERE `hna_users`.`status` = 0 OR `hna_users`.`status` = 1 ORDER BY block ASC, room ASC";
                 $result = $db->fetchAll($sql);
 
                 return $result;
