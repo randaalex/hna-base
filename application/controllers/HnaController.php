@@ -14,10 +14,10 @@ class HnaController extends Zend_Controller_Action
         if(Zend_Auth::getInstance()->getIdentity())
           $role = Zend_Auth::getInstance()->getIdentity()->status;
 
-        $acl = new App_Acl();
+        //$acl = new App_Acl();
 
-        if(!$acl->isAllowed($role, App_Resources::INDEX))
-            $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
+        //if(!$acl->isAllowed($role, App_Resources::INDEX))
+        //    $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
         $this->view->title = "HNA Users";
         $this->view->headTitle($this->view->title);
