@@ -1,3 +1,19 @@
+<style type="text/css">
+.showborder {
+    border: solid black 1px;
+    border-collapse: collapse;
+}
+.showborder th{
+    border: solid black 1px;
+    border-collapse: collapse;
+}
+.showborder td{
+    border: solid black 1px;
+    border-collapse: collapse;
+    width: 45px;
+}
+
+</style>
 
 <b>Статистика по пользователям:</b>
 <table>
@@ -42,4 +58,38 @@
     </tr>
 <?php } ?>
 </table>
+<br>
 
+<b>Статистика по количеству оплат за месяцы:</b>
+<table class="showborder">
+    <tr>
+        <th>Подкл.</th>
+        <th>Сент.</th>
+        <th>Окт.</th>
+        <th>Нояб.</th>
+        <th>Дек.</th>
+        <th>Янв.</th>
+        <th>Февр.</th>
+        <th>Март</th>
+        <th>Апр.</th>
+        <th>Май</th>
+        <th>Июнь</th>
+        <th>Июль</th>
+        <th>Авг.</th>
+    </tr>
+    <tr>
+        <td><?php echo $this->countForMounth['connect']; ?></td>
+        <td><?php echo $this->countForMounth['9']; ?></td>
+        <td><?php echo $this->countForMounth['10']; ?></td>
+        <td><?php echo $this->countForMounth['11']; ?></td>
+        <td><?php echo $this->countForMounth['12']; ?></td>
+        <td><?php echo $this->countForMounth['1']; ?></td>
+        <td><?php echo $this->countForMounth['2']; ?></td>
+        <td><?php echo $this->countForMounth['3']; ?></td>
+        <td><?php echo $this->countForMounth['4']; ?></td>
+        <td><?php echo $this->countForMounth['5']; ?></td>
+        <td><?php echo $this->countForMounth['6']; ?></td>
+        <td><?php echo $this->countForMounth['7']; ?></td>
+        <td><?php echo $this->countForMounth['8']; ?></td>
+    </tr>
+</table>

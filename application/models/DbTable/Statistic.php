@@ -58,6 +58,25 @@ class Application_Model_DbTable_Statistic extends Zend_Db_Table_Abstract
             return $result['count'];
     }
 
+    public function getPaysForMounth(){
+
+            for($i=0;$i<=12;$i++){
+
+                if($i==0){
+                    $sql = "SELECT COUNT(*) as count FROM `hna_pays` WHERE `connect`='1'";
+                    $result = self::db()->fetchRow($sql);
+                    $count['connect'] = $result['count'];
+                } else {
+                    $sql = "SELECT COUNT(*) as count FROM `hna_pays` WHERE `$i`='1'";
+                    $result = self::db()->fetchRow($sql);
+                    $count["$i"] = $result['count'];
+                }
+            }
+            
+            return $count;
+
+    }
+
     private static function db() {
 
             $bootstrap = Zend_Controller_Front::getInstance()->getParam('bootstrap');

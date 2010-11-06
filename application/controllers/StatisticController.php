@@ -18,11 +18,14 @@ class StatisticController extends Zend_Controller_Action
         $countConnections = $statistic->getConnections();
         $countRenewals = $statistic->getRenewals();
 
+        $countForMounth = $statistic->getPaysForMounth();
+
         $this->view->countActive = $countActive;
         $this->view->countBanned = $countBanned;
         $this->view->countArchived = $countArchived;
         $this->view->countConnections = $countConnections;
         $this->view->countRenewals = $countRenewals;
+        $this->view->countForMounth = $countForMounth;
 
         $admin = new Application_Model_DbTable_Admin();
         $admins = $admin->getAdmins();
