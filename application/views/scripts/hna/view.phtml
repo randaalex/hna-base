@@ -70,10 +70,34 @@ table,td,th {
     </tr>
     <tr>
         <td>
+            Общежитие:
+        </td>
+        <td>
+            №<?php echo $this->escape($this->user['hostel']); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Блок:
         </td>
         <td>
             <?php echo $this->escape($this->user['block']) . $this->escape($this->user['room']); ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Кабель:
+        </td>
+        <td>
+            <?php if($this->user['cable'] == 1) echo 'Выдан'; ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Свич №:
+        </td>
+        <td>
+            <?php if($this->user['switch_id'] != 0) echo $this->user['switch_id']; ?>
         </td>
     </tr>
     <tr>
