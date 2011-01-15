@@ -17,7 +17,7 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 		
 	}
 	
-	public function addUser($surname,$firstname,$lastname,$login,$pass,$group,$contract,$block,$room,$status,$register,$admin_id,$note){
+	public function addUser($surname,$firstname,$lastname,$login,$pass,$group,$contract,$block,$room,$status,$register,$admin_id,$note,$hostel,$cable){
 		
 		$data = array(
 			'surname'   => $surname,
@@ -32,7 +32,9 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
 			'status'    => $status,
 			'register'  => $register,
 			'admin_id'  => $admin_id,
-			'note'      => $note
+			'note'      => $note,
+            'hostel'    => $hostel,
+            'cable'     => $cable,
 		);
 		
 		$this->insert($data);
@@ -41,7 +43,7 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
                 return $row['user_id'];
 	}
 	
-	public function updateUser($id,$surname,$firstname,$lastname,$login,$pass,$group,$block,$room,$status,$note){
+	public function updateUser($id,$surname,$firstname,$lastname,$login,$pass,$group,$block,$room,$status,$note, $hostel, $cable, $switch_id){
 		
 		$data = array(
 			'surname'   => $surname,
@@ -53,7 +55,10 @@ class Application_Model_DbTable_Hna extends Zend_Db_Table_Abstract
                         'block'     => $block,
 			'room'      => $room,
 			'status'    => $status,
-			'note'      => $note
+			'note'      => $note,
+            'hostel'    => $hostel,
+            'cable'     => $cable,
+            'switch_id' => $switch_id
 		);
 		
 		$this->update($data, 'user_id ='.(int)$id);
