@@ -1,18 +1,15 @@
 <?php
 
-class HnaController extends Zend_Controller_Action
-{
+class HnaController extends Zend_Controller_Action {
 
-    public function init()
-    {
+    public function init() {
         /* Initialize action controller here */
     }
 
-    public function indexAction()
-    {
+    public function indexAction() {
 
-        if(Zend_Auth::getInstance()->getIdentity())
-          $role = Zend_Auth::getInstance()->getIdentity()->status;
+        if (Zend_Auth::getInstance()->getIdentity())
+            $role = Zend_Auth::getInstance()->getIdentity()->status;
 
         //$acl = new App_Acl();
 
@@ -21,7 +18,7 @@ class HnaController extends Zend_Controller_Action
 
         $this->view->title = "HNA Users";
         $this->view->headTitle($this->view->title);
-        
+
         $user = new Application_Model_DbTable_Hna();
         $this->view->hna = $user->fetchAll();
         $userinfo = $user->fetchAll();
@@ -32,23 +29,22 @@ class HnaController extends Zend_Controller_Action
             $admin_list[$value['admin_id']] = $value['login'];
         }
         $this->view->admin = $admin_list;
-        
+
     }
 
-    public function addAction()
-    {
+    public function addAction() {
 
-        if(Zend_Auth::getInstance()->getIdentity())
-          $role = Zend_Auth::getInstance()->getIdentity()->status;
+        if (Zend_Auth::getInstance()->getIdentity())
+            $role = Zend_Auth::getInstance()->getIdentity()->status;
 
         $acl = new App_Acl();
 
-        if(!$acl->isAllowed($role, App_Resources::ADD))
+        if (!$acl->isAllowed($role, App_Resources::ADD))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
         $this->title->title = "Add new user";
         $this->view->headTitle($this->view->title);
-        
+
         $form = new Application_Form_AddUser();
         $this->view->form = $form;
 
@@ -66,148 +62,173 @@ class HnaController extends Zend_Controller_Action
 
         if ($this->getRequest()->isPost()) {
 
-                $formData = $this->getRequest()->getPost();
-               
-                if ($form->isValid($formData)) {
-                    
-        		$surname = $form->getValue('surname');
-        		$firstname = $form->getValue('firstname');
-        		$lastname = $form->getValue('lastname');
-                        $pass = $this->passgen(8);
-                        $group = $form->getValue('group');
-                        
-                        $modcontract = new Application_Model_DbTable_Hna();
-                        $contract = $modcontract->getLastContract() + 1;
+            $formData = $this->getRequest()->getPost();
 
-                        // TODO: сделать переменную года, согласно которой и делать проверку
-                        /*if($contract < 10000){
-                            $contract = 10000;
-                        }*/
+            if ($form->isValid($formData)) {
 
-                        $login = $contract . $this->logingen();
-        		$block = $form->getValue('block');
-        		$room = $form->getValue('room');
+                $surname = $form->getValue('surname');
+                $firstname = $form->getValue('firstname');
+                $lastname = $form->getValue('lastname');
 
-                        switch ($form->getValue('status')) {
-                            case 'Активный пользователь':   $status = 0; break;
-                            case 'Забаненый пользователь':  $status = 1; break;
-                            case 'Архивный пользователь':   $status = 2; break;
-                            case 'Администратор':           $status = 3; break;
-                            default:
-                                break;
-                        }
-                        
-        		$register = date('Y-m-d');
+                $pass = $this->passgen(8);
+                $group = $form->getValue('group');
 
-                        $admin_id = Zend_Auth::getInstance()->getIdentity()->admin_id;
+                $modcontract = new Application_Model_DbTable_Hna();
+                $contract = $modcontract->getLastContract() + 1;
 
-        		$note = $form->getValue('note');
+                // TODO: сделать переменную года, согласно которой и делать проверку
+                /*if($contract < 10000){
+                    $contract = 10000;
+                }*/
 
-        		$hna = new Application_Model_DbTable_Hna();
-                        $user_id = $hna->addUser($surname,$firstname,$lastname,$login,$pass,$group,$contract,$block,$room,$status,$register,$admin_id,$note);
+                $login = $contract . $this->logingen();
 
-                        $pays = new Application_Model_DbTable_Pays();
-                        $userlog =  new Application_Model_DbTable_Logs();
+                $block = $form->getValue('block');
+                $room = $form->getValue('room');
 
-                        if($form->getValue('arhiv') == '0'){
-                            $pays->addUser($user_id);
-                            $userlog->addMessage($user_id, $admin_id, 0, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Статус:$status; Примечание:$note");
-                        } else {
-                            $pays->addUser($user_id, true);
-                            $userlog->addMessage($user_id, $admin_id, 1, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Статус:$status; Примечание:$note");
-                        }
+                switch ($form->getValue('status')) {
+                    case 'Активный пользователь':
+                        $status = 0;
+                        break;
+                    case 'Забаненый пользователь':
+                        $status = 1;
+                        break;
+                    case 'Архивный пользователь':
+                        $status = 2;
+                        break;
+                    case 'Администратор':
+                        $status = 3;
+                        break;
+                    default:
+                        break;
+                }
 
-                        $this->getHelper('Redirector')->gotoSimpleAndExit('vadd', 'hna', '' , array('user_id' => $user_id));
-        	} else {
-        		$form->populate($formData);
-        	}
+                $register = date('Y-m-d');
+
+                $admin_id = Zend_Auth::getInstance()->getIdentity()->admin_id;
+
+                $note = $form->getValue('note');
+
+                $hostel = (int) $form->getValue('hostel');
+                if (!$hostel)
+                    $hostel = 2;
+
+                $cable = (int) $form->getValue('cable');
+
+                $hna = new Application_Model_DbTable_Hna();
+                $user_id = $hna->addUser($surname, $firstname, $lastname, $login, $pass, $group, $contract, $block, $room, $status, $register, $admin_id, $note, $hostel, $cable);
+                $pays = new Application_Model_DbTable_Pays();
+                $userlog = new Application_Model_DbTable_Logs();
+
+                if ($form->getValue('arhiv') == '0') {
+                    $pays->addUser($user_id);
+                    $userlog->addMessage($user_id, $admin_id, 0, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Статус:$status; Общ:$hostel; Каб:$cable; Свич:$switch_id; Примечание:$note");
+                } else {
+                    $pays->addUser($user_id, true);
+                    $userlog->addMessage($user_id, $admin_id, 1, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Статус:$status; Общ:$hostel; Каб:$cable; Свич:$switch_id; Примечание:$note");
+                }
+
+                $this->getHelper('Redirector')->gotoSimpleAndExit('vadd', 'hna', '', array('user_id' => $user_id));
+            } else {
+                $form->populate($formData);
+            }
         }
     }
-    
-    public function editAction()
-    {
 
-        if(Zend_Auth::getInstance()->getIdentity())
-          $role = Zend_Auth::getInstance()->getIdentity()->status;
+    public function editAction() {
+
+        if (Zend_Auth::getInstance()->getIdentity())
+            $role = Zend_Auth::getInstance()->getIdentity()->status;
 
         $acl = new App_Acl();
 
-        if(!$acl->isAllowed($role, App_Resources::EDIT))
+        if (!$acl->isAllowed($role, App_Resources::EDIT))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
         $this->view->title = "Edit User";
         $this->view->headTitle($this->view->title);
-        
+
         $form = new Application_Form_EditUser();
         $this->view->form = $form;
 
-         if ($this->getRequest()->isPost()) {
-        	$formData = $this->getRequest()->getPost();
-        	if ($form->isValid($formData)) {
-        		$user_id = (int)$form->getValue('user_id');
-        		
-        		$surname = $form->getValue('surname');
-        		$firstname = $form->getValue('firstname');
-        		$lastname = $form->getValue('lastname');
-                        $login = $form->getValue('contract') . $form->getValue('login');
-                        $pass = $form->getValue('pass');
-                        $group = $form->getValue('group');
-        		$block = $form->getValue('block');
-        		$room = $form->getValue('room');
+        if ($this->getRequest()->isPost()) {
+            $formData = $this->getRequest()->getPost();
+            if ($form->isValid($formData)) {
+                $user_id = (int) $form->getValue('user_id');
 
-                        switch ($form->getValue('status')) {
-                            case 'Активный пользователь':   $status = 0; break;
-                            case 'Забаненый пользователь':  $status = 1; break;
-                            case 'Архивный пользователь':   $status = 2; break;
-                            case 'Администратор':           $status = 3; break;
-                            default:
-                                break;
-                        }
-        		$note = $form->getValue('note');
-        		$users = new Application_Model_DbTable_Hna();
-        		$users->updateUser($user_id,$surname,$firstname,$lastname,$login,$pass,$group,$block,$room,$status,$note);
+                $surname = $form->getValue('surname');
+                $firstname = $form->getValue('firstname');
+                $lastname = $form->getValue('lastname');
+                $login = $form->getValue('contract') . $form->getValue('login');
+                $pass = $form->getValue('pass');
+                $group = $form->getValue('group');
+                $block = $form->getValue('block');
+                $room = $form->getValue('room');
 
-                        //$admin_id = Zend_Auth::getInstance();
-                        $userlog =  new Application_Model_DbTable_Logs();
-                        $userlog->addMessage($user_id, Zend_Auth::getInstance()->getIdentity()->admin_id , 2, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Статус:$status; Примечание:$note");
+                switch ($form->getValue('status')) {
+                    case 'Активный пользователь':
+                        $status = 0;
+                        break;
+                    case 'Забаненый пользователь':
+                        $status = 1;
+                        break;
+                    case 'Архивный пользователь':
+                        $status = 2;
+                        break;
+                    case 'Администратор':
+                        $status = 3;
+                        break;
+                    default:
+                        break;
+                }
 
-        		$this->_helper->redirector('index');
-        	} else {
-        		$form->populate($formData);
-        	}	
+                $hostel = (int) $form->getValue('hostel');
+                $cable = (int) $form->getValue('cable');
+                $switch_id = (int) $form->getValue('switch_id');
+                $note = $form->getValue('note');
+                $users = new Application_Model_DbTable_Hna();
+                $users->updateUser($user_id, $surname, $firstname, $lastname, $login, $pass, $group, $block, $room, $status, $note, $hostel, $cable, $switch_id);
+
+                //$admin_id = Zend_Auth::getInstance();
+                $userlog = new Application_Model_DbTable_Logs();
+                $userlog->addMessage($user_id, Zend_Auth::getInstance()->getIdentity()->admin_id, 2, "ФИО: $surname $firstname $lastname; Логин:$login; Группа:$group, Блок:$block$room; Статус:$status; Примечание:$note");
+
+                $this->_helper->redirector('index');
+            } else {
+                $form->populate($formData);
+            }
         } else {
-        	$user_id = $this->_getParam('user_id',0);
-        	if ($user_id > 0) {
+            $user_id = $this->_getParam('user_id', 0);
+            if ($user_id > 0) {
 
-                        $delurl = $this->view->baseUrl()."/hna/delete/user_id/$user_id";
+                $delurl = $this->view->baseUrl() . "/hna/delete/user_id/$user_id";
 
-                        $this->view->Dojo()->addOnLoad("function() {
+                $this->view->Dojo()->addOnLoad("function() {
                                            dojo.connect(dojo.byId('del'),'onclick',function(){
                                                window.location = '$delurl';
                                            });
                         }");
 
-        		$users = new Application_Model_DbTable_Hna();
-                        $userinfo = $users->getUser($user_id);
-                        $userinfo['login'] = substr($userinfo['login'], 5, strlen($userinfo['login'])); //Перед отображение логина, вырезаем номер договора
-        		$form->populate($userinfo);
+                $users = new Application_Model_DbTable_Hna();
+                $userinfo = $users->getUser($user_id);
+                $userinfo['login'] = substr($userinfo['login'], 5, strlen($userinfo['login'])); //Перед отображение логина, вырезаем номер договора
+                $form->populate($userinfo);
 
-                        $this->view->assign('user_id',$id);
-        	}
-        
+                $this->view->assign('user_id', $id);
+            }
+
         }
-        
+
     }
 
-    public function vaddAction()
-    {
+    public function vaddAction() {
 
-        if(Zend_Auth::getInstance()->getIdentity())
-          $role = Zend_Auth::getInstance()->getIdentity()->status;
+        if (Zend_Auth::getInstance()->getIdentity())
+            $role = Zend_Auth::getInstance()->getIdentity()->status;
 
         $acl = new App_Acl();
 
-        if(!$acl->isAllowed($role, App_Resources::VADD))
+        if (!$acl->isAllowed($role, App_Resources::VADD))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
         $this->view->title = "Пользователь добавлен";
@@ -225,15 +246,14 @@ class HnaController extends Zend_Controller_Action
 
     }
 
-    public function viewAction()
-    {
+    public function viewAction() {
 
-        if(Zend_Auth::getInstance()->getIdentity())
-          $role = Zend_Auth::getInstance()->getIdentity()->status;
+        if (Zend_Auth::getInstance()->getIdentity())
+            $role = Zend_Auth::getInstance()->getIdentity()->status;
 
         $acl = new App_Acl();
 
-        if(!$acl->isAllowed($role, App_Resources::VIEW))
+        if (!$acl->isAllowed($role, App_Resources::VIEW))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
         $this->view->title = "View user";
@@ -252,7 +272,8 @@ class HnaController extends Zend_Controller_Action
             $this->view->pay = $userpay;
 
             $log = new Application_Model_DbTable_Logs();
-            $userlog = $log->getUserLog($user_id);            $admin = new Application_Model_DbTable_Admin();
+            $userlog = $log->getUserLog($user_id);
+            $admin = new Application_Model_DbTable_Admin();
             $admins = $admin->getAdmins();
 
             foreach ($admins as $key => $value) {
@@ -262,51 +283,48 @@ class HnaController extends Zend_Controller_Action
             $this->view->log = $userlog;
 
 
-            
         }
 
 
     }
 
-    public function deleteAction()
-    {
+    public function deleteAction() {
 
-        if(Zend_Auth::getInstance()->getIdentity())
-          $role = Zend_Auth::getInstance()->getIdentity()->status;
+        if (Zend_Auth::getInstance()->getIdentity())
+            $role = Zend_Auth::getInstance()->getIdentity()->status;
 
         $acl = new App_Acl();
 
-        if(!$acl->isAllowed($role, App_Resources::DELETE))
+        if (!$acl->isAllowed($role, App_Resources::DELETE))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
         $this->view->title = "Delete user";
         $this->view->headTitle($this->view->title);
-        
-        if ($this->getRequest()->isPost()){
-        	$del = $this->getRequest()->getPost('del');
-        	if ($del == "Yes"){
-        		$id = $this->getRequest()->getPost('user_id');
-        		$user = new Application_Model_DbTable_Hna();
-        		$user->deleteUser($id);
-        	}
-        	$this->_helper->redirector('index');
-        	
+
+        if ($this->getRequest()->isPost()) {
+            $del = $this->getRequest()->getPost('del');
+            if ($del == "Yes") {
+                $id = $this->getRequest()->getPost('user_id');
+                $user = new Application_Model_DbTable_Hna();
+                $user->deleteUser($id);
+            }
+            $this->_helper->redirector('index');
+
         } else {
-        	$id = $this->_getParam('user_id',0);
-        	$users = new Application_Model_DbTable_Hna();
-        	$this->view->user = $users->getUser($id);
-        }       
+            $id = $this->_getParam('user_id', 0);
+            $users = new Application_Model_DbTable_Hna();
+            $this->view->user = $users->getUser($id);
+        }
     }
 
-    public function payslistAction()
-    {
+    public function payslistAction() {
 
-        if(Zend_Auth::getInstance()->getIdentity())
-          $role = Zend_Auth::getInstance()->getIdentity()->status;
+        if (Zend_Auth::getInstance()->getIdentity())
+            $role = Zend_Auth::getInstance()->getIdentity()->status;
 
         $acl = new App_Acl();
 
-        if(!$acl->isAllowed($role, App_Resources::INDEX))
+        if (!$acl->isAllowed($role, App_Resources::INDEX))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
         $this->view->title = "HNA Users Pays";
@@ -323,16 +341,16 @@ class HnaController extends Zend_Controller_Action
      * @param int $lenght
      * @return string $pass
      */
-    private function passgen($lenght)
-    {
-        
+    private function passgen($lenght) {
+
         $chars = '1234567890abcdefghijkmnopqstvwxyz';
 
         $pass = '';
 
-        for($i=1;$i<=$lenght;$i++){
-            $pass .= substr($chars, rand(0,33), 1);
-        };
+        for ($i = 1; $i <= $lenght; $i++) {
+            $pass .= substr($chars, rand(0, 33), 1);
+        }
+        ;
 
         return $pass;
     }
@@ -342,28 +360,27 @@ class HnaController extends Zend_Controller_Action
      *
      * @return string $login
      */
-    private function logingen()
-    {
+    private function logingen() {
 
-    $fp = file("../library/logins.txt");
+        $fp = file("../library/logins.txt");
 
-    $num_stroka = rand(1, count($fp)); 
-    $file = file("../library/logins.txt"); // Считываем весь файл в массив
+        $num_stroka = rand(1, count($fp));
+        $file = file("../library/logins.txt"); // Считываем весь файл в массив
 
-    for($i = 0; $i < sizeof($file); $i++)
-    if($i == $num_stroka) {
-        //echo "<br>$num_stroka - ".$file[$i];
-        $login = substr($file[$i],0,5);
-        unset($file[$i]);
-    }
+        for ($i = 0; $i < sizeof($file); $i++)
+            if ($i == $num_stroka) {
+                //echo "<br>$num_stroka - ".$file[$i];
+                $login = substr($file[$i], 0, 5);
+                unset($file[$i]);
+            }
 
-    $fp = fopen("../library/logins.txt", "w");
-    fputs($fp, implode("", $file));
-    fclose($fp);
+        $fp = fopen("../library/logins.txt", "w");
+        fputs($fp, implode("", $file));
+        fclose($fp);
 
-    $fp = file("../library/logins.txt");
+        $fp = file("../library/logins.txt");
 
-    return $login;
-    
+        return $login;
+
     }
 }

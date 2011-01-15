@@ -43,7 +43,7 @@ class Application_Form_AddUser extends Zend_Dojo_Form
             ->addElement('ValidationTextBox', 'block', array(
                 'label'     => 'Номер блока:',
                 'style'     => 'width: 240px;',
-                'regExp'    => '\d{3,4}',
+                'regExp'    => '\d{2,4}',
                 'required'  => true,
                 'promptMessage' => 'Введите номер блока.',
                 'invalidMessage'=> 'Неверный номер блока.'
@@ -57,7 +57,17 @@ class Application_Form_AddUser extends Zend_Dojo_Form
                         'b' =>  'б' ),
                 'promptMessage' => 'Выберите комнату.'
             ))
-            
+
+            ->addElement('RadioButton', 'hostel', array(
+                'label'     => 'Общежитие:',
+                'required'  => true,
+                'multiOptions' => array(
+                        '2' =>  ' №2',
+                        '3' =>  ' №3' ),
+                'value'     => '2',
+                'promptMessage' => 'Выберите номер общежития.'
+            ))
+
             ->addElement('ValidationTextBox', 'note', array(
                 'label'     => 'Примечание:',
                 'style'     => 'width: 240px;',
@@ -81,6 +91,13 @@ class Application_Form_AddUser extends Zend_Dojo_Form
                 'checkedValue'   => '1',
                 'checked'   => false,
                 'promptMessage' => 'Отметте, если пользователь из архива.'
+            ))
+
+            ->addElement('CheckBox', 'cable', array(
+                'label'     => 'Кабель:',
+                'checkedValue'   => '1',
+                'checked'   => false,
+                'promptMessage' => 'Отметте, если выдан кабель.'
             ))
 
             ->addElement('SubmitButton', 'submit', array(

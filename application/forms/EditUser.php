@@ -85,6 +85,15 @@ class Application_Form_EditUser extends Zend_Dojo_Form
                 'promptMessage' => 'Выберите комнату.'
             ))
 
+            ->addElement('RadioButton', 'hostel', array(
+                'label'     => 'Общежитие:',
+                'required'  => true,
+                'multiOptions' => array(
+                        '2' =>  ' №2',
+                        '3' =>  ' №3' ),
+                'value'     => '2',
+                'promptMessage' => 'Выберите номер общежития.'
+            ))
                 
             ->addElement('ValidationTextBox', 'note', array(
                 'label'     => 'Примечание:',
@@ -103,9 +112,23 @@ class Application_Form_EditUser extends Zend_Dojo_Form
                 'promptMessage' => 'Выберите статус пользователя.'
             ))
 
+            ->addElement('CheckBox', 'cable', array(
+                'label'     => 'Кабель:',
+                'checkedValue'   => '1',
+                'checked'   => false,
+                'promptMessage' => 'Отметте, если выдан кабель.'
+            ))
+
             ->addElement('Button','del', array(
                 'label'     => 'Удалить пользователя'
 
+            ))
+
+            ->addElement('ValidationTextBox', 'switch_id', array(
+                'label'     => 'Номер свича:',
+                'style'     => 'width: 240px;',
+                'required'  => true,
+                'promptMessage' => 'Введите номер свича.',
             ))
 
             ->addElement('SubmitButton', 'submit', array(
