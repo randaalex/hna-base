@@ -15,6 +15,18 @@ table,td,th {
         background-position: center;
         width: 45px;
 }
+.cable {
+        background-image: url('/images/cable.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 45px;
+}
+.switch {
+        background-image: url('/images/switch.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 45px;
+}
 </style>
 <center>
 <table>
@@ -37,6 +49,8 @@ table,td,th {
         <th>Июнь</th>
         <th>Июль</th>
         <th>Авг.</th>
+    <th>Каб.</th>
+    <th>Свич.</th>
 
 </tr>
 <?php foreach($this->hna as $users) : ?>
@@ -59,6 +73,8 @@ table,td,th {
         <td id="<?php if($users['6']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
         <td id="<?php if($users['7']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
         <td id="<?php if($users['8']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td <?php if($users['cable'] == 1) echo 'class="cable"'; ?>></td>
+        <td <?php if($users['switch_id'] != 0) echo 'class="switch"'; ?> title="<?php echo $this->escape($users['switch_id']); ?>"></td>
 </tr>
 <?php endforeach;?>
 
