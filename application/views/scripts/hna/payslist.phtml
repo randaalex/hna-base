@@ -58,23 +58,23 @@ table,td,th {
 	<td><?php echo $this->escape($users['contract']); ?></td>
 	<td><?php echo $this->escape($users['surname']).' '.$this->escape($users['firstname']).' '.$this->escape($users['lastname']);?></td>
         <td><?php echo $this->escape($users['group']); ?></td>
-	<td><?php echo $this->escape($users['block']).$this->escape($users['room']); ?></td>
+	<td><?php echo 'h'.$this->escape($users['hostel']).' '.$this->escape($users['block']).$this->escape($users['room']); ?></td>
 	<td><?php echo $this->escape($users['register']); ?></td>
-        <td id="<?php if($users['connect']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
-        <td id="<?php if($users['9']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
-        <td id="<?php if($users['10']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
-        <td id="<?php if($users['11']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
-        <td id="<?php if($users['12']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
-        <td id="<?php if($users['1']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
-        <td id="<?php if($users['2']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
-        <td id="<?php if($users['3']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
-        <td id="<?php if($users['4']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
-        <td id="<?php if($users['5']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
-        <td id="<?php if($users['6']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
-        <td id="<?php if($users['7']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
-        <td id="<?php if($users['8']){ echo 'pay';} else {echo 'nopay';} ?>"></td>
+        <td id="<?php if($users['connect']){ echo 'pay';} else {echo 'nopay';} ?>" title="Подключение"></td>
+        <td id="<?php if($users['9']){ echo 'pay';} else {echo 'nopay';} ?>" title="Сентябрь"></td>
+        <td id="<?php if($users['10']){ echo 'pay';} else {echo 'nopay';} ?>" title="Отябрь"></td>
+        <td id="<?php if($users['11']){ echo 'pay';} else {echo 'nopay';} ?>" title="Ноябрь"></td>
+        <td id="<?php if($users['12']){ echo 'pay';} else {echo 'nopay';} ?>" title="Декабрь"></td>
+        <td id="<?php if($users['1']){ echo 'pay';} else {echo 'nopay';} ?>" title="Январь"></td>
+        <td id="<?php if($users['2']){ echo 'pay';} else {echo 'nopay';} ?>" title="Февраль"></td>
+        <td id="<?php if($users['3']){ echo 'pay';} else {echo 'nopay';} ?>" title="Март"></td>
+        <td id="<?php if($users['4']){ echo 'pay';} else {echo 'nopay';} ?>" title="Апрель"></td>
+        <td id="<?php if($users['5']){ echo 'pay';} else {echo 'nopay';} ?>" title="Май"></td>
+        <td id="<?php if($users['6']){ echo 'pay';} else {echo 'nopay';} ?>" title="Июнь"></td>
+        <td id="<?php if($users['7']){ echo 'pay';} else {echo 'nopay';} ?>" title="Июль"></td>
+        <td id="<?php if($users['8']){ echo 'pay';} else {echo 'nopay';} ?>" title="Август"></td>
         <td <?php if($users['cable'] == 1) echo 'class="cable"'; ?>></td>
-        <td <?php if($users['switch_id'] != 0) echo 'class="switch"'; ?> title="<?php echo $this->escape($users['switch_id']); ?>"></td>
+        <td <?php if($users['switch_id'] != 0) echo 'class="switch"'; ?> title="<?php if($users['switch_id'] != 0) echo $this->escape($users['switch_id']); ?>"></td>
 </tr>
 <?php endforeach;?>
 
