@@ -16,7 +16,7 @@ class HnaController extends Zend_Controller_Action {
         //if(!$acl->isAllowed($role, App_Resources::INDEX))
         //    $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
-        $this->view->title = "HNA Users";
+        $this->view->title = "HNA - Пользователи";
         $this->view->headTitle($this->view->title);
 
         $user = new Application_Model_DbTable_Hna();
@@ -42,7 +42,7 @@ class HnaController extends Zend_Controller_Action {
         if (!$acl->isAllowed($role, App_Resources::ADD))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
-        $this->title->title = "Add new user";
+        $this->view->title = "HNA - Добавление пользователя";
         $this->view->headTitle($this->view->title);
 
         $form = new Application_Form_AddUser();
@@ -145,7 +145,7 @@ class HnaController extends Zend_Controller_Action {
         if (!$acl->isAllowed($role, App_Resources::EDIT))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
-        $this->view->title = "Edit User";
+        $this->view->title = "HNA - Редактирование пользователя";
         $this->view->headTitle($this->view->title);
 
         $form = new Application_Form_EditUser();
@@ -231,7 +231,7 @@ class HnaController extends Zend_Controller_Action {
         if (!$acl->isAllowed($role, App_Resources::VADD))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
-        $this->view->title = "Пользователь добавлен";
+        $this->view->title = "HNA - Пользователь добавлен";
         $this->view->headTitle($this->view->title);
 
         if ($this->getRequest()->isGet()) {
@@ -256,7 +256,7 @@ class HnaController extends Zend_Controller_Action {
         if (!$acl->isAllowed($role, App_Resources::VIEW))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
-        $this->view->title = "View user";
+        $this->view->title = "HNA - Просмотр пользователя";
         $this->view->headTitle($this->view->title);
 
         if ($this->getRequest()->isGet()) {
@@ -298,7 +298,7 @@ class HnaController extends Zend_Controller_Action {
         if (!$acl->isAllowed($role, App_Resources::DELETE))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
-        $this->view->title = "Delete user";
+        $this->view->title = "HNA - Удаление пользователя";
         $this->view->headTitle($this->view->title);
 
         if ($this->getRequest()->isPost()) {
@@ -327,7 +327,7 @@ class HnaController extends Zend_Controller_Action {
         if (!$acl->isAllowed($role, App_Resources::INDEX))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
-        $this->view->title = "HNA Users Pays";
+        $this->view->title = "HNA - Оплаты";
         $this->view->headTitle($this->view->title);
 
         $user = new Application_Model_DbTable_Hna();

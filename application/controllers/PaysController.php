@@ -24,7 +24,7 @@ class PaysController extends Zend_Controller_Action
         if(!$acl->isAllowed($role, App_Resources::PAYSADD))
             $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
 
-        $this->title->title = "Add pay";
+        $this->view->title = "Add pay";
                 $this->view->headTitle($this->view->title);
         
                 $form = new Application_Form_AddPay();
