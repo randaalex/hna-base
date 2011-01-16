@@ -19,7 +19,6 @@ table,td,th {
     <th style="min-width: 45px;">Группа</th>
     <th style="min-width: 62px;">Комн.</th>
 	<th style="min-width: 60px;">Дата рег.</th>
-    <th style="min-width: 70px;">Админ.</th>
     <th style="min-width: 40px;">Свич</th>
     <th style="min-width: 70px;">Посл. IP</th>
     <th style="min-width: 100px;">Посл. MAC</th>
@@ -49,7 +48,6 @@ table,td,th {
     <td><?php echo $this->escape($users->group); ?></td>
 	<td><?php echo 'h'.$this->escape($users->hostel).' '.$this->escape($users->block).$this->escape($users->room); ?></td>
 	<td><?php echo $this->escape($users->register); ?></td>
-    <td><?php echo $this->escape($this->admin[$this->escape($users->admin_id)]); ?></td>
     <td <?php if($users->switch_id != 0) echo 'class="switch"'; ?> title="<?php echo $this->escape($users->switch_id); ?>"></td>
     <td><?php echo $this->escape($users->lastip); ?></td>
     <td><?php echo $this->escape($users->lastmac); ?></td>
