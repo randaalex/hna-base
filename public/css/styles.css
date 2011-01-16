@@ -1,0 +1,18 @@
+body {
+    font-family: Verdana;
+    font-size: 13px;
+}
+.edit {
+    background-image: url('/images/edit.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 0 8px;
+    margin: 0 0px;
+}
+.view {
+    background-image: url('/images/view.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 0 8px;
+    margin: 0 0px;
+}
