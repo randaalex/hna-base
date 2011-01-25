@@ -127,7 +127,6 @@ class Application_Form_EditUser extends Zend_Dojo_Form
             ->addElement('ValidationTextBox', 'switch_id', array(
                 'label'     => 'Номер свича:',
                 'style'     => 'width: 240px;',
-                'required'  => true,
                 'promptMessage' => 'Введите номер свича.',
             ))
 
