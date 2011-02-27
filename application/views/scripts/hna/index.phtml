@@ -52,8 +52,9 @@ table,td,th {
     <td><?php echo $this->escape($users->lastip); ?></td>
     <td><?php echo $this->escape($users->lastmac); ?></td>
 	<td><?php
-            preg_match( '#^.{0,50}\s#i', $users->note, $p );
-            echo $this->escape($p[0]); ?></td>
+
+
+            echo substr($users->note, 0, 40); ?></td>
 	<td><a class="edit" href="<?php echo $this->url(array('controller'=>'hna','action'=>'edit','user_id'=>$users->user_id)); ?>" title="Редактировать"></a>
         <a class="view" href="<?php echo $this->url(array('controller'=>'hna','action'=>'view','user_id'=>$users->user_id)); ?>" title="Просмотреть"></a></td>
 </tr>
