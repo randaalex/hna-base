@@ -20,7 +20,33 @@ class HnaController extends Zend_Controller_Action {
         $this->view->headTitle($this->view->title);
 
         $user = new Application_Model_DbTable_Hna();
-        $this->view->hna = $user->fetchAll();
+        $this->view->hna = $user->fetchAll('status != 2');
+        $userinfo = $user->fetchAll();
+
+        $admin = new Application_Model_DbTable_Admin();
+        $admins = $admin->getAdmins();
+        foreach ($admins as $key => $value) {
+            $admin_list[$value['admin_id']] = $value['login'];
+        }
+        $this->view->admin = $admin_list;
+
+    }
+
+    public function archAction() {
+
+        if (Zend_Auth::getInstance()->getIdentity())
+            $role = Zend_Auth::getInstance()->getIdentity()->status;
+
+        //$acl = new App_Acl();
+
+        //if(!$acl->isAllowed($role, App_Resources::INDEX))
+        //    $this->getHelper('Redirector')->gotoSimpleAndExit('index', 'error', '');
+
+        $this->view->title = "HNA - Пользователи";
+        $this->view->headTitle($this->view->title);
+
+        $user = new Application_Model_DbTable_Hna();
+        $this->view->hna = $user->fetchAll('status = 2');
         $userinfo = $user->fetchAll();
 
         $admin = new Application_Model_DbTable_Admin();
