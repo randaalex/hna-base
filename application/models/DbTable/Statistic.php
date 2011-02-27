@@ -77,6 +77,32 @@ class Application_Model_DbTable_Statistic extends Zend_Db_Table_Abstract
 
     }
 
+    public function getConnectionsHostel(){
+
+            $sql = "SELECT hostel, COUNT(*) AS count FROM `hna_users`
+                    WHERE `hna_users`.`status` = 0 OR `hna_users`.`status` = 1
+                    GROUP BY hostel
+                    ORDER BY hostel";
+            $result = self::db()->fetchAssoc($sql);
+
+            return $result;
+    }
+
+    public function getCountChangeMAC(){
+
+            $sql = "SELECT hna_users.user_id, hna_users.contract, hna_users.surname, hna_users.firstname, hna_users.lastname, COUNT(hna_log_users.message) as cnt
+                    FROM hna_log_users
+					LEFT JOIN hna_users ON hna_log_users.user_id = hna_users.user_id
+                    WHERE hna_log_users.action = 6
+                    GROUP BY user_id
+                    ORDER BY cnt DESC
+                    LIMIT 10";
+        
+            $result = self::db()->fetchAssoc($sql);
+
+            return $result;
+    }
+
     private static function db() {
 
             $bootstrap = Zend_Controller_Front::getInstance()->getParam('bootstrap');

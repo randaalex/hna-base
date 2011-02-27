@@ -17,8 +17,9 @@ class StatisticController extends Zend_Controller_Action
         $countArchived = $statistic->getArchived();
         $countConnections = $statistic->getConnections();
         $countRenewals = $statistic->getRenewals();
-
         $countForMounth = $statistic->getPaysForMounth();
+        $countConnectionsHostel = $statistic->getConnectionsHostel();
+        $countChangeMAC = $statistic->getCountChangeMAC();
 
         $this->view->countActive = $countActive;
         $this->view->countBanned = $countBanned;
@@ -26,7 +27,10 @@ class StatisticController extends Zend_Controller_Action
         $this->view->countConnections = $countConnections;
         $this->view->countRenewals = $countRenewals;
         $this->view->countForMounth = $countForMounth;
-
+        $this->view->countConnectionsHostel2 = $countConnectionsHostel[2]['count'];
+        $this->view->countConnectionsHostel3 = $countConnectionsHostel[3]['count'];
+        $this->view->countChangeMAC = $countChangeMAC;
+        
         $admin = new Application_Model_DbTable_Admin();
         $admins = $admin->getAdmins();
 

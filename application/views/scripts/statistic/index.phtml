@@ -49,12 +49,44 @@
 </table>
 <br>
 
+<b>Статистика по общежитиям:</b>
+<table>
+    <tr>
+        <td>Подключений в общ. №2:</td>
+        <td><?php echo $this->countConnectionsHostel2; ?></td>
+    </tr>
+    <tr>
+        <td>Подключений в общ. №3:</td>
+        <td><?php echo $this->countConnectionsHostel3; ?></td>
+    </tr>
+</table>
+<br>
+
 <b>Статистика по админам:</b>
 <table>
 <?php foreach ($this->admin_list as $key => $value) { ?>
     <tr>
         <td><?php echo $key; ?>:</td>
         <td><?php echo $value; ?></td>
+    </tr>
+<?php } ?>
+</table>
+<br>
+
+<b>TOP10 смены MAC'ов:</b>
+<table class="showborder">
+    <tr>
+        <th style="width: 300px;">Пользователь</th>
+        <th>Договор</th>
+        <th>Количество</th>
+
+    </tr>
+<?php foreach ($this->countChangeMAC as $key => $value) { ?>
+    <tr>
+        <td><?php echo "{$value['surname']} {$value['firstname']} {$value['lastname']}"; ?></td>
+        <td><?php echo "<a href='https://{$_SERVER['HTTP_HOST']}/hna/view/user_id/{$key}'>{$value['contract']}</a>"; ?></td>
+        <td><?php echo $value['cnt']; ?></td>
+        
     </tr>
 <?php } ?>
 </table>
