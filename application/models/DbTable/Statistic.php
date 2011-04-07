@@ -93,7 +93,7 @@ class Application_Model_DbTable_Statistic extends Zend_Db_Table_Abstract
             $sql = "SELECT hna_users.user_id, hna_users.contract, hna_users.surname, hna_users.firstname, hna_users.lastname, COUNT(hna_log_users.message) as cnt
                     FROM hna_log_users
 					LEFT JOIN hna_users ON hna_log_users.user_id = hna_users.user_id
-                    WHERE hna_log_users.action = 6
+                    WHERE hna_log_users.action = 6 AND hna_log_users.time > DATE_SUB(NOW(), INTERVAL 1 MONTH)
                     GROUP BY user_id
                     ORDER BY cnt DESC
                     LIMIT 10";
