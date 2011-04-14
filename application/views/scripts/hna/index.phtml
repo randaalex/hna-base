@@ -1,47 +1,50 @@
-<style type="text/css">
-table,td,th {
-	border: 1px solid black;
-	border-collapse: collapse;     
-}
-.switch {
-    background-image: url('/images/switch.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 40px;
-}
-</style>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+        oTable = $('#data').dataTable({
+            "bJQueryUI": true,
+            "sPaginationType": "full_numbers",
+            "bStateSave": true,
+            "aLengthMenu": [[10, 20, 30, 40, 50, 100, -1], [10, 20, 30, 40, 50, 100, "All"]],
+        });
+    });
+</script>
 <center>
-<table style="width: 99%;">
+<div class="demo_jui">
+<table id="data" cellpadding="0" cellspacing="0" border="0" class="display" style="width: 99%;">
+<thead>
 <tr>
-    <th style="min-width: 40px;">ID</th>
-	<th style="min-width: 350px;">Фамилия Имя Отчество</th>
-    <th style="min-width: 60px;">Логин</th>
-    <th style="min-width: 45px;">Группа</th>
-    <th style="min-width: 62px;">Комн.</th>
-	<th style="min-width: 60px;">Дата рег.</th>
-    <th style="min-width: 40px;">Свич</th>
-    <th style="min-width: 70px;">Посл. IP</th>
-    <th style="min-width: 100px;">Посл. MAC</th>
-	<th style="width: 250px;">Примечание</th>
-	<th style="min-width: 32px;">&nbsp;</th>
+    <th>ID</th>
+	<th>Фамилия Имя Отчество</th>
+    <th>Логин</th>
+    <th>Группа</th>
+    <th>Комн.</th>
+	<th>Дата рег.</th>
+    <th>Свич</th>
+    <th>Посл. IP</th>
+    <th>Посл. MAC</th>
+	<th>Примечание</th>
+	<th>&nbsp;</th>
 </tr>
+</thead>
+<tbody>
 <?php foreach($this->hna as $users) : ?>
-<tr style="background-color: <?php
+<tr class="<?php
                                 switch ($users->status) {
                                 case 1:
-                                    echo '#ff8c69';
+                                    echo 'gradeX';
                                     break;
                                 case 2:
-                                    echo '#abcdef';
+                                    echo 'gradeC';
                                     break;
                                 case 3:
-                                    echo '#77dd77';
+                                    echo 'gradeA';
                                     break;
                                 default:
-                                    echo '#ffffff';
+                                    echo 'default';
                                     break;
                                 }
-                             ?>;">
+                             ?>">
     <td><?php echo $this->escape($users->user_id); ?></td>
 	<td><?php echo $this->escape($users->surname).' '.$this->escape($users->firstname).' '.$this->escape($users->lastname);?></td>
     <td><?php echo $this->escape($users->login); ?></td>
@@ -60,6 +63,6 @@ table,td,th {
 </tr>
 <?php endforeach;?>
 
-
+</tbody>
 </table>
 </center>
